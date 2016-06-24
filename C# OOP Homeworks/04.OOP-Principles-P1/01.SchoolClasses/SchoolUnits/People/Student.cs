@@ -5,17 +5,18 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using UniqueData;
 
     public class Student : Human
     {
         private int uClassNumber;
 
-        public Student(string name, int classNumber) : base(name)
+        public Student(string name) : base(name)
         {
-            this.UniqueClassNumber = classNumber;
+            this.UniqueNumber = UniqueClassNumber.GenerateClassNumber() ;
         }
 
-        public int UniqueClassNumber
+        public int UniqueNumber
         {
             get
             {

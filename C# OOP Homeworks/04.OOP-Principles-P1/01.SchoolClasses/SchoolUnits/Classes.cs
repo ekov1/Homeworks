@@ -7,6 +7,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using UniqueData;
 
     public class Classes : ICommentable
     {
@@ -14,9 +15,9 @@
         private List<Student> students;
         private List<Teacher> teachers;
 
-        public Classes(string uText)
+        public Classes()
         {
-            this.UniqueText = uText;
+            this.UniqueText = UniqueData.UniqueTextIdentifier.GenerateUniqueText();
             this.students = new List<Student>();
             this.teachers = new List<Teacher>();
         }

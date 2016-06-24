@@ -51,6 +51,8 @@
     <Compile Include="SchoolUnits\People\Human.cs" />
     <Compile Include="SchoolUnits\People\Student.cs" />
     <Compile Include="SchoolUnits\People\Teacher.cs" />
+    <Compile Include="SchoolUnits\UniqueData\UniqueClassNumber.cs" />
+    <Compile Include="SchoolUnits\UniqueData\UniqueTextIdentifier.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
