@@ -24,7 +24,7 @@
             {
                 return this.width;
             }
-            set
+            private set
             {
                 NegativeVerification.Width(value);
                 this.width = value;
@@ -37,7 +37,7 @@
             {
                 return this.height;
             }
-            set
+            private set
             {
                 NegativeVerification.Height(value);
                 this.height = value;

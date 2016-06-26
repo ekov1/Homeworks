@@ -27,7 +27,7 @@
             {
                 return this.balance;
             }
-            set
+            protected set
             {
                 this.balance = value;
             }
@@ -39,7 +39,7 @@
             {
                 return this.customerType;
             }
-            set
+            protected set
             {
                 this.customerType = value;
             }
@@ -51,7 +51,7 @@
             {
                 return this.interestRate;
             }
-            set
+            protected set
             {
                 if (value < 0)
                 {
