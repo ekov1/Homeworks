@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Utils;
 
     public abstract class Shape
     {
@@ -25,10 +26,7 @@
             }
             set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Width cannot be a negative number!");
-                }
+                NegativeVerification.Width(value);
                 this.width = value;
             }
         }
@@ -41,10 +39,7 @@
             }
             set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Height cannot be a negative number!");
-                }
+                NegativeVerification.Height(value);
                 this.height = value;
             }
         }

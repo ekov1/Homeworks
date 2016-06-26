@@ -16,7 +16,7 @@
                 new Loan(CustomerType.individual, 4500, 3),
                 new Mortgage(CustomerType.company, 500000, 4),
                 new Deposit(CustomerType.individual, 1000, 5),
-                new Loan(CustomerType.company, 6000, 10)
+                new Loan(CustomerType.company, 12000, 8)
             };
 
         public static List<Account> GetAccountData()
@@ -34,7 +34,7 @@
 
         public static void LoanAccountActions()
         {
-            Loan acc = accounts[1] as Loan;
+            Loan acc = accounts[4] as Loan;
 
             acc.DepositMoney(2000);
         }
