@@ -6,11 +6,11 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    class Startup
+    public class Startup
     {
-        static void Main()
+        public static void Main()
         {
-
+            TestingBitArray64.TestImplementations();
         }
     }
 }

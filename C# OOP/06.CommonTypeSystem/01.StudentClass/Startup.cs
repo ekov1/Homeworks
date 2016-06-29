@@ -6,11 +6,10 @@
     using System.Text;
     using System.Threading.Tasks;
     using Units.Classes;
-   
 
-    class Startup 
+    public class Startup 
     {
-        static void Main()
+        public static void Main()
         {
             StudentClassTest.TestOverriddenMethods();
 

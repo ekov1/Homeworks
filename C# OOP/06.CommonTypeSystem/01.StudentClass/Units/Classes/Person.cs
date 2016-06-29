@@ -24,6 +24,7 @@
             {
                 return this.name;
             }
+
             set
             {
                 Verification.NullVerification(value);
@@ -37,10 +38,22 @@
             {
                 return this.age;
             }
+
             set
             {
                 this.age = value;
             }
+        }
+
+        // I thought it will look better to make a method printing both people here than in the main contructor
+        // Dont judge by lazyness :D
+        public static void PrintPeople(Person man, Person woman)
+        {
+            Console.WriteLine("Man and woman data");
+            GlobalConstants.ContentSeparator();
+            Console.WriteLine(man);
+            GlobalConstants.ContentSeparator();
+            Console.WriteLine(woman);
         }
 
         public override string ToString()
@@ -59,17 +72,6 @@
             }
 
             return builder.ToString();
-        }
-
-        //I thought it will look better to make a method printing both people here than in the main contructor
-        //Dont judge by lazyness :D
-        public static void PrintPeople(Person man, Person woman)
-        {
-            Console.WriteLine("Man and woman data");
-            GlobalConstants.ContentSeparator();
-            Console.WriteLine(man);
-            GlobalConstants.ContentSeparator();
-            Console.WriteLine(woman);
         }
     }
 }

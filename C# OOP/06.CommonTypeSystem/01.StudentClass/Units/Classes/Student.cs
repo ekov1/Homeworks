@@ -22,8 +22,18 @@
         private Universities university;
         private Faculties faculty;
 
-        public Student(string firstName, string middleName, string lastName, int ssnNumber, string permAdress, string phoneNumber
-            , string email, string course, Specialties specialty, Universities university, Faculties faculty)
+        public Student(
+            string firstName,
+            string middleName,
+            string lastName,
+            int ssnNumber,
+            string permAdress,
+            string phoneNumber,
+            string email,
+            string course,
+            Specialties specialty,
+            Universities university,
+            Faculties faculty)
         {
             this.FirstName = firstName;
             this.MiddleName = middleName;
@@ -44,6 +54,7 @@
             {
                 return this.firstName;
             }
+
             private set
             {
                 Verification.NullVerification(value);
@@ -57,6 +68,7 @@
             {
                 return this.middleName;
             }
+
             private set
             {
                 Verification.NullVerification(value);
@@ -70,6 +82,7 @@
             {
                 return this.lastName;
             }
+
             private set
             {
                 Verification.NullVerification(value);
@@ -83,6 +96,7 @@
             {
                 return this.ssnNumber;
             }
+
             private set
             {
                 Verification.ZeroOrNegative(value);
@@ -96,6 +110,7 @@
             {
                 return this.permAdress;
             }
+
             private set
             {
                 Verification.NullVerification(value);
@@ -109,6 +124,7 @@
             {
                 return this.phoneNumber;
             }
+
             internal set
             {
                 Verification.NullVerification(value);
@@ -122,6 +138,7 @@
             {
                 return this.email;
             }
+
             internal set
             {
                 Verification.NullVerification(value);
@@ -135,6 +152,7 @@
             {
                 return this.course;
             }
+
             internal set
             {
                 Verification.NullVerification(value);
@@ -148,6 +166,7 @@
             {
                 return this.specialty;
             }
+
             internal set
             {
                 this.specialty = value;
@@ -160,6 +179,7 @@
             {
                 return this.university;
             }
+
             internal set
             {
                 this.university = value;
@@ -172,10 +192,21 @@
             {
                 return this.faculty;
             }
+
             internal set
             {
                 this.faculty = value;
             }
+        }
+
+        public static bool operator ==(Student firstStudent, Student secondStudent)
+        {
+            return firstStudent.Equals(secondStudent);
+        }
+
+        public static bool operator !=(Student firstStudent, Student secondStudent)
+        {
+            return !firstStudent.Equals(secondStudent);
         }
 
         public override bool Equals(object obj)
@@ -186,6 +217,7 @@
             {
                 return true;
             }
+
             return false;
         }
 
@@ -205,7 +237,6 @@
             builder.AppendLine($"University : {this.University}");
             builder.AppendLine($"Faculty : {this.Faculty}");
 
-
             return builder.ToString();
         }
 
@@ -214,29 +245,29 @@
             return (this.SSN.GetHashCode() + this.PhoneNumber.GetHashCode());
         }
 
-        public static bool operator ==(Student firstStudent, Student secondStudent)
-        {
-            return firstStudent.Equals(secondStudent);
-        }
-
-        public static bool operator !=(Student firstStudent, Student secondStudent)
-        {
-            return !firstStudent.Equals(secondStudent);
-        }
-
         public object Clone()
         {
-            return new Student(this.FirstName, this.MiddleName, this.LastName, this.SSN, this.PermanentAdress, this.PhoneNumber,
-                this.Email, this.Course, this.Specialty, this.University, this.Faculty);
+            return new Student(
+                this.FirstName,
+                this.MiddleName,
+                this.LastName,
+                this.SSN, 
+                this.PermanentAdress, 
+                this.PhoneNumber,
+                this.Email, 
+                this.Course,
+                this.Specialty, 
+                this.University, 
+                this.Faculty);
         }
 
         public int CompareTo(Student otherStudent)
         {
-            var stCompare = new List<Student> { this, otherStudent };
+            var stringCompare = new List<Student> { this, otherStudent };
             Student sorted;
             if (this.FirstName != otherStudent.FirstName && this.MiddleName != otherStudent.MiddleName && this.LastName != otherStudent.LastName)
             {
-                sorted = stCompare
+                sorted = stringCompare
                     .OrderBy(x => x.FirstName)
                     .ThenBy(x => x.MiddleName)
                     .ThenBy(x => x.LastName)
@@ -254,7 +285,7 @@
             }
             else if (this.SSN != otherStudent.SSN)
             {
-                sorted = stCompare
+                sorted = stringCompare
                     .OrderBy(x => x.SSN)
                     .ToList()
                     .FirstOrDefault();

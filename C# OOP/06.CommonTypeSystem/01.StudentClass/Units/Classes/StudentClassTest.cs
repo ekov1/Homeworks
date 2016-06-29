@@ -1,12 +1,13 @@
 ﻿namespace _01.StudentClass.Units.Classes
 {
-    using Enums;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Enums;
     using Utils;
+
     public class StudentClassTest
     {
         public static void TestOverriddenMethods()
@@ -17,24 +18,24 @@
             var equalStudents = firstStudent == secondStudent;
             var hashCode = firstStudent.GetHashCode();
 
-            //Testing Equal()
+            // Testing Equal()
             Console.WriteLine("\nFirst and second student are equal? -> {0}", equalStudents);
             GlobalConstants.ContentSeparator();
 
-            //Testing GetHashCode()
+            // Testing GetHashCode()
             Console.WriteLine("Hash code of first student -> " + hashCode);
             GlobalConstants.ContentSeparator();
 
-            //Printing Student
+            // Printing Student
             Console.WriteLine(firstStudent);
             GlobalConstants.ContentSeparator();
 
-            //Changing the specialty on the cloning student doesnt affect the original firstStudent 
+            // Changing the specialty on the cloning student doesnt affect the original firstStudent 
             var firstStudentCloning = firstStudent.Clone() as Student;
             firstStudentCloning.Faculty = Faculties.Sports;
             Console.WriteLine(firstStudentCloning);
 
-            //Comparing students by first criteria -> Names, then by second criteria -> SS Number
+            // Comparing students by first criteria -> Names, then by second criteria -> SS Number
             GlobalConstants.ContentSeparator();
             Console.WriteLine("Comparisson -> " + firstStudent.CompareTo(secondStudent) + Environment.NewLine);
             GlobalConstants.ContentSeparator();
