@@ -1,7 +1,6 @@
 function largerThanNeightbours(input) {
-    var arr = input[0].split('\n'),
-    n = +arr[0],
-    number = arr[1].split(' ').map(Number),
+    var n = +input[0],
+    number = input[1].split(' ').map(Number),
     count = -1;
 
     for(var i = 1; i < n - 1; i += 1) {

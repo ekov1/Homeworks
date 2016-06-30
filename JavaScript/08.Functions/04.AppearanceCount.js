@@ -1,7 +1,7 @@
 function appearanceCount(input) {
-    var nums = input[0].split('\n'),
-    numbers = nums[1].split(' ').map(Number),
-    x = +nums[2],
+    var nums = input[0],
+    numbers = input[1].split(' ').map(Number),
+    x = +input[2],
     position = 0,
     appCount = 0;
 
