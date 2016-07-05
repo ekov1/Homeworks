@@ -1,32 +1,43 @@
-function solve(args) {
+function solve(params) {
 
-    var line = "",
+    var lines = [],
         result = "",
-        wrongSelectors = /\w+[.|#].+?{/g,
-        wrongSelectorArr = [],
-        fixedSelector = [];
+        selector = {},
+        isInSelector = false,
+        selectorNames = [];
 
+    for (var i = 0; i < params.length; i += 1) {
+        lines.push(params[i]
+            .replace(/\s/g, ''));
 
-
-    for (var i = 0; i < args.length; i += 1) {
-        line = args[i].replace(/\s+/g, '');
-        result += line;
-        result = result.replace(/;}/g, '}');
-    }
-    wrongSelectorArr = result.match(wrongSelectors);
-
-    for (i = 0; i < wrongSelectorArr.length; i += 1) {
-
-        if (wrongSelectorArr[i].indexOf('.') >= 0) {
-            fixedSelector[i] = wrongSelectorArr[i].replace('.', ' .');
+        if (lines[i] === '}') {
+            lines[i - 1] = lines[i - 1].replace(';', '');
         }
-        else{
-            fixedSelector[i] = wrongSelectorArr[i].replace('#', ' #');
-        }
-        
-        result = result.replace(wrongSelectorArr[i], fixedSelector[i]);
     }
-    console.log(result);
+
+    for (i = 0; i < lines.length; i += 1) {
+
+        if (lines[i][lines[i].length - 1] === '{') {
+            isInSelector = true;
+            selectorNames.push(lines[i]);
+        }
+        else if (lines[i] === '}') {
+            isInSelector = false;
+        }
+        else if (isInSelector) {
+            if (!selector.hasOwnProperty(selectorNames[selectorNames.length - 1])) { 
+
+                selector[selectorNames[selectorNames.length - 1]] = lines[i];
+            }
+            else { //Make function to see if there is a property with the same name!! If yes-replace if //if no just add
+                selector[selectorNames[selectorNames.length - 1]] += ' ' + lines[i];
+            }
+        }
+    }
+
+
+
+    console.log(selector);
 }
 
 solve(['#the-big-b{',

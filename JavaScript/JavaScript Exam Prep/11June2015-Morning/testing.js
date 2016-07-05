@@ -1,17 +1,7 @@
-'3',
-'4',
-'--RB--B',
-'Q--Q',
-'12',
-'d1 b3',
-'a1 a3',
-'c3 b2',
-'a1 c1',
-'a1 b2',
-'a1 c3',
-'a2 b3',
-'d2 c1',
-'b1 b2',
-'c3 b1',
-'a2 a3',
-'d1 d3'
+var obj = {};
+
+obj.name = 'mitko';
+obj.name += ' ' + 'hihi';
+obj.huhu = 'haha';
+
+console.log(obj);
