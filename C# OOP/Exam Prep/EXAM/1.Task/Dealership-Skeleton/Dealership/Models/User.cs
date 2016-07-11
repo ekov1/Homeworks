@@ -39,10 +39,8 @@
                 Validator.ValidateNull(value,
                     String.Format("{0} cannot be null or empty!", "Firstname"));
 
-                Validator.ValidateIntRange(value.Length, Constants.MinNameLength,
-                    Constants.MaxNameLength,
-                    String.Format(Constants.StringMustBeBetweenMinAndMax, "Firstname", Constants.MinNameLength
-                    , Constants.MaxNameLength));
+                ValidatorCustom.StringValidation(value, Constants.MinNameLength, Constants.MaxNameLength,
+                    "Firstname");
 
                 this.firstName = value;
             }
@@ -59,10 +57,8 @@
                 Validator.ValidateNull(value,
                     String.Format("{0} cannot be null or empty!", "Lastname"));
 
-                Validator.ValidateIntRange(value.Length, Constants.MinNameLength,
-                    Constants.MaxNameLength,
-                    String.Format(Constants.StringMustBeBetweenMinAndMax, "Lastname", Constants.MinNameLength
-                    , Constants.MaxNameLength));
+                ValidatorCustom.StringValidation(value, Constants.MinNameLength, Constants.MaxNameLength,
+                    "Lastname");
 
                 this.lastName = value;
             }
@@ -79,13 +75,11 @@
                 Validator.ValidateNull(value,
                     String.Format("{0} cannot be null or empty!", "Password"));
 
-                Validator.ValidateIntRange(value.Length, Constants.MinPasswordLength,
-                    Constants.MaxPasswordLength,
-                    String.Format(Constants.StringMustBeBetweenMinAndMax, "Password", Constants.MinPasswordLength
-                    , Constants.MaxPasswordLength));
-
                 Validator.ValidateSymbols(value, Constants.PasswordPattern,
                     String.Format(Constants.InvalidSymbols, "Password"));
+
+                ValidatorCustom.StringValidation(value, Constants.MinPasswordLength, Constants.MaxPasswordLength,
+                    "Password");
 
                 this.password = value;
             }
@@ -117,10 +111,9 @@
                 Validator.ValidateSymbols(value, Constants.UsernamePattern,
                     String.Format(Constants.InvalidSymbols, "Username"));
 
-                Validator.ValidateIntRange(value.Length, Constants.MinNameLength,
-                    Constants.MaxNameLength,
-                    String.Format(Constants.StringMustBeBetweenMinAndMax, "Username", Constants.MinNameLength
-                    , Constants.MaxNameLength));
+                ValidatorCustom.StringValidation(value, Constants.MinNameLength, Constants.MaxNameLength,
+                    "Username");
+
                 this.username = value;
             }
         }

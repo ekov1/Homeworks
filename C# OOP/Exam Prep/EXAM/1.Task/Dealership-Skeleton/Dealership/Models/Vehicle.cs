@@ -74,10 +74,8 @@
             }
             protected set
             {
-                Validator.ValidateDecimalRange(value, Constants.MinPrice,
-                    Constants.MaxPrice, String.Format(Constants.NumberMustBeBetweenMinAndMax,
-                    "Price", Constants.MinPrice
-                    , Constants.MaxPrice));
+                ValidatorCustom.DecimalNumberValidation(value, Constants.MinPrice, Constants.MaxPrice,
+                    "Price");
 
                 this.price = value;
             }

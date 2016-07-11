@@ -31,10 +31,8 @@
                 Validator.ValidateNull(value,
                     String.Format("{0} cannot be null or empty!", "Content"));
 
-                Validator.ValidateIntRange(value.Length, Constants.MinCommentLength, Constants.MaxCommentLength,
-                    String.Format(Constants.StringMustBeBetweenMinAndMax, "Content",
-                    Constants.MinCommentLength, Constants.MaxCommentLength));
-
+                ValidatorCustom.StringValidation(value, Constants.MinCommentLength, Constants.MaxCommentLength,
+                    "Content");
                 this.content = value;
             }
         }

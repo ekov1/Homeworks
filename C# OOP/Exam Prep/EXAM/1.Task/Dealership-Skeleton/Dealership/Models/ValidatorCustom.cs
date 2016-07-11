@@ -24,5 +24,13 @@
                     obj, min
                     , max));
         }
+
+        public static void DecimalNumberValidation(decimal value, decimal min, decimal max, string obj)
+        {
+            Validator.ValidateDecimalRange(value, min,
+                    max, String.Format(Constants.NumberMustBeBetweenMinAndMax,
+                    obj, min
+                    , max));
+        }
     }
 }

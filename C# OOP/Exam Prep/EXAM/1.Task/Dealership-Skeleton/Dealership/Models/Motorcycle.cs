@@ -27,11 +27,9 @@
                 Validator.ValidateNull(value,
                     String.Format("{0} cannot be null or empty!", "Category"));
 
-                Validator.ValidateIntRange(value.Length, Constants.MinCategoryLength,
+                ValidatorCustom.StringValidation(value, Constants.MinCategoryLength, 
                     Constants.MaxCategoryLength,
-                    String.Format(Constants.StringMustBeBetweenMinAndMax, "Category",
-                     Constants.MinCategoryLength
-                    , Constants.MaxCategoryLength));
+                    "Category");
 
                 this.category = value;
             }

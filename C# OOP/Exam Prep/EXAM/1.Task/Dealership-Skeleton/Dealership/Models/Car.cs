@@ -28,10 +28,8 @@
             }
             protected set
             {
-                Validator.ValidateDecimalRange(value, Constants.MinSeats,
-                   Constants.MaxSeats, String.Format(Constants.NumberMustBeBetweenMinAndMax,
-                  "Seats", Constants.MinSeats
-                   , Constants.MaxSeats));
+                ValidatorCustom.NumberValdation(value, Constants.MinSeats, Constants.MaxSeats,
+                    "Seats");
 
                 this.seats = value;
             }
