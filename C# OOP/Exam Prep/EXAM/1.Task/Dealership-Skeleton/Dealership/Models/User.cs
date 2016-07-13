@@ -161,68 +161,38 @@
 
         public string PrintVehicles()
         {
-            StringBuilder builer = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             var counter = 0;
-            builer.AppendLine(String.Format("--USER {0}--", this.Username));
+            builder.AppendLine(String.Format("--USER {0}--", this.Username));
 
             if (this.Vehicles.Count > 0)
             {
                 foreach (var vehicle in this.Vehicles)
                 {
-                    builer.AppendLine(String.Format("{0}. {1}:", ++counter, vehicle.GetType().Name));
-                    builer.AppendLine(String.Format("  Make: {0}", vehicle.Make));
-                    builer.AppendLine(String.Format("  Model: {0}", vehicle.Model));
-                    builer.AppendLine(String.Format("  Wheels: {0}", vehicle.Wheels));
-
-                    if (vehicle.Price > 0.0m)
-                    {
-                        builer.AppendLine(String.Format("  Price: ${0}", vehicle.Price));
-                    }
-                    else
-                    {
-                        builer.AppendLine("  Price: $0");
-                    }
-
-                    if (vehicle.GetType().Name == "Car")
-                    {
-                        var car = vehicle as Car;
-                        builer.AppendLine(String.Format("  Seats: {0}", car.Seats));
-                    }
-                    else if (vehicle.GetType().Name == "Truck")
-                    {
-                        var truck = vehicle as Truck;
-                        builer.AppendLine(String.Format("  Weight Capacity: {0}t", truck.WeightCapacity));
-                    }
-                    else if (vehicle.GetType().Name == "Motorcycle")
-                    {
-                        var motor = vehicle as Motorcycle;
-                        builer.AppendLine(String.Format("  Category: {0}", motor.Category));
-                    }
+                    builder.AppendLine(String.Format("{0}. {1}:", ++counter, vehicle.GetType().Name));
+                    builder.Append(vehicle.ToString());
 
                     if (vehicle.Comments.Count > 0)
                     {
-                        builer.AppendLine("    --COMMENTS--");
+                        builder.AppendLine("    --COMMENTS--");
                         foreach (var comment in vehicle.Comments)
                         {
-                            builer.AppendLine("    ----------");
-                            builer.AppendLine(String.Format("    {0}", comment.Content));
-                            builer.AppendLine(String.Format("      User: {0}", comment.Author));
-                            builer.AppendLine("    ----------");
+                            builder.Append(comment.ToString());
                         }
-                        builer.AppendLine("    --COMMENTS--");
+                        builder.AppendLine("    --COMMENTS--");
                     }
                     else
                     {
-                        builer.AppendLine("    --NO COMMENTS--");
+                        builder.AppendLine("    --NO COMMENTS--");
                     }
                 }
             }
             else
             {
-                builer.AppendLine("--NO VEHICLES--");
+                builder.AppendLine("--NO VEHICLES--");
             }
 
-            return builer.ToString().Trim();
+            return builder.ToString().Trim();
         }
 
         public void RemoveComment(IComment commentToRemove, IVehicle vehicleToRemoveComment)

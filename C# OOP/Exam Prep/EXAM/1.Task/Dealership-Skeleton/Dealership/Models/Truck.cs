@@ -3,6 +3,7 @@
     using Common;
     using Contracts;
     using System;
+    using System.Text;
 
     public class Truck : Vehicle, ITruck
     {
@@ -28,6 +29,16 @@
 
                 this.weightLimit = value;
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            builder.Append(base.ToString());
+            builder.AppendLine(String.Format("  Weight Capacity: {0}t", this.WeightCapacity));
+
+            return builder.ToString();
         }
     }
 }

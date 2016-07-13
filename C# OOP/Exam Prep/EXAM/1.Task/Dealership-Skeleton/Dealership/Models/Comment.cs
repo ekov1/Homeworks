@@ -11,7 +11,6 @@
     public class Comment : IComment
     {
         private string content;
-        private string author;
 
         public Comment(string content)
         {
@@ -35,6 +34,18 @@
                     "Content");
                 this.content = value;
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            builder.AppendLine("    ----------");
+            builder.AppendLine(String.Format("    {0}", this.Content));
+            builder.AppendLine(String.Format("      User: {0}", this.Author));
+            builder.AppendLine("    ----------");
+
+            return builder.ToString();
         }
     }
 }

@@ -34,5 +34,15 @@
                 this.seats = value;
             }
         }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            builder.Append(base.ToString());
+            builder.AppendLine(String.Format("  Seats: {0}", this.Seats));
+
+            return builder.ToString();
+        }
     }
 }

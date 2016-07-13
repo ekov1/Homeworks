@@ -3,6 +3,7 @@
     using Common;
     using Contracts;
     using System;
+    using System.Text;
 
     public class Motorcycle : Vehicle, IMotorcycle
     {
@@ -33,6 +34,16 @@
 
                 this.category = value;
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            builder.Append(base.ToString());
+            builder.AppendLine(String.Format("  Category: {0}", this.Category));
+
+            return builder.ToString();
         }
     }
 }

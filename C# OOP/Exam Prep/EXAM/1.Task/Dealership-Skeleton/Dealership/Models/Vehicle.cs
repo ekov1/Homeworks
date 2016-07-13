@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using Common.Enums;
     using Common;
-
+    using System.Text;
     public abstract class Vehicle : IVehicle
     {
         private string make;
@@ -97,6 +97,24 @@
             }
         }
 
-        
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            builder.AppendLine(String.Format("  Make: {0}", this.Make));
+            builder.AppendLine(String.Format("  Model: {0}", this.Model));
+            builder.AppendLine(String.Format("  Wheels: {0}", this.Wheels));
+
+            if (this.Price > 0.0m)
+            {
+                builder.AppendLine(String.Format("  Price: ${0}", this.Price));
+            }
+            else
+            {
+                builder.AppendLine("  Price: $0");
+            }
+
+            return builder.ToString();
+        }
     }
 }
