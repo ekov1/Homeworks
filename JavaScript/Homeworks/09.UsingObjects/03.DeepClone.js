@@ -13,5 +13,4 @@ function deepClone(object) {
     else {
         return object;
     }
-
 }
