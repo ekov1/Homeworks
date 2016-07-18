@@ -38,6 +38,7 @@
         quadraticCurve(ctx, s1, s2, c);
 
         requestAnimationFrame(animation);
+
     }
     animation();
 } ());
