@@ -46,4 +46,14 @@
     ctx.fill();
     ctx.stroke();
 
+    $('#the-canvas-shapes').hover(function() {
+
+        $(this).toggle('display');
+    }, function() {
+        
+        $(this).toggle('display', function() {
+            alert('Done!');
+        });
+    });
+
 } ());
