@@ -1,7 +1,7 @@
 (function () {
     var canvas = document.getElementById('the-canvas-shapes'),
         ctx = canvas.getContext('2d');
-    
+
     ctx.strokeStyle = '#22545F';
     ctx.fillStyle = '#90CAD7';
     ctx.lineWidth = 2;
@@ -39,21 +39,15 @@
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.scale(2, 0.5); // TODO: Find easy way to position scaled objects!!!
-    
+    ctx.scale(2, 0.5);
+
     ctx.moveTo(125, 60);
     ctx.arc(100, 60, 25, 0, 2 * Math.PI);
     ctx.fill();
     ctx.stroke();
 
-    $('#the-canvas-shapes').hover(function() {
-
-        $(this).toggle('display');
-    }, function() {
+    $('#wrapper').hover(function () {
         
-        $(this).toggle('display', function() {
-            alert('Done!');
-        });
+        $('#the-canvas-shapes').toggle();
     });
-
 } ());
