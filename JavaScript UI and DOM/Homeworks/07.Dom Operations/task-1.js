@@ -50,3 +50,4 @@ function solve() {
         after.appendChild(docFragment);
     };
 }
+module.exports = solve;

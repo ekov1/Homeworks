@@ -64,3 +64,5 @@ function solve() {
         }, false);
     };
 }
+
+module.exports = solve;
