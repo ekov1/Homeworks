@@ -42,24 +42,25 @@ function solve() {
 
             if (next.className === 'content') {
                 content = next;
-            }
 
-            // Cycle until next content is with class button
-            while (next) {
-                if (next.className === 'button') {
+                // Cycle until next content is with class button
+                while (next) {
+                    if (next.className === 'button') {
 
-                    if (content.style.display === 'none') {
-                        content.style.display = '';
-                        targetButton.innerHTML = 'hide';
+                        if (content.style.display === 'none') {
+                            content.style.display = '';
+                            targetButton.innerHTML = 'hide';
+                        }
+                        else {
+                            content.style.display = 'none';
+                            targetButton.innerHTML = 'show';
+                        }
+                        break;
                     }
-                    else {
-                        content.style.display = 'none';
-                        targetButton.innerHTML = 'show';
-                    }
-                    break;
+                    next = next.nextElementSibling;
                 }
-                next = next.nextElementSibling;
             }
+
         }, false);
     };
 }
