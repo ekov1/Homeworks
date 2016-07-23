@@ -16,9 +16,49 @@ Create a function that takes a selector and:
 */
 function solve() {
   return function (selector) {
-    
 
+    var elements,
+      targetButton,
+      next,
+      buttons;
 
+    if (typeof selector !== 'string' || $(selector).size() === 0) {
+      throw Error();
+    }
+
+    buttons = $('.button');
+
+    $(buttons).each(function () {
+      $(this).text('hide');
+    });
+
+    $(selector).on('click', function (ev) {
+
+      targetButton = $(ev.target);
+      next = targetButton.next();
+
+      // If something different from a button is clicked
+      if (!(targetButton.hasClass('button'))) {
+        return;
+      }
+
+      // Cycle until next content is with class button
+      while (next) {
+        if (next.hasClass('content')) {
+          break;
+        }
+        next = next.next();
+      }
+
+      if (next.css("display") === "none") {
+        next.css("display", "");
+        $(targetButton).text('hide');
+      }
+      else {
+        next.hide();
+        $(targetButton).text('show');
+      }
+    });
   };
 }
 
