@@ -4,8 +4,8 @@ Create a function that takes a selector and COUNT, then generates inside a UL wi
   * Each of the LIs must:
     * have a class `list-item`
     * content "List item #INDEX"
-      * The indices are zero-based
-  * If the provided selector does not selects anything, do nothing
+      * The indexes are zero-based
+  * If the provided selector does not select anything, do nothing
   * Throws if
     * COUNT is a `Number`, but is less than 1
     * COUNT is **missing**, or **not convertible** to `Number`
@@ -18,9 +18,32 @@ Create a function that takes a selector and COUNT, then generates inside a UL wi
 
 function solve() {
   return function (selector, count) {
-   
 
-   
+    if (!selector || typeof selector !== 'string') {
+      throw Error();
+    }
+    if (typeof count !== 'number' || count < 1) {
+      throw Error();
+    }
+
+    var element = $(selector),
+      ul = $('<ul />').addClass('items-list'),
+      li, i;
+
+    if (!element) {
+      return;
+    }
+
+    for (i = 0; i < count; i += 1) {
+
+      li = $('<li />')
+        .addClass('list-item')
+        .text('List item #' + i);
+
+      li.appendTo(ul);
+    }
+
+    ul.appendTo(element);
   };
 }
 
