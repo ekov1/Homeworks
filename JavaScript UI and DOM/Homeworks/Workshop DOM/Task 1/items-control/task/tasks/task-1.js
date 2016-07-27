@@ -15,7 +15,7 @@ function solve() {
             resultDiv = document.createElement('div'),
             resultUl = document.createElement('ul');
 
-
+        root.className = 'items-control';
         addingDiv.className = 'add-controls';
         isCaseSensitive = !!isCaseSensitive;
 
@@ -30,14 +30,16 @@ function solve() {
 
         addingButton.addEventListener('click', function () {
             var li = document.createElement('li'),
+                label = document.createElement('label'),
                 xButton = document.createElement('button');
 
             li.className = 'list-item';
-            li.innerHTML = addingInput.value;
+            label.innerHTML = addingInput.value;
 
             xButton.className = 'button';
             xButton.innerHTML = 'X';
 
+            li.appendChild(label);
             li.appendChild(xButton);
             resultUl.appendChild(li);
         });
@@ -52,18 +54,21 @@ function solve() {
         root.appendChild(searchElementDiv);
 
         searchInput.addEventListener('input', function () {
-            var child = resultUl.getElementsByTagName('li'),
+            var child = document.getElementsByClassName('list-item'),
                 len = child.length,
-                search = searchInput.value, i;
+                 i;
 
-            search = search.replace(/\s\s+/g, ' ');
-            if (!isCaseSensitive) {
-                search = search.toLowerCase();
-
-                // TODO: Regex for Test A
-
-                for (i = 0; i < len; i += 1) {
-                    if (child[i].innerHTML.toLowerCase().includes(search)) {
+            for (i = 0; i < len; i += 1) {
+                if(isCaseSensitive) {
+                    if (child[i].firstElementChild.innerHTML.indexOf(searchInput.value) >= 0) {
+                        child[i].style.display = '';
+                    }
+                    else {
+                        child[i].style.display = 'none';
+                    }
+                }
+                else {
+                    if (child[i].firstElementChild.innerHTML.toLowerCase().indexOf(searchInput.value.toLowerCase()) >= 0) {
                         child[i].style.display = '';
                     }
                     else {
@@ -71,17 +76,6 @@ function solve() {
                     }
                 }
             }
-            else {
-                for (i = 0; i < len; i += 1) {
-                    if (child[i].innerHTML.includes(search)) {
-                        child[i].style.display = '';
-                    }
-                    else {
-                        child[i].style.display = 'none';
-                    }
-                }
-            }
-
         }, false);
 
         // Result div
@@ -92,10 +86,9 @@ function solve() {
         root.appendChild(resultDiv);
 
         resultUl.addEventListener('click', function (ev) {
-            var buttonClicked = ev.target,
-                li = buttonClicked.parentElement;
-
-            li.parentElement.removeChild(li);
+            if (ev.target.className.indexOf('button') >= 0) {
+                this.removeChild(ev.target.parentNode);
+            }
         });
     };
 }
