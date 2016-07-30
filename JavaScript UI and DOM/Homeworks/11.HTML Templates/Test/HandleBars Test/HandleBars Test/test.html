@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div id="wrapper"></div>
+    <script id="article-container" type="text/x-handlebars-template">
+        <div id="container">
+            <p>Hello, my name is {{name}} and I am {{age}} years old.</p>
+            <p>I think {{text}} will be bold.</p>
+            {{#student}}
+                <p class="list-item">Student: {{name}} Age: {{age}}</p>
+            {{/student}}
+
+            {{#each student}}
+            <p class="list-item">Person №{{@index}}: {{name}} Age: {{age}}</p>
+            {{/each}}
+
+            <!--TODO: "with" helper and custom helpers-->
+        </div>
+    </script>
+    <script src="Scripts/handlebars.min.js"></script>
+    <script>
+
+        var html = document.getElementById('article-container').innerHTML;
+        var articleTemplate = Handlebars.compile(html);
+        var data = {
+            name: 'Mitko',
+            age: 18,
+            text: new Handlebars.SafeString('<strong> this text </strong>'),
+            student: [
+                {
+                    name: 'Mitko',
+                    age: 18
+                },
+                {
+                    name: 'Gosho',
+                    age: '15'
+                }
+            ]
+        };
+
+        var result = articleTemplate(data);
+        var wrapper = document.getElementById('wrapper');
+        wrapper.innerHTML = result;
+    </script>
+</body>
+</html>
