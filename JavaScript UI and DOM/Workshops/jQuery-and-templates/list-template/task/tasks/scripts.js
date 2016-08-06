@@ -26,7 +26,6 @@ window.onload = function () {
     right: true,
   }];
 	 
-  solve()('authors-template');
 
   var authorsListContainer = document.getElementById('authors'),
     authorsListTemplate = Handlebars.compile((document.getElementById('authors-template')).innerHTML);
@@ -36,7 +35,5 @@ window.onload = function () {
     authorsListContainer.removeChild(authorsListContainer.firstChild);
   }
 
-  authorsListContainer.innerHTML = authorsListTemplate({
-    authors: authors
-  });
+  authorsListContainer.innerHTML = authorsListTemplate(authors);
 };
