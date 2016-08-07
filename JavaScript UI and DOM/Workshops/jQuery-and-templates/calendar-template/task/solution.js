@@ -1,3 +1,4 @@
+/// <reference path="C:\Downloads\Telerik\Homeworks\JavaScript UI and DOM\Workshops\jQuery-and-templates\calendar-template\task\typings\handlebars\handlebars.d.ts" />
 function solve() {
     return function (selector) {
         var template = [
