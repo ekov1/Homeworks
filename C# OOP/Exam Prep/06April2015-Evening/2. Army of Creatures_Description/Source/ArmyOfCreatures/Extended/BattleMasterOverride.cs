@@ -11,12 +11,24 @@
 
     public class BattleMasterOverride : BattleManager
     {
+        private readonly ILogger logger;
+
+        private readonly ICreaturesFactory creaturesFactory;
+
+        private readonly ICollection<ICreaturesInBattle> firstArmyCreatures;
+
+        private readonly ICollection<ICreaturesInBattle> secondArmyCreatures;
+
         private readonly ICollection<ICreaturesInBattle> thirdArmyCreatures;
 
         public BattleMasterOverride(ICreaturesFactory creaturesFactory, ILogger logger)
             :base(creaturesFactory, logger)
         {
+            this.firstArmyCreatures = new List<ICreaturesInBattle>();
+            this.secondArmyCreatures = new List<ICreaturesInBattle>();
             this.thirdArmyCreatures = new List<ICreaturesInBattle>();
+            this.creaturesFactory = creaturesFactory;
+            this.logger = logger;
         }
 
         protected override void AddCreaturesByIdentifier(CreatureIdentifier creatureIdentifier, ICreaturesInBattle creaturesInBattle)
