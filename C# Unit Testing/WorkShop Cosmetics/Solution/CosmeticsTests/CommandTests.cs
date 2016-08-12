@@ -48,11 +48,21 @@
         }
 
         [Test]
-        public void Parse_InputInValidCommandWithNullParameterList_ShouldThrowArgumentNullException()
+        public void Parse_InputInValidCommandWithEmptyParameterList_ShouldThrowArgumentNullException()
         {
             var input = "Gosho ";
 
             Assert.Throws<ArgumentNullException>(() => Command.Parse(input));
+        }
+
+        [Test]
+        public void Parse_InputInValidCommandWithNullParameterList_ShouldThrowArgumentNullException()
+        {
+            var input = "Gosho";
+
+            var command = Command.Parse(input);
+
+            Assert.AreEqual(null, command.Parameters);
         }
     }
 }

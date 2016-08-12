@@ -44,6 +44,12 @@
         }
 
         [Test]
+        public void CheckIfStringLengthIsValid_InputStringWithLessThanMinLength_ShouldThrowIndexOutOfRangeException()
+        {
+            Assert.Throws<IndexOutOfRangeException>(() => Validator.CheckIfStringLengthIsValid("too long", 20, 10));
+        }
+
+        [Test]
         public void CheckIfStringLengthIsValid_InputStringWithLengthWithinRange_ShouldNotThrowException()
         {
             Assert.DoesNotThrow(() => Validator.CheckIfStringLengthIsValid("too long", 20));
