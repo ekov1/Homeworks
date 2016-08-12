@@ -81,9 +81,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Battles\BattleManagerTests.cs" />
+    <Compile Include="Battles\CreatureIdentifierTests.cs" />
+    <Compile Include="Battles\CreaturesInBattleTests.cs" />
     <Compile Include="Commands\AddCommandTests.cs" />
     <Compile Include="Extended\BattleMasterOverrideTests.cs" />
     <Compile Include="Extended\CreatureFactoryOverrideTests.cs" />
+    <Compile Include="Fakes\BattleManagerFake.cs" />
+    <Compile Include="Fakes\EvenFakerCreature.cs" />
+    <Compile Include="Fakes\FakeCreature.cs" />
+    <Compile Include="Fakes\FakeSpecialty.cs" />
     <Compile Include="Specialties\DoubleDefenceWhenDefendingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
