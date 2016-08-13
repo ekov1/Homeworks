@@ -4,12 +4,11 @@ function solve() {
 
         selector = document.querySelector(selector);
 
-        var rightDiv = document.createElement('ul'),
+        var rightDiv = document.createElement('div'),
             leftDiv = document.createElement('div'),
             filterDiv = document.createElement('div');
 
         // Right div
-        rightDiv.className = 'image-container';
 
         for (var i = 0; i < items.length; i += 1) {
             var li = formatImage(items[i]);
@@ -19,7 +18,8 @@ function solve() {
         function formatImage(item) {
             var title = document.createElement('strong'),
                 image = document.createElement('img'),
-                container = document.createElement('li');
+                container = document.createElement('div');
+            container.className = 'image-container';
 
             image.setAttribute('src', item.url);
             title.innerHTML = item.title;
@@ -31,15 +31,17 @@ function solve() {
         }
 
         rightDiv.addEventListener('mouseover', function (ev) {
-            var targetImage = ev.target.parentElement;
+            var target = ev.target;
 
-            targetImage.style.backgroundColor = 'gray';
+            if (target.parentNode.className === 'image-container') {
+                target.parentElement.style.backgroundColor = 'gray';
+            }
         });
 
         rightDiv.addEventListener('mouseout', function (ev) {
-            var targetImage = ev.target.parentElement;
+            var target = ev.target.parentElement;
 
-            targetImage.style.backgroundColor = '';
+            target.style.backgroundColor = '';
         });
 
         rightDiv.addEventListener('click', function (ev) {
@@ -77,22 +79,23 @@ function solve() {
         inputFilter.addEventListener('input', function (ev) {
 
             var searchText = ev.target.value;
-            lis = rightDiv.childNodes;
+            imageDivs = rightDiv.childNodes;
 
-            searchText = searchText.replace(/\s\s+/g, ' ');
+            searchText = searchText.replace(/\s\s+/g, ' ').toLowerCase().trim();
 
             for (var i = 0; i < items.length; i += 1) {
+
                 if (searchText === ' ') {
-                    lis[i].style.display = '';
+                    imageDivs[i].style.display = '';
                 }
                 else {
-                    var title = lis[i].firstElementChild.innerHTML;
+                    var title = imageDivs[i].firstElementChild.innerText.toLowerCase();
 
-                    if (title.toLowerCase().includes(searchText.toLowerCase())) {
-                        lis[i].style.display = '';
+                    if (title.includes(searchText)) {
+                        imageDivs[i].style.display = '';
                     }
                     else {
-                        lis[i].style.display = 'none';
+                        imageDivs[i].style.display = 'none';
                     }
                 }
             }
