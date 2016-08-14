@@ -52,6 +52,8 @@ $.fn.colorpicker = function () {
     var ctx = $('.canvas').get(0).getContext('2d');
     var image = new Image();
 
+// Cross origin data / tainted canvas /cannot get data because canvas is 'tainted' 
+
     image.src = "https://photos-3.dropbox.com/t/2/AADYFX_7GCfDQwLjwHw0RlqqTXOgv1eehy0GNHg8M3N87Q/12/353837826/png/32x32/1/_/1/2/color-picker.png/EL2D1OMCGEMgBygH/MNSqWrrDpaIlp5MYIablbUIpyanZ7gB39jEdpgyIvKM?dl=0&size=1280x960&size_mode=3";
 
     image.onload = function () {
