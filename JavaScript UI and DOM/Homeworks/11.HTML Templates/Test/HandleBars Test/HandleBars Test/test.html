@@ -11,14 +11,19 @@
             <p>Hello, my name is {{name}} and I am {{age}} years old.</p>
             <p>I think {{text}} will be bold.</p>
             {{#student}}
-                <p class="list-item">Student: {{name}} Age: {{age}}</p>
+            <p class="list-item">Student: {{name}} Age: {{age}}</p>
             {{/student}}
 
             {{#each student}}
             <p class="list-item">Person №{{@index}}: {{name}} Age: {{age}}</p>
             {{/each}}
 
-            <!--TODO: "with" helper and custom helpers-->
+            {{#with studentSchool}}
+            <p>Student name is {{studentName}} and id {{studentID}}</p>
+            {{/with}}
+            {{#each numbers}}
+                <p>Number {{this}}</p>
+            {{/each}}
         </div>
     </script>
     <script src="Scripts/handlebars.min.js"></script>
@@ -39,12 +44,16 @@
                     name: 'Gosho',
                     age: '15'
                 }
-            ]
+            ],
+            numbers: [1,2,3,4,5,6],
+            studentSchool: {
+                studentName: 'Mitko',
+                studentID: 15
+            }
         };
 
         var result = articleTemplate(data);
-        var wrapper = document.getElementById('wrapper');
-        wrapper.innerHTML = result;
+        document.getElementById('wrapper').innerHTML = result;
     </script>
 </body>
 </html>
