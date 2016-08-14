@@ -1,6 +1,5 @@
 $.fn.colorpicker = function () {
 
-
     var $root = $(this),
 
         $picker = $('<div />')
@@ -21,7 +20,6 @@ $.fn.colorpicker = function () {
                 $pickerButton.show();
                 $picker.css('display', 'none');
             }),
-
 
         $canvas = $('<canvas />')
             .addClass('canvas')
@@ -52,17 +50,34 @@ $.fn.colorpicker = function () {
     var ctx = $('.canvas').get(0).getContext('2d');
     var image = new Image();
 
-// Cross origin data / tainted canvas /cannot get data because canvas is 'tainted' 
+    // Only runs with live-server/ otherwise error message 'canvas is tainted/cannot get data from canvas'
 
-    image.src = "https://photos-3.dropbox.com/t/2/AADYFX_7GCfDQwLjwHw0RlqqTXOgv1eehy0GNHg8M3N87Q/12/353837826/png/32x32/1/_/1/2/color-picker.png/EL2D1OMCGEMgBygH/MNSqWrrDpaIlp5MYIablbUIpyanZ7gB39jEdpgyIvKM?dl=0&size=1280x960&size_mode=3";
-
+    image.src = 'imgs/color-picker.png';
     image.onload = function () {
         ctx.drawImage(image, 0, 0);
     };
 
     $('.canvas').click(function (e) {
-        var data = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
-        alert('rgb: ' + [].slice.call(data, 0, 3).join());
+        var data = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data,
+            R = data[0],
+            G = data[1],
+            B = data[2],
+            rgbString = R + ',' + G + ',' + B,
+            hexString = rgbToHex(R, G, B);
+
+        $hexInput.val('#' + hexString);
+        $rgbInput.val(rgbString);
+        $colorDiv.css({
+            'background-color': '#' + hexString
+        });
     });
+
+    // Events for inputHex and inputRGB on enter to change color
+    function rgbToHex(R, G, B) { return toHex(R) + toHex(G) + toHex(B); }
+    function toHex(n) {
+        n = parseInt(n, 10);
+        if (isNaN(n)) return "00";
+        n = Math.max(0, Math.min(n, 255)); return "0123456789ABCDEF".charAt((n - n % 16) / 16) + "0123456789ABCDEF".charAt(n % 16);
+    }
     return $root;
 };
