@@ -53,7 +53,6 @@ function createCalendar(selector, events) {
         if (target.className === 'dateTitle') {
             target.style.backgroundColor = '#B6E3F2';
         }
-
     });
     container.addEventListener('mouseout', function (ev) {
         var target = ev.target;
@@ -61,7 +60,6 @@ function createCalendar(selector, events) {
         if (target.className === 'dateTitle') {
             target.style.backgroundColor = 'gray';
         }
-
     });
 
     container.addEventListener('click', function (ev) {
@@ -74,7 +72,5 @@ function createCalendar(selector, events) {
         if (target.parentElement.className === 'dateContainer') {
             target.parentElement.style.backgroundColor = '#B6E3F2';
         }
-
     });
-
 }
