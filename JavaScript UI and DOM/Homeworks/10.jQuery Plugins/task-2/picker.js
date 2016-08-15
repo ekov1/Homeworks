@@ -28,7 +28,7 @@ $.fn.colorpicker = function () {
             .appendTo($picker)
             .on('mouseover', function (ev) {
                 var $target = $(ev.target);
-                $target.css('cursor', 'url(imgs/cursor.png), auto');
+                $target.css('cursor', 'url(imgs/cursor.png) 0 28, auto');
             }),
 
         $hexInput = $('<input />')
@@ -70,6 +70,10 @@ $.fn.colorpicker = function () {
         $colorDiv.css({
             'background-color': '#' + hexString
         });
+
+        $('.hexInput').select();
+        document.execCommand('copy');
+        document.getSelection().empty();
     });
 
     // Events for inputHex and inputRGB on enter to change color
