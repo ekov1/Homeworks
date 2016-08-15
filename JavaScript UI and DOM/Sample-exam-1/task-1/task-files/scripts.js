@@ -21,10 +21,10 @@ function createCalendar(selector, events) {
         dateTitle.style.width = '130px';
         dateTitle.style.borderBottom = '1px solid black';
         dateTitle.style.backgroundColor = 'gray';
-        dateTitle.style.marginTop = '0';
+        dateTitle.style.margin = '0';
 
-        dateInfo.style.width = '125px';
-        dateInfo.style.height = '100px';
+        dateInfo.style.width = '128px';
+        dateInfo.style.height = '110px';
         dateInfo.style.margin = '0';
 
         dateContainer.style.width = '130px';
@@ -50,14 +50,22 @@ function createCalendar(selector, events) {
     container.addEventListener('mouseover', function (ev) {
         var target = ev.target;
 
-        if (target.className === 'dateTitle') {
+        if (target.parentElement.className === 'dateContainer') {
+            if (target.className !=='dateTitle') {
+                target.previousElementSibling.style.backgroundColor = '#B6E3F2';
+                return;
+            }
             target.style.backgroundColor = '#B6E3F2';
         }
     });
     container.addEventListener('mouseout', function (ev) {
         var target = ev.target;
 
-        if (target.className === 'dateTitle') {
+        if (target.parentElement.className === 'dateContainer') {
+            if (target.className !== 'dateTitle') {
+                target.previousElementSibling.style.backgroundColor = 'gray';
+                return;
+            }
             target.style.backgroundColor = 'gray';
         }
     });
