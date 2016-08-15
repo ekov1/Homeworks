@@ -15,27 +15,9 @@ function createCalendar(selector, events) {
             dateInfo = document.createElement('div'),
             dateText = weekDays[date.getDay()] + ' ' + date.getDate() + ' June 2014';
 
-        dateContainer.appendChild(dateTitle);
-        dateContainer.appendChild(dateInfo);
-
-        dateTitle.style.width = '130px';
-        dateTitle.style.borderBottom = '1px solid black';
-        dateTitle.style.backgroundColor = 'gray';
-        dateTitle.style.margin = '0';
-
-        dateInfo.style.width = '128px';
-        dateInfo.style.height = '110px';
-        dateInfo.style.margin = '0';
-
-        dateContainer.style.width = '130px';
-        dateContainer.style.height = '130px';
-        dateContainer.style.float = 'left';
-        dateContainer.style.border = '1px solid black';
-
-        dateContainer.className += 'dateContainer';
-        dateTitle.className += 'dateTitle';
-
-        dateTitle.innerHTML = dateText;
+        dateTitleStyles(dateTitle, dateText);
+        dateInfoStyles(dateInfo);
+        dateContainerStyles(dateContainer);
 
         for (var j = 0; j < events.length; j += 1) {
             if (events[j].date == date.getDate()) {
@@ -43,31 +25,54 @@ function createCalendar(selector, events) {
             }
         }
 
+        dateContainer.appendChild(dateTitle);
+        dateContainer.appendChild(dateInfo);
         container.appendChild(dateContainer);
+
         date.setDate(date.getDate() + 1);
+    }
+
+    function dateContainerStyles(dateContainer) {
+        dateContainer.style.width = '130px';
+        dateContainer.style.height = '130px';
+        dateContainer.style.float = 'left';
+        dateContainer.style.border = '1px solid black';
+        dateContainer.className += 'dateContainer';
+    }
+
+    function dateInfoStyles(dateInfo) {
+        dateInfo.style.width = '128px';
+        dateInfo.style.height = '110px';
+        dateInfo.style.margin = '0';
+    }
+
+    function dateTitleStyles(dateTitle, dateText) {
+        dateTitle.innerHTML = dateText;
+        dateTitle.className += 'dateTitle';
+        dateTitle.style.width = '130px';
+        dateTitle.style.borderBottom = '1px solid black';
+        dateTitle.style.backgroundColor = 'gray';
+        dateTitle.style.margin = '0';
+    }
+
+    function changeColor(target, color) {
+        if (target.parentElement.className === 'dateContainer') {
+            if (target.className !== 'dateTitle') {
+                target.previousElementSibling.style.backgroundColor = color;
+                return;
+            }
+            target.style.backgroundColor = color;
+        }
     }
 
     container.addEventListener('mouseover', function (ev) {
         var target = ev.target;
-
-        if (target.parentElement.className === 'dateContainer') {
-            if (target.className !=='dateTitle') {
-                target.previousElementSibling.style.backgroundColor = '#B6E3F2';
-                return;
-            }
-            target.style.backgroundColor = '#B6E3F2';
-        }
+        changeColor(target, '#B6E3F2');
     });
+
     container.addEventListener('mouseout', function (ev) {
         var target = ev.target;
-
-        if (target.parentElement.className === 'dateContainer') {
-            if (target.className !== 'dateTitle') {
-                target.previousElementSibling.style.backgroundColor = 'gray';
-                return;
-            }
-            target.style.backgroundColor = 'gray';
-        }
+        changeColor(target, 'gray');
     });
 
     container.addEventListener('click', function (ev) {
