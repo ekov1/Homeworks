@@ -1,7 +1,7 @@
 $.fn.lists = function (lists) {
 
     var $container = $(this),
-        dragged,
+        $dragged,
         graphs = lists.length,
         $listsWrapper = $('<section />').addClass('lists-wrapper').appendTo($container);
 
@@ -63,7 +63,7 @@ $.fn.lists = function (lists) {
     // Drag and drop
 
     $listsWrapper.on('dragstart', 'li', function () {
-        dragged = $(this);
+        $dragged = $(this);
     });
 
     $listsWrapper.on("dragenter", function (ev) {
@@ -74,21 +74,26 @@ $.fn.lists = function (lists) {
     $listsWrapper.on('dragover', function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
+
     });
 
     $listsWrapper.on('drop', function (ev) {
 
-        var target = $(ev.target);
+        var $target = $(ev.target);
 
-        if (target.is('ul')) {
+console.log($target);
+        if ($target.is('ul')) {
 
-        } else if (target.parents('ul').length > 0) {
-            target = target.parents('ul').first();
-        } else {
+        }
+        else if ($target.parents('ul').length > 0) {
+            $target = $target.parents('ul').first();
+        }
+        else {
             return;
         }
-        dragged.remove();
-        dragged.appendTo(target);
+
+        $dragged.remove();
+        $dragged.appendTo($target);
     });
 
     function setupLi($itemsUl, text) {
