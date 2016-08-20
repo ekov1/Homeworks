@@ -19,10 +19,11 @@ function solve() {
                 var inputValue = $(this).val(),
                     directories = $('.dir-item');
 
-                if (inputValue.indexOf('/') > 0) {
+                if (inputValue.indexOf('/') >= 0) {
                     var dirAndFile = inputValue.split('/'),
                         dirToAdd = dirAndFile[0],
-                        len = directories.length;
+                        len = directories.length,
+                        containedDir = false;
 
                     for (var i = 0; i < len; i += 1) {
 
@@ -32,8 +33,13 @@ function solve() {
                         if (directoryName === dirToAdd) {
 
                             setupLiElement(itemsList, dirAndFile[1]);
+                            containedDir = true;
                             break;
                         }
+                    }
+
+                    if (!containedDir) {
+                        return;
                     }
                 }
                 else {
@@ -44,7 +50,7 @@ function solve() {
 
                 $(this).val('');
                 $('.add-wrapper').children().first().addClass('visible');
-                $(this).hide();
+                $(this).removeClass('visible');
             }
         });
 
@@ -52,9 +58,11 @@ function solve() {
         $('.add-wrapper').on('click', function (ev) {
             var target = $(ev.target);
 
-            target.removeClass('visible');
-            target.next().show();
-            target.next().addClass('visible');
+            if (target.hasClass('add-btn')) {
+
+                target.removeClass('visible');
+                target.next().addClass('visible');
+            }
         });
 
         // Show message
@@ -70,22 +78,25 @@ function solve() {
         $('.dir-item').on('click', function (ev) {
             var target = $(ev.target);
 
-            if (target.parents('.dir-item').length > 0 && target.parents('.dir-item').hasClass('collapsed')) {
-                target.parents('.dir-item').removeClass('collapsed');
+            if (target.parents('.dir-item').hasClass('collapsed')) {
+                $(this).removeClass('collapsed');
             }
-            else {
+            else if (!target.parents('.dir-item').hasClass('collapsed') && !target.hasClass('del-btn')) {
                 $(this).addClass('collapsed');
             }
         });
 
         function setupLiElement(elementToAppendTo, text) {
-            if(text){
-                var liToAdd = $('<li />').addClass('file-item item'),
-                aToAdd = $('<a />').addClass('item-name').appendTo(liToAdd),
-                delButton = $('<a />').addClass('del-btn').appendTo(liToAdd);
+            text = text.trim();
 
-            aToAdd.text(text);
-            liToAdd.appendTo(elementToAppendTo);
+            if (text) {
+                var liToAdd = $('<li />').addClass('file-item item'),
+                    aToAdd = $('<a />').addClass('item-name').appendTo(liToAdd),
+                    delButton = $('<a />').addClass('del-btn').appendTo(liToAdd);
+
+                aToAdd.text(text);
+                fileContentsByName[text] = '';
+                liToAdd.appendTo(elementToAppendTo);
             }
         }
     };
