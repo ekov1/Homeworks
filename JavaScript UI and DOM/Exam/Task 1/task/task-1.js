@@ -72,7 +72,7 @@ function solve() {
             for (var i = 0; i < suggestions.length; i += 1) {
                 element = suggestions[i].firstElementChild.innerHTML.toLowerCase();
 
-                if (element.includes(suggestion.toLowerCase())) {
+                if (element === suggestion.toLowerCase()) {
                     return;
                 }
             }
