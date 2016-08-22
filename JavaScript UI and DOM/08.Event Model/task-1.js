@@ -11,7 +11,7 @@ function solve() {
             content,
             next,
             len, i;
-
+ 
         if (typeof selector !== 'string' && !(selector instanceof HTMLElement)) {
             throw Error();
         }
