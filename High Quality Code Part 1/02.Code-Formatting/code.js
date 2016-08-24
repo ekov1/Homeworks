@@ -10,6 +10,7 @@ if ((navigator.userAgent.indexOf('MSIE 5') > 0) ||
     addScroll = true;
 }
 
+// Not sure which event this line is using
 if (b === 'Netscape') {
     document.captureEvents(Event.MOUSEMOVE);
 }
@@ -18,16 +19,15 @@ document.onmousemove(function mouseMove(evn) {
     if (b === 'Netscape') {
         pX = evn.pageX - 5;
         pY = evn.pageY;
-    } else {
-        pX = event.x - 5;
-        pY = event.y;
-    }
-    if (b === 'Netscape') {
-        if (document.layers.ToolTip.visibility === 'show') {
+
+		if (document.layers.ToolTip.visibility === 'show') {
             PopTip();
         }
     } else {
-        if (document.all.ToolTip.style.visibility === 'visible') {
+        pX = event.x - 5;
+        pY = event.y;
+
+		if (document.all.ToolTip.style.visibility === 'visible') {
             PopTip();
         }
     }
@@ -61,20 +61,12 @@ function PopTip() {
     }
 }
 
-function HideTip() {
-    args = HideTip.arguments;
+// ToolTip, menu1 or menu2 can be hidden with command
+function Hide(obj) {
     if (b === 'Netscape') {
-        document.layers.ToolTip.visibility = 'hide';
+        document.layers[obj].visibility = 'hide';
     } else {
-        document.all.ToolTip.style.visibility = 'hidden';
-    }
-}
-
-function HideMenu(menu) {
-    if (b === 'Netscape') {
-        document.layers[menu].visibility = 'hide';
-    } else {
-        document.all[menu].style.visibility = 'hidden';
+        document.all[obj].style.visibility = 'hidden';
     }
 }
 
