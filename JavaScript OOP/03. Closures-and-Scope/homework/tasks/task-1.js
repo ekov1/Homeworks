@@ -26,7 +26,9 @@ function solve() {
 			categories = [];
 
 		function listBooks(obj) {
-			var sortedBooks;
+			var sortedBooks,
+				props,
+				len;
 
 			if (books.length === 0) {
 				return books;
@@ -37,12 +39,14 @@ function solve() {
 			});
 
 			if (obj) {
+				props = Object.keys(obj);
+				len = props.length;
 
-				for (var prop in Object.keys(obj)) {
-					sortedBooks = sortedBooks.filter((c) => c[prop] === obj[prop]);
+				for (var i = 0; i < len; i += 1) {
+
+					sortedBooks = sortedBooks.filter((c) => c[props[i]] === obj[props[i]]);
 				}
 			}
-
 
 			return sortedBooks;
 		}
@@ -53,28 +57,22 @@ function solve() {
 			if (!isBookInfoValid(book)) {
 				throw new Error('Invalid book info, cannot add book!');
 			}
+
 			books.push(book);
 
-			if (!containsCategory(book)) {
-				var category = {};
-				category.title = book.category;
-				category.ID = categories.length + 1;
-
-				categories.push(category);
+			if (categories.filter(x => x.title === book.category).length === 0) {
+				setupCategory(categories, book);
 			}
 
 			return book;
 		}
 
-		function containsCategory(book) {
-			var len = categories.length;
+		function setupCategory(categories, book) {
+			var category = {};
+			category.title = book.category;
+			category.ID = categories.length + 1;
 
-			for (var i = 0; i < len; i += 1) {
-				if (book.category === categories[i].title) {
-					return true;
-				}
-			}
-			return false;
+			categories.push(category);
 		}
 
 		function listCategories() {
