@@ -30,7 +30,7 @@ var library = (function () {
             book.author.length === 0 ||
             !isUnique(book) ||
             (book.isbn.length !== 10 && book.isbn.length !== 13)) {
-                
+
             throw Error('Invalid book info! Will not add book');
         }
     }
