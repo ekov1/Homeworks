@@ -22,8 +22,10 @@
 */
 function solve() {
 	var library = (function () {
-		var books = [];
-		var categories = [];
+		var books = [],
+			categories = [],
+			categoryID = 1;
+
 		function listBooks() {
 			return books;
 		}
@@ -31,7 +33,25 @@ function solve() {
 		function addBook(book) {
 			book.ID = books.length + 1;
 			books.push(book);
+
+			book.category.ID = ++categoryID;
+
+			if (containsID(book.category)) {
+				categories.push(book.category);
+			}
+
 			return book;
+		}
+
+		function containsID(category) {
+			var len = categories.length;
+
+			for (var i = 0; i < len; i += 1) {
+				if (category.ID === categories[i].ID) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		function listCategories() {
