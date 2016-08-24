@@ -6,50 +6,57 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    class Event : IComparable
+    public class Event : IComparable
     {
-        public DateTime date;
-        public string title;
-        public string location;
+        private DateTime date;
+        private string title;
+        private string location;
 
         public Event(DateTime date, string title, string location)
         {
             this.date = date;
-
             this.title = title;
             this.location = location;
         }
 
         public int CompareTo(object obj)
         {
-            Event other = obj as Event;
-            int byDate = this.date.CompareTo(other.date);
-            int byTitle = this.title.CompareTo(other.title);
+            Event otherEvent = obj as Event;
 
-            int byLocation = this.location.CompareTo(other.location);
-            if (byDate == 0)
+            int dateCompare = this.date.CompareTo(otherEvent.date);
+            int titleCompare = this.title.CompareTo(otherEvent.title);
+            int locationCompare = this.location.CompareTo(otherEvent.location);
+
+            if (dateCompare == 0)
             {
-                if (byTitle == 0)
-                    return byLocation;
+                if (titleCompare == 0)
+                {
+                    return locationCompare;
+                }
                 else
-                { return byTitle; }
-
-
+                {
+                    return titleCompare;
+                }
             }
             else
-                return byDate;
+            {
+                return dateCompare;
+            }
         }
 
         public override string ToString()
         {
-            StringBuilder toString = new StringBuilder();
-            toString.Append(date
-                .ToString("yyyy-MM-ddTHH:mm:ss"));
+            StringBuilder builder = new StringBuilder();
 
+            builder.Append(this.date.ToString("yyyy-MM-ddTHH:mm:ss"));
+            builder.Append(" | " + this.title);
 
-            toString.Append(" | " + title);
-            if (location != null && location != "") toString.Append(" | " + location);
-            return toString.ToString();
+            if (this.location != null && this.location != "")
+            {
+                builder.Append(" | " + this.location);
+            }
+
+            return builder.ToString();
         }
     }
 }

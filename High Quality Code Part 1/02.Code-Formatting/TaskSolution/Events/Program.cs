@@ -12,48 +12,52 @@ namespace Events
 
         static EventHolder events = new EventHolder();
 
-        static void Main(string[] args)
+        public static void Main()
         {
-            while (ExecuteNextCommand()) { }
-            Console.WriteLine(output);
+            while (ExecuteNextCommand())
+            {
+                Console.WriteLine(output);
+            }
         }
 
         private static bool ExecuteNextCommand()
         {
             string command = Console.ReadLine();
-            if (command[0] == 'A') { AddEvent(command); return true; }
-            if (command[0] == 'D') { DeleteEvents(command); return true; }
 
+            switch (command[0])
+            {
+                case 'A':
+                    AddEvent(command);
+                    return true;
+                case 'D':
+                    DeleteEvents(command);
+                    return true;
+                case 'L':
+                    ListEvents(command);
+                    return true;
+                case 'E':
+                    return false;
+                default:
+                    break;
+            }
 
-            if (command[0] == 'L') { ListEvents(command); return true; }
-            if (command[0] == 'E') { return false; }
             return false;
         }
 
         private static void ListEvents(string command)
-
         {
-            int pipeIndex = command.IndexOf('|')
-            ;
-            DateTime date = GetDate(
-            command,
-            "ListEvents");
-            string countString = command.Substring(
-                pipeIndex + 1
-            );
+            int pipeIndex = command.IndexOf('|');
+            DateTime date = GetDate(command, "ListEvents");
 
-
+            string countString = command.Substring(pipeIndex + 1);
             int count = int.Parse(countString);
-            events.ListEvents(date,
-            count);
+
+            events.ListEvents(date, count);
         }
 
         private static void DeleteEvents(string command)
         {
-            string title = command.Substring
-            (
-                "DeleteEvents".Length + 1
-            );
+            string title = command.Substring("DeleteEvents".Length + 1);
 
             events.DeleteEvents(title);
         }
@@ -68,7 +72,9 @@ namespace Events
 
             events.AddEvent(date, title, location);
         }
-        private static void GetParameters(string commandForExecution,
+
+        private static void GetParameters(
+            string commandForExecution,
             string commandType,
             out DateTime dateAndTime,
             out string eventTitle,
@@ -86,13 +92,11 @@ namespace Events
             }
             else
             {
-                eventTitle = commandForExecution.Substring(
-                                                        firstPipeIndex + 1,
-                                                        lastPipeIndex - firstPipeIndex - 1)
-                                                    .Trim();
+                eventTitle = commandForExecution.Substring(firstPipeIndex + 1, lastPipeIndex - firstPipeIndex - 1).Trim();
                 eventLocation = commandForExecution.Substring(lastPipeIndex + 1).Trim();
             }
         }
+
         private static DateTime GetDate(string command, string commandType)
         {
             DateTime date = DateTime.Parse(command.Substring(commandType.Length + 1, 20));

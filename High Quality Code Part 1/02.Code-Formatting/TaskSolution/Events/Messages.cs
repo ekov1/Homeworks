@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    static class Messages
+    public static class Messages
     {
         public static void EventAdded()
         {
@@ -24,6 +24,7 @@
                 output.AppendFormat("{0} events deleted\n", x);
             }
         }
+
         public static void NoEventsFound()
         {
             output.Append("No events found\n");
