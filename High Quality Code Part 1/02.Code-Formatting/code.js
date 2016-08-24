@@ -10,12 +10,11 @@ if ((navigator.userAgent.indexOf('MSIE 5') > 0) ||
     addScroll = true;
 }
 
-document.onmousemove = mouseMove;
 if (b === 'Netscape') {
     document.captureEvents(Event.MOUSEMOVE);
 }
 
-function mouseMove(evn) {
+document.onmousemove(function mouseMove(evn) {
     if (b === 'Netscape') {
         pX = evn.pageX - 5;
         pY = evn.pageY;
@@ -32,7 +31,7 @@ function mouseMove(evn) {
             PopTip();
         }
     }
-}
+});
 
 function PopTip() {
     if (b === 'Netscape') {
@@ -71,41 +70,20 @@ function HideTip() {
     }
 }
 
-// Make one HideMenu with [menu] option
-
-function HideMenu1() {
+function HideMenu(menu) {
     if (b === 'Netscape') {
-        document.layers.menu1.visibility = 'hide';
+        document.layers[menu].visibility = 'hide';
     } else {
-        document.all.menu1.style.visibility = 'hidden';
+        document.all[menu].style.visibility = 'hidden';
     }
 }
 
-function HideMenu2() {
+function ShowMenu(menu) {
     if (b === 'Netscape') {
-        document.layers.menu2.visibility = 'hide';
-    } else {
-        document.all.menu2.style.visibility = 'hidden';
-    }
-}
-
-// Make one ShowMenu with [menu] option
-function ShowMenu1() {
-    if (b === 'Netscape') {
-        theLayer = eval('document.layers[\'menu1\']');
+        theLayer = eval('document.layers[\'' + menu + '\']');
         theLayer.visibility = 'show';
     } else {
-        theLayer = eval('document.all[\'menu1\']');
+        theLayer = eval('document.all[\'' + menu + '\']');
         theLayer.style.visibility = 'visible';
     }
 }
-
-function ShowMenu2() {
-    if (b === "Netscape") {
-        theLayer = eval('document.layers[\'menu2\']');
-        theLayer.visibility = 'show';
-    } else {
-        theLayer = eval('document.all[\'menu2\']');
-        theLayer.style.visibility = 'visible';
-    }
-} 
