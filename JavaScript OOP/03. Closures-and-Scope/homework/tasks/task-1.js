@@ -63,6 +63,22 @@ function solve() {
 			return categories;
 		}
 
+		function isBookInfoValid(book) {
+			var len = books.length;
+
+			for (var i = 0; i < len; i += 1) {
+				if (book.title === books[i].title || book.isbn === books[i].isbn ||
+			     !book.author || 
+				 (book.isbn.length !== 10 && book.isbn.length !== 13) ||
+				 book.title.length < 2 || book.title.length > 100 ||
+				 book.category.length < 2 || book.category.length > 100)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
 		return {
 			books: {
 				list: listBooks,
