@@ -8,7 +8,7 @@
 
     public static class StringExtensions
     {
-        public static string SplitToSeparateWordsByUppercaseLetter(this string sequence)
+        public static string SeparateDifferentWords(this string sequence)
         {
             var stringMargin = 10;
             var stringSize = sequence.Length + stringMargin;
