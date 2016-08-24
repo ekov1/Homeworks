@@ -23,56 +23,81 @@
 function solve() {
 	var library = (function () {
 		var books = [],
-			categories = [],
-			categoryID = 1;
+			categories = [];
 
-		function listBooks() {
-			return books;
+		function listBooks(obj) {
+			var sortedBooks;
+
+			if (books.length === 0) {
+				return books;
+			}
+
+			sortedBooks = books.sort(function (a, b) {
+				return a.ID - b.ID;
+			});
+
+			if (obj) {
+
+				for (var prop in Object.keys(obj)) {
+					sortedBooks = sortedBooks.filter((c) => c[prop] === obj[prop]);
+				}
+			}
+
+
+			return sortedBooks;
 		}
 
 		function addBook(book) {
 			book.ID = books.length + 1;
+
+			if (!isBookInfoValid(book)) {
+				throw new Error('Invalid book info, cannot add book!');
+			}
 			books.push(book);
 
-			book.category.ID = ++categoryID;
+			if (!containsCategory(book)) {
+				var category = {};
+				category.title = book.category;
+				category.ID = categories.length + 1;
 
-			if (containsID(book.category)) {
-				categories.push(book.category);
+				categories.push(category);
 			}
 
 			return book;
 		}
 
-		function containsID(category) {
+		function containsCategory(book) {
 			var len = categories.length;
 
 			for (var i = 0; i < len; i += 1) {
-				if (category.ID === categories[i].ID) {
-					return false;
+				if (book.category === categories[i].title) {
+					return true;
 				}
 			}
-			return true;
+			return false;
 		}
 
 		function listCategories() {
 
-			categories.sort(function (a, b) {
+			var sortedCategories = categories.sort(function (a, b) {
 				return a.ID - b.ID;
-			});
+			}).map((c) => c.title);
 
-			return categories;
+			return sortedCategories;
 		}
 
 		function isBookInfoValid(book) {
 			var len = books.length;
 
+			if ((book.isbn.length !== 10 && book.isbn.length !== 13) ||
+				book.title.length < 2 || book.title.length > 100 ||
+				book.category.length < 2 || book.category.length > 100 ||
+				!book.author) {
+				return false;
+			}
+
 			for (var i = 0; i < len; i += 1) {
-				if (book.title === books[i].title || book.isbn === books[i].isbn ||
-			     !book.author || 
-				 (book.isbn.length !== 10 && book.isbn.length !== 13) ||
-				 book.title.length < 2 || book.title.length > 100 ||
-				 book.category.length < 2 || book.category.length > 100)
-				{
+				if (book.title === books[i].title || book.isbn === books[i].isbn) {
 					return false;
 				}
 			}
