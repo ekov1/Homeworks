@@ -61,7 +61,6 @@ function ShowToolTip() {
 	layerLeft = pX + offsetLeft;
 	layerTop = pY + offsetTop;
 
-
 	//----------------------------------------------------------------------------
     if (navAppName === NETSCAPE) {
 
