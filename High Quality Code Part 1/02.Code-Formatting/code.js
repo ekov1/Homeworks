@@ -44,14 +44,25 @@ function ShowToolTip() {
 		offsetWidth = 150,
 		documentWidth;
 
-	theLayer = document.layers.ToolTip || document.all.ToolTip;
-	documentWidth = window.innerWidth || document.body.clientWidth;
-
 	if (!theLayer) {
 		return;
 	}
 
+	theLayer = document.layers.ToolTip || document.all.ToolTip;
+	documentWidth = window.innerWidth || document.body.clientWidth;
 
+	if (navAppName !== NETSCAPE && addScroll) {
+		pX = pX + document.body.scrollLeft;
+		pY = pY + document.body.scrollTop;
+	}
+
+	layerLeft = theLayer.left || theLayer.style.pixelLeft;
+	layerTop = theLayer.top || theLayer.style.pixelTop;
+
+	layerLeft = pX + offsetLeft;
+	layerTop = pY + offsetTop;
+
+	
 	//----------------------------------------------------------------------------
     if (navAppName === NETSCAPE) {
 
@@ -59,25 +70,14 @@ function ShowToolTip() {
             pX = window.innerWidth - offsetWidth;
         }
 
-        theLayer.left = pX + offsetLeft;
-        theLayer.top = pY + offsetTop;
         theLayer.visibility = 'show';
 
     } else {
 
-		pX = event.x - 5;
-		pY = event.y;
-
-		if (addScroll) {
-			pX = pX + document.body.scrollLeft;
-			pY = pY + document.body.scrollTop;
-		}
 		if ((pX + 120) > documentWidth) {
 			pX = pX - offsetWidth;
 		}
 
-		theLayer.style.pixelLeft = pX + offsetLeft;
-		theLayer.style.pixelTop = pY + offsetTop;
 		theLayer.style.visibility = 'visible';
     }
 	//----------------------------------------------------------------------------
