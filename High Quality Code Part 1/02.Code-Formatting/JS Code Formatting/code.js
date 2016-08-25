@@ -61,6 +61,8 @@ function ShowToolTip() {
 	layerLeft = pX + offsetLeft;
 	layerTop = pY + offsetTop;
 
+	toggleLayerVisibility(theLayer, true);
+
 	//----------------------------------------------------------------------------
     if (navAppName === NETSCAPE) {
 
@@ -68,17 +70,32 @@ function ShowToolTip() {
             pX = window.innerWidth - offsetWidth;
         }
 
-        theLayer.visibility = 'show';
-
     } else {
 
 		if ((pX + 120) > documentWidth) {
 			pX = pX - offsetWidth;
 		}
-
-		theLayer.style.visibility = 'visible';
     }
 	//----------------------------------------------------------------------------
+}
+
+function toggleLayerVisibility(layer, bool) {
+	if (navAppName === NETSCAPE) {
+		if (bool) {
+			theLayer.visibility = 'show';
+		}
+		else {
+			theLayer.visibility = 'hide';
+		}
+	}
+	else {
+		if (!bool) {
+			theLayer.style.visibility = 'visible';
+		}
+		else {
+			theLayer.style.visibility = 'hidden';
+		}
+	}
 }
 
 // ToolTip, menu1 or menu2 can be hidden with command
