@@ -20,7 +20,7 @@
 
         public static void EventAdded()
         {
-            output.Append("Event added\n");
+            output.AppendLine("Event added");
         }
 
         public static void EventDeleted(int x)
@@ -37,14 +37,14 @@
 
         public static void NoEventsFound()
         {
-            output.Append("No events found\n");
+            output.AppendLine("No events found");
         }
 
         public static void PrintEvent(Event eventToPrint)
         {
             if (eventToPrint != null)
             {
-                output.Append(eventToPrint + "\n");
+                output.AppendLine(eventToPrint + Environment.NewLine);
             }
         }
     }
