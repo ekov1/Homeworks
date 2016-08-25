@@ -1,0 +1,4 @@
+# NOTE TO THE ONE CHECKING THE HOMEWORK
+
+ - The given task is to format the given code, however I have applied some changes to other components of code, such as
+   naming variables, structuring methods.

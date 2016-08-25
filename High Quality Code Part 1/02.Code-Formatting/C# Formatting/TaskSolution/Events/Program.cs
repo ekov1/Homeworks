@@ -7,6 +7,14 @@ namespace Events
 
     public class Program
     {
+        private const char Separator = '|';
+
+        private const string ListEventsCommand = "ListEvents";
+
+        private const string AddEventCommand = "AddEvent";
+
+        private const string DeleteEventsCommand = "DeleteEvents";
+
         private static EventHolder events = new EventHolder();
 
         public static void Main()
@@ -43,8 +51,8 @@ namespace Events
 
         private static void ListEvents(string command)
         {
-            int pipeIndex = command.IndexOf('|');
-            DateTime date = GetDate(command, "ListEvents");
+            int pipeIndex = command.IndexOf(Separator);
+            DateTime date = GetDate(command, ListEventsCommand);
 
             string countString = command.Substring(pipeIndex + 1);
             int count = int.Parse(countString);
@@ -54,7 +62,7 @@ namespace Events
 
         private static void DeleteEvents(string command)
         {
-            string title = command.Substring("DeleteEvents".Length + 1);
+            string title = command.Substring(DeleteEventsCommand.Length + 1);
 
             events.DeleteEvents(title);
         }
@@ -65,7 +73,7 @@ namespace Events
             string title;
             string location;
 
-            GetParameters(command, "AddEvent", out date, out title, out location);
+            GetParameters(command, AddEventCommand, out date, out title, out location);
 
             events.AddEvent(date, title, location);
         }
@@ -79,8 +87,8 @@ namespace Events
         {
             dateAndTime = GetDate(commandForExecution, commandType);
 
-            int firstPipeIndex = commandForExecution.IndexOf('|');
-            int lastPipeIndex = commandForExecution.LastIndexOf('|');
+            int firstPipeIndex = commandForExecution.IndexOf(Separator);
+            int lastPipeIndex = commandForExecution.LastIndexOf(Separator);
 
             if (firstPipeIndex == lastPipeIndex)
             {

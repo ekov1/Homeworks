@@ -60,7 +60,6 @@
                 }
             };
 
-            // Introduce all bunnies
             var consoleWriter = new ConsoleWriter();
 
             foreach (var bunny in bunnies)

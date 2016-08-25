@@ -8,7 +8,12 @@
 
     public static class Messages
     {
-        private static StringBuilder output = new StringBuilder();
+        private static StringBuilder output;
+
+        static Messages()
+        {
+            output = new StringBuilder();
+        }
 
         public static string Log
         {
