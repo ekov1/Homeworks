@@ -1,0 +1,89 @@
+
+#mainDiv {
+    width : 450px;
+    height: 432px;
+    background: url( background.jpg );
+    position:absolute;
+    border-radius: 6px;
+    display: block;
+}
+
+#innerDiv{
+    width:432px;
+    height:389px;
+	border: 1px solid #5d6c7a;
+   	box-shadow: 0 0 1pt 0.5pt white;
+   	border-radius: 3px;
+	position:absolute;
+	top: 32px;
+	left: 7px;
+	background-color: #d9e4f1;
+}
+
+div img {
+    margin: 7px;
+    width:18px;
+    height:19px;
+}
+#calc {
+    position: absolute;
+    top:7px;
+    text-shadow: 1px 1px 6px white;
+    
+}
+.buttons {
+    position: absolute;
+    top: 2px;
+    left: 337px;
+    display: block;
+    z-index: 1;
+}
+.btn {
+	display: inline-block;
+	margin: -2px;
+}
+.minimize {
+	width: 28px;
+	height: 18px; 
+	background-image: url(./button1.jpg);
+	border-bottom-left-radius: 3px;
+	border: 1px solid #5d6c7a;
+}
+
+.restore {
+	width: 28px; height: 18px; 
+	background-image: url(./button2.jpg);
+	border-top: 1px solid #5d6c7a;
+	border-bottom: 1px solid #5d6c7a;
+
+}
+
+.quit {
+	width: 46px; height: 18px; 
+	background-image: url(./button3.jpg);
+	border-bottom-right-radius: 3px;
+	border: 1px solid #5d6c7a;
+}
+.optionBar {
+    width: 432px;
+	height: 20px;
+	padding-top: 3px;
+	border-bottom: solid 1px #b6bccc;
+	background: -webkit-linear-gradient(top, rgb(242, 245, 250) 0%, rgb(207, 213, 229) 94%);
+	background: -o-linear-gradient(top, rgb(242, 245, 250) 0%, rgb(207, 213, 229) 94%);
+	background: -ms-linear-gradient(top, rgb(242, 245, 250) 0%, rgb(207, 213, 229) 94%);
+	background: -moz-linear-gradient(top, rgb(242, 245, 250) 0%, rgb(207, 213, 229) 94%);
+	background: linear-gradient(to bottom, rgb(242, 245, 250) 0%, rgb(207, 213, 229) 94%);
+	position:absolute;
+	font-size: 0.9rem;
+}
+.view, .edit, .help {
+	padding-left: 6px;
+	padding-right: 4px;
+}
+
+input [type=text] {
+	width: 410px;
+	height: 54px;
+	
+}

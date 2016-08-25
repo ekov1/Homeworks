@@ -1,0 +1,38 @@
+﻿body
+{
+    background-color:#595959;
+}
+.firstCol{
+    color:#F1F1F1;
+    font-family:sans-serif;
+    font-style:italic;
+    font-size: small;
+}
+.info{
+    color:#FFF2B3;
+    font-size: small;
+}
+#nameInfo{
+    color:red;
+    font-size: small;
+    
+}
+#statusInfo{
+    color:#DF673E;
+    font-size: small;
+}
+.timeAction{
+    color:#9BABB3;
+    font-family:Arial;
+    font-size: small;
+}
+#nameBullet{
+    font-size:21px;
+    color:#71B47A;
+}
+#ticketID{
+    color:#9BABB3;
+    font-family:Tahoma;
+    font-size:large;
+    
+}
