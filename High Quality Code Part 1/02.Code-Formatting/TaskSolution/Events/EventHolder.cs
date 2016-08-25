@@ -5,11 +5,12 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Wintellect.PowerCollections;
 
     public class EventHolder
     {
-        private Dictionary<string, Event> titleEvents = new Dictionary<string, Event>();
-        private List<Event> dateEvents = new List<Event>();
+        private MultiDictionary<string, Event> titleEvents = new MultiDictionary<string, Event>(true);
+        private OrderedBag<Event> dateEvents = new OrderedBag<Event>();
 
         public void AddEvent(DateTime date, string title, string location)
         {
@@ -24,35 +25,37 @@
         public void DeleteEvents(string titleToDelete)
         {
             string title = titleToDelete.ToLower();
-            int removed = 0;
+            int removedEvents = 0;
 
-            foreach (var eventToRemove in this.titleEvents)
+            foreach (var eventToRemove in this.titleEvents[title])
             {
-                removed++;
+                removedEvents++;
                 this.dateEvents.Remove(eventToRemove);
             }
 
             this.titleEvents.Remove(title);
-            Messages.EventDeleted(removed);
+            Messages.EventDeleted(removedEvents);
         }
 
         public void ListEvents(DateTime date, int count)
         {
-            OrderedBag<Event>.View eventsToShow = byDate.RangeFrom(new Event(date, "", ""), true);
-            int showed = 0;
+            OrderedBag<Event>.View eventsToShow = 
+                this.dateEvents.RangeFrom(new Event(date, string.Empty, string.Empty), true);
+
+            int displayedEvents = 0;
 
             foreach (var eventToShow in eventsToShow)
             {
-                if (showed == count)
+                if (displayedEvents == count)
                 {
                     break;
                 }
 
                 Messages.PrintEvent(eventToShow);
-                showed++;
+                displayedEvents++;
             }
 
-            if (showed == 0)
+            if (displayedEvents == 0)
             {
                 Messages.NoEventsFound();
             }

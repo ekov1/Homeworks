@@ -14,7 +14,6 @@ if (navigator.userAgent.indexOf('MSIE 5') > 0 ||
 
 document.onmousemove = mouseMove;
 
-// Not sure which event this line is using
 if (navAppName === NETSCAPE) {
     document.captureEvents(Event.MOUSEMOVE);
 }
@@ -62,7 +61,7 @@ function ShowToolTip() {
 	layerLeft = pX + offsetLeft;
 	layerTop = pY + offsetTop;
 
-	
+
 	//----------------------------------------------------------------------------
     if (navAppName === NETSCAPE) {
 

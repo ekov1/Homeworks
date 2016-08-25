@@ -8,6 +8,16 @@
 
     public static class Messages
     {
+        private static StringBuilder output = new StringBuilder();
+
+        public static string Log
+        {
+            get
+            {
+                return output.ToString();
+            }
+        }
+
         public static void EventAdded()
         {
             output.Append("Event added\n");

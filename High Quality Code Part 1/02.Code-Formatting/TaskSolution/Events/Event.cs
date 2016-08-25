@@ -8,52 +8,57 @@
 
     public class Event : IComparable
     {
-        private DateTime date;
-        private string title;
-        private string location;
+        private const string DateFormat = "yyyy-MM-ddTHH:mm:ss";
 
         public Event(DateTime date, string title, string location)
         {
-            this.date = date;
-            this.title = title;
-            this.location = location;
+            this.Date = date;
+            this.Title = title;
+            this.Location = location;
         }
+
+        public DateTime Date { get; set; }
+
+        public string Title { get; set; }
+
+        public string Location { get; set; }
 
         public int CompareTo(object obj)
         {
             Event otherEvent = obj as Event;
 
-            int dateCompare = this.date.CompareTo(otherEvent.date);
-            int titleCompare = this.title.CompareTo(otherEvent.title);
-            int locationCompare = this.location.CompareTo(otherEvent.location);
-
-            if (dateCompare == 0)
+            if (obj == null)
             {
-                if (titleCompare == 0)
-                {
-                    return locationCompare;
-                }
-                else
-                {
-                    return titleCompare;
-                }
+                throw new ArgumentException();
             }
-            else
+
+            int dateCompare = this.Date.CompareTo(otherEvent.Date);
+            int titleCompare = this.Title.CompareTo(otherEvent.Title);
+            int locationCompare = this.Location.CompareTo(otherEvent.Location);
+
+            if (dateCompare != 0)
             {
                 return dateCompare;
             }
+
+            if (titleCompare != 0)
+            {
+                return titleCompare;
+            }
+
+            return locationCompare;
         }
 
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append(this.date.ToString("yyyy-MM-ddTHH:mm:ss"));
-            builder.Append(" | " + this.title);
+            builder.Append(this.Date.ToString(DateFormat));
+            builder.Append(" | " + this.Title);
 
-            if (this.location != null && this.location != "")
+            if (this.Location != null && this.Location != string.Empty)
             {
-                builder.Append(" | " + this.location);
+                builder.Append(" | " + this.Location);
             }
 
             return builder.ToString();

@@ -8,15 +8,13 @@ namespace Events
 
     public class Program
     {
-        static StringBuilder output = new StringBuilder();
-
-        static EventHolder events = new EventHolder();
+        private static EventHolder events = new EventHolder();
 
         public static void Main()
         {
             while (ExecuteNextCommand())
             {
-                Console.WriteLine(output);
+                Console.WriteLine(Messages.Log);
             }
         }
 
@@ -88,7 +86,7 @@ namespace Events
             if (firstPipeIndex == lastPipeIndex)
             {
                 eventTitle = commandForExecution.Substring(firstPipeIndex + 1).Trim();
-                eventLocation = "";
+                eventLocation = string.Empty;
             }
             else
             {
