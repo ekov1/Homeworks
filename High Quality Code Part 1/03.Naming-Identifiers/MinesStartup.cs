@@ -1,4 +1,4 @@
-﻿namespace MinesGame
+﻿namespace Minesweeper
 {
     using System;
     using System.Collections.Generic;
@@ -7,348 +7,351 @@
 
     public class MinesStartup
     {
-        public class tochki
+        public static void Main()
         {
-            string име;
-            int то4ки;
+            string command = string.Empty;
 
-            public string Име
-            {
-                get { return име; }
-                set { име = value; }
-            }
+            char[,] gameField = CreateGameField();
+            char[,] fieldBombs = SetupFieldBombs();
+            List<Player> players = new List<Player>(6);
 
-            public int То4ки
-            {
-                get { return то4ки; }
-                set { то4ки = value; }
-            }
-
-            public tochki() { }
-
-            public tochki(string име, int то4ки)
-            {
-                this.име = име;
-                this.то4ки = то4ки;
-            }
-        }
-
-        static void Main(string[] аргументи)
-        {
-            string komanda = string.Empty;
-            char[,] poleto = create_igralno_pole();
-            char[,] bombite = slojibombite();
-            int broya4 = 0;
-            bool grum = false;
-            List<tochki> shampion4eta = new List<tochki>(6);
-            int red = 0;
-            int kolona = 0;
-            bool flag = true;
-            const int maks = 35;
-            bool flag2 = false;
+            int openedCells = 0;
+            int row = 0;
+            int col = 0;
+            bool isDead = false;
+            bool restartGame = true;
+            bool isWinner = false;
 
             do
             {
-                if (flag)
+                if (restartGame)
                 {
-                    Console.WriteLine("Hajde da igraem na “Mini4KI”. Probvaj si kasmeta da otkriesh poleteta bez mini4ki." +
-                    " Komanda 'top' pokazva klasiraneto, 'restart' po4va nova igra, 'exit' izliza i hajde 4ao!");
-                    dumpp(poleto);
-                    flag = false;
+                    Console.WriteLine("Minesweeper Game. Try to find all cells without a bomb!" +
+                        " Commands are: 'top' to show Leaderboard, 'restart' to start new game, 'exit' to exit game.");
+
+                    DrawGameBoard(gameField);
+                    restartGame = false;
                 }
-                Console.Write("Daj red i kolona : ");
-                komanda = Console.ReadLine().Trim();
-                if (komanda.Length >= 3)
+
+                Console.Write("Input command : ");
+                command = Console.ReadLine().Trim();
+
+                if (command.Length >= 3)
                 {
-                    if (int.TryParse(komanda[0].ToString(), out red) &&
-                    int.TryParse(komanda[2].ToString(), out kolona) &&
-                        red <= poleto.GetLength(0) && kolona <= poleto.GetLength(1))
+                    if (int.TryParse(command[0].ToString(), out row) &&
+                    int.TryParse(command[2].ToString(), out col) &&
+                        row <= gameField.GetLength(0) && col <= gameField.GetLength(1))
                     {
-                        komanda = "turn";
+                        command = "turn";
                     }
                 }
-                switch (komanda)
+
+                switch (command)
                 {
                     case "top":
-                        klasacia(shampion4eta);
+                        GetLeaderboard(players);
                         break;
                     case "restart":
-                        poleto = create_igralno_pole();
-                        bombite = slojibombite();
-                        dumpp(poleto);
-                        grum = false;
-                        flag = false;
+                        gameField = CreateGameField();
+                        fieldBombs = SetupFieldBombs();
+                        DrawGameBoard(gameField);
+
+                        isDead = false;
+                        restartGame = false;
                         break;
                     case "exit":
-                        Console.WriteLine("4a0, 4a0, 4a0!");
+                        Console.WriteLine(GlobalConstants.ExitMessage);
                         break;
                     case "turn":
-                        if (bombite[red, kolona] != '*')
+                        if (fieldBombs[row, col] != GlobalConstants.BombCellChar)
                         {
-                            if (bombite[red, kolona] == '-')
+                            if (fieldBombs[row, col] == GlobalConstants.EmptyCellChar)
                             {
-                                tisinahod(poleto, bombite, red, kolona);
-                                broya4++;
+                                PlayTurn(gameField, fieldBombs, row, col);
+                                openedCells++;
                             }
-                            if (maks == broya4)
+
+                            if (GlobalConstants.MaxOpenedCells == openedCells)
                             {
-                                flag2 = true;
+                                isWinner = true;
                             }
                             else
                             {
-                                dumpp(poleto);
+                                DrawGameBoard(gameField);
                             }
                         }
                         else
                         {
-                            grum = true;
+                            isDead = true;
                         }
+
                         break;
                     default:
-                        Console.WriteLine("\nGreshka! nevalidna Komanda\n");
+                        Console.WriteLine(Environment.NewLine + GlobalConstants.InvalidCommandMessage);
                         break;
                 }
-                if (grum)
+
+                if (isDead)
                 {
-                    dumpp(bombite);
-                    Console.Write("\nHrrrrrr! Umria gerojski s {0} to4ki. " +
-                        "Daj si niknejm: ", broya4);
-                    string niknejm = Console.ReadLine();
-                    tochki t = new tochki(niknejm, broya4);
-                    if (shampion4eta.Count < 5)
+                    DrawGameBoard(fieldBombs);
+                    Console.Write(
+                        Environment.NewLine + 
+                        GlobalConstants.LoserMessage + 
+                        Environment.NewLine + 
+                        GlobalConstants.InputNicknameMessage, 
+                        openedCells);
+
+                    string nickName = Console.ReadLine();
+                    Player player = new Player(nickName, openedCells);
+
+                    if (players.Count < 5)
                     {
-                        shampion4eta.Add(t);
+                        players.Add(player);
                     }
                     else
                     {
-                        for (int i = 0; i < shampion4eta.Count; i++)
+                        for (int i = 0; i < players.Count; i++)
                         {
-                            if (shampion4eta[i].То4ки < t.То4ки)
+                            if (players[i].Points < player.Points)
                             {
-                                shampion4eta.Insert(i, t);
-                                shampion4eta.RemoveAt(shampion4eta.Count - 1);
+                                players.Insert(i, player);
+                                players.RemoveAt(players.Count - 1);
                                 break;
                             }
                         }
                     }
-                    shampion4eta.Sort((tochki r1, tochki r2) => r2.Име.CompareTo(r1.Име));
-                    shampion4eta.Sort((tochki r1, tochki r2) => r2.То4ки.CompareTo(r1.То4ки));
-                    klasacia(shampion4eta);
 
-                    poleto = create_igralno_pole();
-                    bombite = slojibombite();
-                    broya4 = 0;
-                    grum = false;
-                    flag = true;
+                    players.Sort((Player firstPlayer, Player secondPlayer) => secondPlayer.Name.CompareTo(firstPlayer.Name));
+                    players.Sort((Player firstPlayer, Player secondPlayer) => secondPlayer.Points.CompareTo(firstPlayer.Points));
+                    GetLeaderboard(players);
+
+                    gameField = CreateGameField();
+                    fieldBombs = SetupFieldBombs();
+                    openedCells = 0;
+                    isDead = false;
+                    restartGame = true;
                 }
-                if (flag2)
+
+                if (isWinner)
                 {
-                    Console.WriteLine("\nBRAVOOOS! Otvri 35 kletki bez kapka kryv.");
-                    dumpp(bombite);
-                    Console.WriteLine("Daj si imeto, batka: ");
-                    string imeee = Console.ReadLine();
-                    tochki to4kii = new tochki(imeee, broya4);
-                    shampion4eta.Add(to4kii);
-                    klasacia(shampion4eta);
-                    poleto = create_igralno_pole();
-                    bombite = slojibombite();
-                    broya4 = 0;
-                    flag2 = false;
-                    flag = true;
+                    Console.WriteLine(Environment.NewLine + GlobalConstants.WinnerMessage);
+                    DrawGameBoard(fieldBombs);
+                    Console.WriteLine(GlobalConstants.InputNicknameMessage);
+
+                    string playerName = Console.ReadLine();
+                    Player player = new Player(playerName, openedCells);
+                    players.Add(player);
+
+                    GetLeaderboard(players);
+
+                    gameField = CreateGameField();
+                    fieldBombs = SetupFieldBombs();
+                    openedCells = 0;
+                    isWinner = false;
+                    restartGame = true;
                 }
             }
-            while (komanda != "exit");
-            Console.WriteLine("Made in Bulgaria - Uauahahahahaha!");
-            Console.WriteLine("AREEEEEEeeeeeee.");
+            while (command != "exit");
+
             Console.Read();
         }
 
-        private static void klasacia(List<tochki> to4kii)
+        private static void GetLeaderboard(List<Player> players)
         {
-            Console.WriteLine("\nTo4KI:");
-            if (to4kii.Count > 0)
+            var builder = new StringBuilder();
+
+            builder.AppendLine();
+            builder.AppendLine("Players:");
+
+            if (players.Count > 0)
             {
-                for (int i = 0; i < to4kii.Count; i++)
+                for (int i = 0; i < players.Count; i++)
                 {
-                    Console.WriteLine("{0}. {1} --> {2} kutii",
-                        i + 1, to4kii[i].Име, to4kii[i].То4ки);
+                    builder.AppendLine(string.Format(GlobalConstants.LeaderboardPlayerMessage, i + 1, players[i].Name, players[i].Points));
                 }
-                Console.WriteLine();
+
+                builder.AppendLine();
             }
             else
             {
-                Console.WriteLine("prazna klasaciq!\n");
+                builder.AppendLine(GlobalConstants.EmptyLeaderboardMessage);
             }
+
+            Console.WriteLine(builder.ToString());
         }
 
-        private static void tisinahod(char[,] POLE,
-            char[,] BOMBI, int RED, int KOLONA)
+        private static void PlayTurn(char[,] field, char[,] bombs, int row, int col)
         {
-            char kolkoBombi = kolko(BOMBI, RED, KOLONA);
-            BOMBI[RED, KOLONA] = kolkoBombi;
-            POLE[RED, KOLONA] = kolkoBombi;
+            char bombCount = GetBombCount(bombs, row, col);
+
+            bombs[row, col] = bombCount;
+            field[row, col] = bombCount;
         }
 
-        private static void dumpp(char[,] board)
+        private static void DrawGameBoard(char[,] board)
         {
-            int RRR = board.GetLength(0);
-            int KKK = board.GetLength(1);
-            Console.WriteLine("\n    0 1 2 3 4 5 6 7 8 9");
-            Console.WriteLine("   ---------------------");
-            for (int i = 0; i < RRR; i++)
+            var builder = new StringBuilder();
+
+            builder.AppendLine();
+            builder.AppendLine(GlobalConstants.FieldColumnNumber);
+            builder.AppendLine(GlobalConstants.FieldBorder);
+
+            for (int i = 0; i < GlobalConstants.BoardRows; i++)
             {
-                Console.Write("{0} | ", i);
-                for (int j = 0; j < KKK; j++)
+                builder.AppendFormat("{0} | ", i);
+
+                for (int j = 0; j < GlobalConstants.BoardCols; j++)
                 {
-                    Console.Write(string.Format("{0} ", board[i, j]));
+                    builder.AppendFormat("{0} ", board[i, j]);
                 }
-                Console.Write("|");
-                Console.WriteLine();
+
+                builder.AppendLine("|");
             }
-            Console.WriteLine("   ---------------------\n");
+
+            builder.AppendLine(GlobalConstants.FieldBorder);
+
+            Console.WriteLine(builder.ToString());
         }
 
-        private static char[,] create_igralno_pole()
+        private static char[,] CreateGameField()
         {
-            int boardRows = 5;
-            int boardColumns = 10;
-            char[,] board = new char[boardRows, boardColumns];
-            for (int i = 0; i < boardRows; i++)
+            char[,] board = new char[GlobalConstants.BoardRows, GlobalConstants.BoardCols];
+
+            for (int i = 0; i < GlobalConstants.BoardRows; i++)
             {
-                for (int j = 0; j < boardColumns; j++)
+                for (int j = 0; j < GlobalConstants.BoardCols; j++)
                 {
-                    board[i, j] = '?';
+                    board[i, j] = GlobalConstants.UnknownCellChar;
                 }
             }
 
             return board;
         }
 
-        private static char[,] slojibombite()
+        private static char[,] SetupFieldBombs()
         {
-            int Редове = 5;
-            int Колони = 10;
-            char[,] игрално_поле = new char[Редове, Колони];
+            char[,] gameField = new char[GlobalConstants.BoardRows, GlobalConstants.BoardCols];
 
-            for (int i = 0; i < Редове; i++)
+            for (int i = 0; i < GlobalConstants.BoardRows; i++)
             {
-                for (int j = 0; j < Колони; j++)
+                for (int j = 0; j < GlobalConstants.BoardCols; j++)
                 {
-                    игрално_поле[i, j] = '-';
+                    gameField[i, j] = GlobalConstants.EmptyCellChar;
                 }
             }
 
-            List<int> r3 = new List<int>();
-            while (r3.Count < 15)
-            {
-                Random random = new Random();
-                int asfd = random.Next(50);
-                if (!r3.Contains(asfd))
-                {
-                    r3.Add(asfd);
-                }
-            }
+            var bombCellNumbers = GenerateBombCellNumbers();
 
-            foreach (int i2 in r3)
+            foreach (int bombNumber in bombCellNumbers)
             {
-                int kol = (i2 / Колони);
-                int red = (i2 % Колони);
-                if (red == 0 && i2 != 0)
+                int row = bombNumber % GlobalConstants.BoardCols;
+                int col = bombNumber / GlobalConstants.BoardCols;
+
+                if (row == 0 && bombNumber != 0)
                 {
-                    kol--;
-                    red = Колони;
+                    col--;
+                    row = GlobalConstants.BoardRows;
                 }
                 else
                 {
-                    red++;
+                    row++;
                 }
-                игрално_поле[kol, red - 1] = '*';
+
+                gameField[col, row - 1] = GlobalConstants.BombCellChar;
             }
 
-            return игрално_поле;
+            return gameField;
         }
 
-        private static void smetki(char[,] pole)
+        private static List<int> GenerateBombCellNumbers()
         {
-            int kol = pole.GetLength(0);
-            int red = pole.GetLength(1);
+            var bombCellNumbers = new List<int>();
 
-            for (int i = 0; i < kol; i++)
+            while (bombCellNumbers.Count < 15)
             {
-                for (int j = 0; j < red; j++)
+                var random = new Random();
+                int cellNumber = random.Next(50);
+
+                if (!bombCellNumbers.Contains(cellNumber))
                 {
-                    if (pole[i, j] != '*')
-                    {
-                        char kolkoo = kolko(pole, i, j);
-                        pole[i, j] = kolkoo;
-                    }
+                    bombCellNumbers.Add(cellNumber);
                 }
             }
+
+            return bombCellNumbers;
         }
 
-        private static char kolko(char[,] r, int rr, int rrr)
+        private static char GetBombCount(char[,] bombs, int row, int col)
         {
-            int brojkata = 0;
-            int reds = r.GetLength(0);
-            int kols = r.GetLength(1);
+            int count = 0;
+            int bombRows = bombs.GetLength(0);
+            int bombCols = bombs.GetLength(1);
 
-            if (rr - 1 >= 0)
+            if (row - 1 >= 0)
             {
-                if (r[rr - 1, rrr] == '*')
+                if (bombs[row - 1, col] == GlobalConstants.BombCellChar)
                 {
-                    brojkata++;
+                    count++;
                 }
             }
-            if (rr + 1 < reds)
+
+            if (row + 1 < bombRows)
             {
-                if (r[rr + 1, rrr] == '*')
+                if (bombs[row + 1, col] == GlobalConstants.BombCellChar)
                 {
-                    brojkata++;
+                    count++;
                 }
             }
-            if (rrr - 1 >= 0)
+
+            if (col - 1 >= 0)
             {
-                if (r[rr, rrr - 1] == '*')
+                if (bombs[row, col - 1] == GlobalConstants.BombCellChar)
                 {
-                    brojkata++;
+                    count++;
                 }
             }
-            if (rrr + 1 < kols)
+
+            if (col + 1 < bombCols)
             {
-                if (r[rr, rrr + 1] == '*')
+                if (bombs[row, col + 1] == GlobalConstants.BombCellChar)
                 {
-                    brojkata++;
+                    count++;
                 }
             }
-            if ((rr - 1 >= 0) && (rrr - 1 >= 0))
+
+            if ((row - 1 >= 0) && (col - 1 >= 0))
             {
-                if (r[rr - 1, rrr - 1] == '*')
+                if (bombs[row - 1, col - 1] == GlobalConstants.BombCellChar)
                 {
-                    brojkata++;
+                    count++;
                 }
             }
-            if ((rr - 1 >= 0) && (rrr + 1 < kols))
+
+            if ((row - 1 >= 0) && (col + 1 < bombCols))
             {
-                if (r[rr - 1, rrr + 1] == '*')
+                if (bombs[row - 1, col + 1] == GlobalConstants.BombCellChar)
                 {
-                    brojkata++;
+                    count++;
                 }
             }
-            if ((rr + 1 < reds) && (rrr - 1 >= 0))
+
+            if ((row + 1 < bombRows) && (col - 1 >= 0))
             {
-                if (r[rr + 1, rrr - 1] == '*')
+                if (bombs[row + 1, col - 1] == GlobalConstants.BombCellChar)
                 {
-                    brojkata++;
+                    count++;
                 }
             }
-            if ((rr + 1 < reds) && (rrr + 1 < kols))
+
+            if ((row + 1 < bombRows) && (col + 1 < bombCols))
             {
-                if (r[rr + 1, rrr + 1] == '*')
+                if (bombs[row + 1, col + 1] == GlobalConstants.BombCellChar)
                 {
-                    brojkata++;
+                    count++;
                 }
             }
-            return char.Parse(brojkata.ToString());
+
+            return char.Parse(count.ToString());
         }
     }
 }
