@@ -1,11 +1,15 @@
 ﻿namespace Bunnies
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
+    using Enums;
+    using Models;
+    using Utils;
 
     public class Bunnies
     {
+        private const string BunniesFilePath = @"..\..\bunnies.txt";
+
         public static void Main()
         {
             var bunnies = new List<Bunny>
@@ -68,13 +72,11 @@
             }
 
             // Create bunnies text file
-            var bunniesFilePath = @"..\..\bunnies.txt";
-            var fileStream = File.Create(bunniesFilePath);
-
+            var fileStream = File.Create(BunniesFilePath);
             fileStream.Close();
 
             // Save bunnies to a text file
-            using (var streamWriter = new StreamWriter(bunniesFilePath))
+            using (var streamWriter = new StreamWriter(BunniesFilePath))
             {
                 foreach (var bunny in bunnies)
                 {

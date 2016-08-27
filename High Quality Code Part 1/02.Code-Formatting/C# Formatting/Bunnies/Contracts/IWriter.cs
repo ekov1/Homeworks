@@ -1,4 +1,4 @@
-﻿namespace Bunnies
+﻿namespace Bunnies.Constracts
 {
     using System;
     using System.Collections.Generic;
@@ -6,11 +6,10 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public enum FurType
+    public interface IWriter
     {
-        NotFluffy,
-        ALittleFluffy,
-        Fluffy,
-        FluffyToTheLimit
+        void Write(string message);
+
+        void WriteLine(string message);
     }
 }

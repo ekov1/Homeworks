@@ -1,4 +1,4 @@
-﻿namespace Events
+﻿namespace Events.Models
 {
     using System;
     using System.Collections.Generic;

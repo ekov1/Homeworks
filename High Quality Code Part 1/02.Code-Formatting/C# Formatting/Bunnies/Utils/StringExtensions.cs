@@ -1,4 +1,4 @@
-﻿namespace Bunnies
+﻿namespace Bunnies.Utils
 {
     using System;
     using System.Collections.Generic;
@@ -8,18 +8,19 @@
 
     public static class StringExtensions
     {
+        private const char Whitespace = ' ';
+        private const int StringMargin = 10;
+
         public static string SeparateDifferentWords(this string sequence)
         {
-            var stringMargin = 10;
-            var stringSize = sequence.Length + stringMargin;
+            var stringSize = sequence.Length + StringMargin;
             var builder = new StringBuilder(stringSize);
-            var whitespace = ' ';
 
             foreach (var letter in sequence)
             {
                 if (char.IsUpper(letter))
                 {
-                    builder.Append(whitespace);
+                    builder.Append(Whitespace);
                 }
 
                 builder.Append(letter);

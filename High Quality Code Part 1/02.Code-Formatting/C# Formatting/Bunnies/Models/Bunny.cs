@@ -1,7 +1,10 @@
-﻿namespace Bunnies
+﻿namespace Bunnies.Models
 {
     using System;
     using System.Text;
+    using Constracts;
+    using Enums;
+    using Utils;
 
     [Serializable]
     public class Bunny

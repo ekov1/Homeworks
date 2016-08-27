@@ -1,10 +1,11 @@
-﻿namespace Events
+﻿namespace Events.Models
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Utils;
     using Wintellect.PowerCollections;
 
     public class EventHolder

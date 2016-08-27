@@ -1,11 +1,10 @@
 namespace Events
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using Models;
+    using Utils;
 
-    public class Program
+    public class Startup
     {
         private const char Separator = '|';
 
