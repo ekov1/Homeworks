@@ -38,7 +38,7 @@
         }
 
         /// <summary>
-        /// Converts string to bool 
+        /// Converts string to Boolean 
         /// </summary>
         /// <param name="input">The input string</param>
         /// <returns>Returns a Boolean value</returns>
@@ -204,30 +204,48 @@
             return input;
         }
 
+        /// <summary>
+        /// Validates username string
+        /// </summary>
+        /// <param name="input">The input username string</param>
+        /// <returns>The parsed username</returns>
         public static string ToValidUsername(this string input)
         {
             input = input.ConvertCyrillicToLatinLetters();
+
+            // Removes all whitespace and unsupported in username symbols
             return Regex.Replace(input, @"[^a-zA-z0-9_\.]+", string.Empty);
         }
 
-        public static void Main()
-        {
-            var test = "Kuche";
-            var result = ToValidUsername(test);
-            Console.WriteLine(result);
-        }
-
+        /// <summary>
+        /// Validates file name from string
+        /// </summary>
+        /// <param name="input">The input string</param>
+        /// <returns>Returns the parsed file name</returns>
         public static string ToValidLatinFileName(this string input)
         {
             input = input.Replace(" ", "-").ConvertCyrillicToLatinLetters();
+
+            // Removes all whitespace and unsupported in file name symbols ( dash is excluded )
             return Regex.Replace(input, @"[^a-zA-z0-9_\.\-]+", string.Empty);
         }
 
+        /// <summary>
+        /// Gets first character of input string
+        /// </summary>
+        /// <param name="input">The input string</param>
+        /// <param name="charsCount">Count of the characters in input</param>
+        /// <returns>Returns the first character in input</returns>
         public static string GetFirstCharacters(this string input, int charsCount)
         {
             return input.Substring(0, Math.Min(input.Length, charsCount));
         }
 
+        /// <summary>
+        /// Gets the file extension of a file name
+        /// </summary>
+        /// <param name="fileName">The input string file name</param>
+        /// <returns>Returns the file extension of the input</returns>
         public static string GetFileExtension(this string fileName)
         {
             if (string.IsNullOrWhiteSpace(fileName))
@@ -236,6 +254,7 @@
             }
 
             string[] fileParts = fileName.Split(new[] { "." }, StringSplitOptions.None);
+
             if (fileParts.Count() == 1 || string.IsNullOrEmpty(fileParts.Last()))
             {
                 return string.Empty;
@@ -244,6 +263,11 @@
             return fileParts.Last().Trim().ToLower();
         }
 
+        /// <summary>
+        /// Converts file extension string to file content type
+        /// </summary>
+        /// <param name="fileExtension">The input string</param>
+        /// <returns>Returns the content type from the file extension</returns>
         public static string ToContentType(this string fileExtension)
         {
             var fileExtensionToContentType = new Dictionary<string, string>
@@ -265,12 +289,20 @@
                 return fileExtensionToContentType[fileExtension.Trim()];
             }
 
+            // Returns default string content type if file extension is not contained in Dictionary
             return "application/octet-stream";
         }
 
+        /// <summary>
+        /// Converts string to byte array
+        /// </summary>
+        /// <param name="input">The input string</param>
+        /// <returns>Returns the parsed byte array</returns>
         public static byte[] ToByteArray(this string input)
         {
             var bytesArray = new byte[input.Length * sizeof(char)];
+
+            // Creates a copy of input array into bytesArray
             Buffer.BlockCopy(input.ToCharArray(), 0, bytesArray, 0, bytesArray.Length);
             return bytesArray;
         }
