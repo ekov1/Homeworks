@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cooking", "Cooking\Cooking.csproj", "{75048CC6-26A7-4A9F-9821-ED705BE3726A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisitingCell", "VisitingCell\VisitingCell.csproj", "{F28AFC7B-8617-4C78-B8D9-64087EABEEAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoopRefactoring", "LoopRefactoring\LoopRefactoring.csproj", "{9C5CDD9D-ABD1-4F3D-A857-9133985B7102}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{75048CC6-26A7-4A9F-9821-ED705BE3726A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75048CC6-26A7-4A9F-9821-ED705BE3726A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75048CC6-26A7-4A9F-9821-ED705BE3726A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F28AFC7B-8617-4C78-B8D9-64087EABEEAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F28AFC7B-8617-4C78-B8D9-64087EABEEAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F28AFC7B-8617-4C78-B8D9-64087EABEEAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F28AFC7B-8617-4C78-B8D9-64087EABEEAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C5CDD9D-ABD1-4F3D-A857-9133985B7102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C5CDD9D-ABD1-4F3D-A857-9133985B7102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C5CDD9D-ABD1-4F3D-A857-9133985B7102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C5CDD9D-ABD1-4F3D-A857-9133985B7102}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
