@@ -86,19 +86,12 @@ namespace Events
         {
             dateAndTime = GetDate(commandForExecution, commandType);
 
-            int firstPipeIndex = commandForExecution.IndexOf(Separator);
-            int lastPipeIndex = commandForExecution.LastIndexOf(Separator);
+            var commandWords = commandForExecution
+                 .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (firstPipeIndex == lastPipeIndex)
-            {
-                eventTitle = commandForExecution.Substring(firstPipeIndex + 1).Trim();
-                eventLocation = string.Empty;
-            }
-            else
-            {
-                eventTitle = commandForExecution.Substring(firstPipeIndex + 1, lastPipeIndex - firstPipeIndex - 1).Trim();
-                eventLocation = commandForExecution.Substring(lastPipeIndex + 1).Trim();
-            }
+            eventTitle = commandWords[1].Trim();
+            eventLocation = commandWords.Length == 3 ?
+                  commandWords[2].Trim() : string.Empty;
         }
 
         private static DateTime GetDate(string command, string commandType)

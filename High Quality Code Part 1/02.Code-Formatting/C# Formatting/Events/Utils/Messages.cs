@@ -34,7 +34,7 @@
             }
             else
             {
-                output.AppendFormat("{0} events deleted\n", x);
+                output.AppendLine(string.Format("{0} events deleted", x));
             }
         }
 
