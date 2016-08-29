@@ -12,10 +12,10 @@
 
         bool IsRotten { get; }
 
-        bool IsPeeled { get; }
+        bool IsPeeled { get; set; }
 
-        bool IsCut { get; }
+        bool IsCut { get; set; }
 
-        bool IsCooked { get; }
+        bool IsCooked { get; set; }
     }
 }

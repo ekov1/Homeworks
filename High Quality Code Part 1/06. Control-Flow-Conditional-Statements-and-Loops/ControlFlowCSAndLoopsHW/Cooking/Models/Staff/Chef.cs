@@ -49,20 +49,20 @@
             return potato;
         }
 
-        public void Cut(Vegetable vegetable)
+        public void Cut(IVegetable vegetable)
         {
             vegetable.IsCut = true;
             this.speachLogger.Say("Alright, we're done with cutting the vegetables!");
         }
 
-        public void Peel(Vegetable vegetable)
+        public void Peel(IVegetable vegetable)
         {
             vegetable.IsPeeled = true;
             this.speachLogger.Say("Alright, we're done with peeling the vegetable!");
         }
 
         // There can be an option to input ingridients in the method contructor
-        public void Cook(Vegetable potato, Vegetable carrot, Bowl bowl)
+        public void Cook(IVegetable potato, IVegetable carrot, Bowl bowl)
         {
             var areIngridientsAvaliable = (potato != null) && (carrot != null) && (bowl != null);
 
