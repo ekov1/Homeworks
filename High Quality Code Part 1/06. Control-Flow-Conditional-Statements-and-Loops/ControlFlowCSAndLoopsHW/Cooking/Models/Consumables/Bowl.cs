@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Contracts;
 
-    public class Bowl
+    public class Bowl : IContainable
     {
         private List<IVegetable> bowlContent;
 
@@ -13,7 +13,7 @@
             this.bowlContent = new List<IVegetable>();
         }
 
-        public IList<IVegetable> BowlContent
+        public IList<IVegetable> Contents
         {
             get
             {

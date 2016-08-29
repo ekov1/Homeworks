@@ -33,7 +33,7 @@
             return bowl;
         }
 
-        public Carrot GetCarrot()
+        public IVegetable GetCarrot()
         {
             var carrot = new Carrot();
             this.speachLogger.Say("Alright, here we have a carrot!");
@@ -41,7 +41,7 @@
             return carrot;
         }
 
-        public Potato GetPotato()
+        public IVegetable GetPotato()
         {
             var potato = new Potato();
             this.speachLogger.Say("We got a potato, that's great!");
@@ -83,8 +83,8 @@
 
             if (isPreparationComplete)
             {
-                bowl.BowlContent.Add(carrot);
-                bowl.BowlContent.Add(potato);
+                bowl.Contents.Add(carrot);
+                bowl.Contents.Add(potato);
 
                 this.speachLogger.Say("Awesome we got ourselves a carrot a potato in a bowl!");
             }
