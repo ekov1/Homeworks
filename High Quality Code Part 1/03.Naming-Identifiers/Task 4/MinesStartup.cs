@@ -2,8 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
+    using Globals;
+    using Models;
 
     public class MinesStartup
     {
@@ -13,7 +14,7 @@
 
             char[,] gameField = CreateGameField();
             char[,] fieldBombs = SetupFieldBombs();
-            List<Player> players = new List<Player>(6);
+            List<Player> players = new List<Player>();
 
             int openedCells = 0;
             int row = 0;
@@ -26,14 +27,13 @@
             {
                 if (restartGame)
                 {
-                    Console.WriteLine("Minesweeper Game. Try to find all cells without a bomb!" +
-                        " Commands are: 'top' to show Leaderboard, 'restart' to start new game, 'exit' to exit game.");
+                    Console.WriteLine(GlobalConstants.IntroGameMessage);
 
                     DrawGameBoard(gameField);
                     restartGame = false;
                 }
 
-                Console.Write("Input command : ");
+                Console.Write(GlobalConstants.InputCommandMessage);
                 command = Console.ReadLine().Trim();
 
                 if (command.Length >= 3)
@@ -48,10 +48,12 @@
 
                 switch (command)
                 {
-                    case "top":
+                    case GlobalConstants.LeaderboardCommand:
+
                         GetLeaderboard(players);
                         break;
-                    case "restart":
+                    case GlobalConstants.RestartGameCommand:
+
                         gameField = CreateGameField();
                         fieldBombs = SetupFieldBombs();
                         DrawGameBoard(gameField);
@@ -59,10 +61,12 @@
                         isDead = false;
                         restartGame = false;
                         break;
-                    case "exit":
+                    case GlobalConstants.ExitGameCommand:
+
                         Console.WriteLine(GlobalConstants.ExitMessage);
                         break;
-                    case "turn":
+                    case GlobalConstants.PlayTurnCommand:
+
                         if (fieldBombs[row, col] != GlobalConstants.BombCellChar)
                         {
                             if (fieldBombs[row, col] == GlobalConstants.EmptyCellChar)
@@ -95,10 +99,10 @@
                 {
                     DrawGameBoard(fieldBombs);
                     Console.Write(
-                        Environment.NewLine + 
-                        GlobalConstants.LoserMessage + 
-                        Environment.NewLine + 
-                        GlobalConstants.InputNicknameMessage, 
+                        Environment.NewLine +
+                        GlobalConstants.LoserMessage +
+                        Environment.NewLine +
+                        GlobalConstants.InputNicknameMessage,
                         openedCells);
 
                     string nickName = Console.ReadLine();
@@ -151,7 +155,7 @@
                     restartGame = true;
                 }
             }
-            while (command != "exit");
+            while (command != GlobalConstants.ExitGameCommand);
 
             Console.Read();
         }
@@ -161,7 +165,7 @@
             var builder = new StringBuilder();
 
             builder.AppendLine();
-            builder.AppendLine("Players:");
+            builder.AppendLine(GlobalConstants.LeaderboardPlayers);
 
             if (players.Count > 0)
             {
@@ -198,14 +202,14 @@
 
             for (int i = 0; i < GlobalConstants.BoardRows; i++)
             {
-                builder.AppendFormat("{0} | ", i);
+                builder.AppendFormat("{0} {1} ", i, GlobalConstants.BoarderSeparator);
 
                 for (int j = 0; j < GlobalConstants.BoardCols; j++)
                 {
                     builder.AppendFormat("{0} ", board[i, j]);
                 }
 
-                builder.AppendLine("|");
+                builder.AppendLine(GlobalConstants.BoarderSeparator);
             }
 
             builder.AppendLine(GlobalConstants.FieldBorder);
@@ -267,10 +271,10 @@
         {
             var bombCellNumbers = new List<int>();
 
-            while (bombCellNumbers.Count < 15)
+            while (bombCellNumbers.Count < GlobalConstants.MaxBombsToGenerate)
             {
                 var random = new Random();
-                int cellNumber = random.Next(50);
+                int cellNumber = random.Next(GlobalConstants.TotalCellNumber);
 
                 if (!bombCellNumbers.Contains(cellNumber))
                 {

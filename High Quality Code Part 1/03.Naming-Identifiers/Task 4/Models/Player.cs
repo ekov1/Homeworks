@@ -1,4 +1,4 @@
-﻿namespace Minesweeper
+﻿namespace Minesweeper.Models
 {
     using System;
     using System.Collections.Generic;
@@ -44,6 +44,11 @@
 
             set
             {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Cannot set points to a negative number!");
+                }
+
                 this.playerPoints = value;
             }
         }
