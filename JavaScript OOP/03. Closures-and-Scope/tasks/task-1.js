@@ -87,15 +87,22 @@ function solve() {
 		function isBookInfoValid(book) {
 			var len = books.length;
 
-			if ((book.isbn.length !== 10 && book.isbn.length !== 13) ||
-				book.title.length < 2 || book.title.length > 100 ||
-				book.category.length < 2 || book.category.length > 100 ||
+			var isISBNLengthValid = book.isbn.length !== 10 && book.isbn.length !== 13;
+			var isBookTitleValid = book.title.length < 2 || book.title.length > 100;
+			var isCategoryLengthValid = book.category.length < 2 || book.category.length > 100;
+
+			if (isISBNLengthValid ||
+				isBookTitleValid ||
+				isCategoryLengthValid ||
 				!book.author) {
 				return false;
 			}
 
 			for (var i = 0; i < len; i += 1) {
-				if (book.title === books[i].title || book.isbn === books[i].isbn) {
+				var listContainsTitle = book.title === books[i].title;
+				var listContainsISBN = book.isbn === books[i].isbn;
+
+				if (listContainsTitle || listContainsISBN) {
 					return false;
 				}
 			}
