@@ -28,72 +28,182 @@ class LinkedList {
     }
 
     get first() {
-        return this._firstItem;
-    }
-    set first(value) {
-        this._firstItem = value;
+        let firstElement = this.at(0);
+        return firstElement;
     }
 
     get last() {
-
+        let lastElement = this.at(this.length - 1);
+        return lastElement;
     }
 
     get length() {
-        return this._length;
-    }
-    set length(value) {
-        this._length = value;
+        let length = this._length === 0 ? 0 :this._getLength();
+        return length;
     }
 
-    append(values) {
-        var currentItem;
+    append(...values) {
+        let currentItem;
 
-        for (var name of arguments) {
+        for (const name of values) {
 
-            var itemToAppend = new listNode(name);
+            let itemToAppend = new listNode(name);
 
-            if (!this.first) {
-                this.first = itemToAppend;
-            } else {
-                currentItem = this.first;
+            if (this._firstItem) {
+                currentItem = this._firstItem;
 
                 while (currentItem.next) {
                     currentItem = currentItem.next;
                 }
 
                 currentItem.next = itemToAppend;
+
+            } else {
+                this._firstItem = itemToAppend;
             }
 
             this._length += 1;
         }
+        return this;
     }
 
-    prepend(values) {
-        for (var value of arguments) {
+    prepend(...values) {
+        var initialFirstItem = this._firstItem,
+            currentItem,
+            len = values.length;
 
-            var itemToAppend = new listNode(value);
+        for (let i = 0; i < len; i += 1) {
+            let itemToAppend = new listNode(values[i]);
 
-            if (this.first === null) {
-                this.first = item;
-            } else {
-                 itemToAppend.next = this.first;
-                 this.first = itemToAppend; 
+            if (i === 0) {
+                this._firstItem = itemToAppend;
+                currentItem = itemToAppend;
+            }
+            else {
+                currentItem.next = itemToAppend;
+                currentItem = currentItem.next;
             }
 
-            this.length += 1;
+        }
+        currentItem.next = initialFirstItem;
+        return this;
+    }
+
+    insert(index, ...values) {
+        let isListEmpty = this._length > 0 && index !== 0;
+
+        if (isListEmpty) {
+
+            let prevIndexElement = this._getElementAt(index - 1),
+                nextIndexElement = this._getElementAt(index),
+                currentElement = this._getElementAt(index - 1),
+                len = values.length;
+
+            for (var i = 0; i < len; i += 1) {
+                let elementToAppend = new listNode(values[i]);
+
+                if (len === 1) {
+                    prevIndexElement.next = elementToAppend;
+                    elementToAppend.next = nextIndexElement;
+                    return this;
+                } else {
+                    currentElement.next = elementToAppend;
+                }
+
+                currentElement = currentElement.next;
+            }
+            currentElement.next = nextIndexElement;
+        } else {
+            this.prepend(...values);
+        }
+        return this;
+    }
+
+    at(index, value) {
+        let indexItem = this._getElementAt(index);
+
+        // Zero is false-like
+        if (value || value === 0) {
+            indexItem.data = value;
+            return this;
+        } else {
+            return indexItem.data;
         }
     }
+
+    _getElementAt(index) {
+
+        let count = 0,
+            currentElement = this._firstItem;
+
+        while (currentElement && count < index) {
+            currentElement = currentElement.next;
+            count += 1;
+        }
+
+        return currentElement;
+    }
+
+    _getLength() {
+        let counter = 1,
+            currentItem = this._firstItem;
+
+        while (currentItem.next) {
+            currentItem = currentItem.next;
+            counter += 1;
+        }
+
+        return counter;
+    }
+
+    removeAt(index) {
+
+        if(this._length === 0) {
+            return;
+        }
+
+        let prevIndexElement = this._getElementAt(index - 1),
+            indexElement = this._getElementAt(index) || undefined;
+
+        if (index === 0) {
+            this._firstItem = indexElement.next;
+
+        } else {
+            prevIndexElement.next = indexElement.next;
+        }
+
+        return indexElement.data;
+    }
+
+    toArray() {
+        let array = [],
+            currentItem = this._firstItem;
+
+        for (var i = 0; i < this.length; i += 1) {
+            array.push(currentItem.data);
+
+            currentItem = currentItem.next;
+        }
+
+        return array;
+    }
+
+    toString() {
+        let arr = this.toArray(),
+            result = arr.join(' -> ');
+
+        return result;
+    }
+
+    *[Symbol.iterator]() {
+        var currentElement = this._firstItem;
+
+        while (currentElement) {
+            yield currentElement.data;
+            currentElement = currentElement.next;
+        }
+    }
+
 }
 
-var list = new LinkedList();
-
-list.append(1, 2, 3, 4);
-list.prepend(7);
-
-console.log(list);
-// console.log(list.first.data);
-// console.log(list.first.next.data);
-// console.log(list.first.next.next.data);
-// console.log(list.first.next.next.next.data);
-
-//module.exports = LinkedList;
+module.exports = LinkedList;
