@@ -1,11 +1,9 @@
 ﻿namespace Statistics
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
 
+    // I didn't change the original logic of the methods and didn't replace them with Math. functions on purpouse
     public class StatisticsViewer
     {
         private const char ConsoleSeparatorCharacter = '=';
