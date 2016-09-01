@@ -278,7 +278,7 @@ describe('Test for Modules and Patterns in JavaScript', function () {
             var jsoop = Object.create(Course);
                 jsoop.init(getValidTitle(), [getValidTitle()]);
                 
-            expect(jsoop.getAllStudents()).to.be.equal([]);
+            expect(jsoop.getAllStudents()).to.be.eql([]);
         });
         it('expect getAllStudents to return an array of the listed students (one student)', function () {
             var jsoop = Object.create(Course);

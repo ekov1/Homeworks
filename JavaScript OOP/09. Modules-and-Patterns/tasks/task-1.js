@@ -45,163 +45,161 @@
 */
 
 function solve() {
-var Course = (function () {
-  var courseTitle,
-    coursePresentations = [],
-    courseStudents = [],
-    homeworks = [],
-    examResults,
-    uniqueID = 0;
+  var Course = (function () {
 
-  function init(title, presentations) {
-    validateTitle(title);
-    courseTitle = title;
+    function init(title, presentations) {
+      validateTitle(title);
+      this.courseTitle = title;
 
-    if (presentations.length === 0) {
-      throw new Error('No presentations in course!');
-    }
-
-    if (!arePresentationTitlesValid(presentations)) {
-      throw new Error('Presentation titles are not valid!');
-    }
-
-    coursePresentations = presentations;
-  }
-
-  function validateTitle(title) {
-    if (!title) {
-      throw new Error('Title must have length of at least one symbol!');
-    }
-
-    if (title !== title.trim()) {
-      throw new Error('Title cannot contain spaces at start or end!');
-    }
-
-    let replacedMultipleSpacesTitle = title.replace(/\s\s+/g, ' ');
-
-    if (title !== replacedMultipleSpacesTitle) {
-      throw new Error('Title cannot contain multiple consecutive spaces!');
-    }
-  }
-
-  function arePresentationTitlesValid(presentations) {
-
-    presentations.forEach(function (title) {
-      if (!validateTitle(title)) {
-        return false;
-      }
-    });
-    return true;
-  }
-
-  function addStudent(name) {
-    let student = {},
-      studentNames = name.split(' ');
-
-    validateStudentNames(studentNames);
-
-    student.firstname = studentNames[0];
-    student.lastname = studentNames[1];
-    student.id = ++uniqueID;
-
-    courseStudents.push(student);
-    return uniqueID;
-  }
-
-  function validateStudentNames(studentNames) {
-    if (studentNames.length !== 2) {
-      throw new Error('Invalid name format!');
-    }
-
-    let areFirstLettersUppercase = studentNames[0][0].toUpperCase() === studentNames[0][0] &&
-      studentNames[1][0].toUpperCase() === studentNames[1][0];
-
-    if (!areFirstLettersUppercase) {
-      throw new Error('First letters of student names are not UpperCase!');
-    }
-
-    let areOtherLettersLowerCase = areRemainingLettersLowerCase(studentNames[0]) &&
-      areRemainingLettersLowerCase(studentNames[1]);
-
-    if (!areOtherLettersLowerCase) {
-      throw new Error('All letters except the first should be lower cased!');
-    }
-
-  }
-
-  function areRemainingLettersLowerCase(name) {
-    let len = name.length;
-
-    for (var i = 1; i < len; i += 1) {
-      if (name[i].toLowerCase() !== name[i]) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  function getAllStudents() {
-    let students = courseStudents.splice(0);
-
-    return students;
-  }
-
-  function submitHomework(studentID, homeworkID) {
-    let isStudentIDValid = studentID > 0 && studentID <= courseStudents.length && studentID % 1 === 0;
-    let isHomeworkIDValid = homeworkID > 0 && homeworkID <= coursePresentations.length;
-
-    if (!isStudentIDValid || !isHomeworkIDValid) {
-      throw new Error('Wrong ID provided! Try again!');
-    }
-  }
-
-  function pushExamResults(results) {
-
-    for (let student of results) {
-      let isStudentIDValid = student.StudentID > 0 && student.StudentID <= courseStudents.length;
-      let isScoreValid = student.score && typeof student.score === 'number';
-
-      if (!isStudentIDValid) {
-        throw new Error('Invalid student ID in exam results');
+      if (presentations.length === 0) {
+        throw new Error('No presentations in course!');
       }
 
-      if (!isScoreValid) {
-        throw new Error('Student exam score is not valid!');
+      if (!arePresentationTitlesValid(presentations)) {
+        throw new Error('Presentation titles are not valid!');
+      }
+
+      this.uniqueID = 0;
+      this.courseStudents = [];
+      this.homeworks = [];
+      this.examResults = [];
+      this.coursePresentations = presentations;
+    }
+
+    function validateTitle(title) {
+      if (!title) {
+        throw new Error('Title must have length of at least one symbol!');
+      }
+
+      if (title !== title.trim()) {
+        throw new Error('Title cannot contain spaces at start or end!');
+      }
+
+      let replacedMultipleSpacesTitle = title.replace(/\s\s+/g, ' ');
+
+      if (title !== replacedMultipleSpacesTitle) {
+        throw new Error('Title cannot contain multiple consecutive spaces!');
       }
     }
 
-    if (hasDuplicateStudentID(results)) {
-      throw new Error('Someone is trying to cheat!');
+    function arePresentationTitlesValid(presentations) {
+
+      presentations.forEach(function (title) {
+        if (!validateTitle(title)) {
+          return false;
+        }
+      });
+      return true;
     }
 
-    examResults = results;
-  }
+    function addStudent(name) {
+      let student = {},
+        studentNames = name.split(' ');
 
-  function hasDuplicateStudentID(results) {
-    results = results.sort((a, b) => a.StudentID - b.StudentID);
+      validateStudentNames(studentNames);
 
-    for (var i = 0; i < results.length - 1; i += 1) {
-      if (results[i].StudentID === results[i + 1].StudentID) {
-        return true;
+      student.firstname = studentNames[0];
+      student.lastname = studentNames[1];
+      student.id = ++this.uniqueID;
+
+      this.courseStudents.push(student);
+      return this.uniqueID;
+    }
+
+    function validateStudentNames(studentNames) {
+      if (studentNames.length !== 2) {
+        throw new Error('Invalid name format!');
+      }
+
+      let areFirstLettersUppercase = studentNames[0][0].toUpperCase() === studentNames[0][0] &&
+        studentNames[1][0].toUpperCase() === studentNames[1][0];
+
+      if (!areFirstLettersUppercase) {
+        throw new Error('First letters of student names are not UpperCase!');
+      }
+
+      let areOtherLettersLowerCase = areRemainingLettersLowerCase(studentNames[0]) &&
+        areRemainingLettersLowerCase(studentNames[1]);
+
+      if (!areOtherLettersLowerCase) {
+        throw new Error('All letters except the first should be lower cased!');
+      }
+
+    }
+
+    function areRemainingLettersLowerCase(name) {
+      let len = name.length;
+
+      for (var i = 1; i < len; i += 1) {
+        if (name[i].toLowerCase() !== name[i]) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function getAllStudents() {
+      let students = this.courseStudents.splice(0);
+
+      return students;
+    }
+
+    function submitHomework(studentID, homeworkID) {
+      let isStudentIDValid = studentID > 0 && studentID <= this.courseStudents.length && studentID % 1 === 0;
+      let isHomeworkIDValid = homeworkID > 0 && homeworkID <= this.coursePresentations.length;
+
+      if (!isStudentIDValid || !isHomeworkIDValid) {
+        throw new Error('Wrong ID provided! Try again!');
       }
     }
 
-    return false;
-  }
+    function pushExamResults(results) {
 
-  function getTopStudents() {
+      for (let student of results) {
+        let isStudentIDValid = student.StudentID > 0 && student.StudentID <= this.courseStudents.length;
+        let isScoreValid = student.score && typeof student.score === 'number';
 
-  }
+        if (!isStudentIDValid) {
+          throw new Error('Invalid student ID in exam results');
+        }
 
-  return {
-    init: init,
-    addStudent: addStudent,
-    getAllStudents: getAllStudents,
-    submitHomework: submitHomework,
-    pushExamResults: pushExamResults,
-    getTopStudents: getTopStudents
-  }
-} ());
+        if (!isScoreValid) {
+          throw new Error('Student exam score is not valid!');
+        }
+      }
+
+      if (hasDuplicateStudentID(results)) {
+        throw new Error('Someone is trying to cheat!');
+      }
+
+      this.examResults = results;
+    }
+
+    function hasDuplicateStudentID(results) {
+      results = results.sort((a, b) => a.StudentID - b.StudentID);
+
+      for (var i = 0; i < results.length - 1; i += 1) {
+        if (results[i].StudentID === results[i + 1].StudentID) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function getTopStudents() {
+
+    }
+
+    return {
+      init: init,
+      addStudent: addStudent,
+      getAllStudents: getAllStudents,
+      submitHomework: submitHomework,
+      pushExamResults: pushExamResults,
+      getTopStudents: getTopStudents
+    }
+  } ());
   return Course;
 }
 
