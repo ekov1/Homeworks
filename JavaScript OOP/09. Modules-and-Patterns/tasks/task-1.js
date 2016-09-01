@@ -45,167 +45,195 @@
 */
 
 function solve() {
-  var Course = (function () {
+var Course = (function () {
+  let self = this;
 
-    function init(title, presentations) {
-      validateTitle(title);
-      this.courseTitle = title;
+  function init(title, presentations) {
+    validateTitle(title);
 
-      if (presentations.length === 0) {
-        throw new Error('No presentations in course!');
-      }
-
-      if (!arePresentationTitlesValid(presentations)) {
-        throw new Error('Presentation titles are not valid!');
-      }
-
-      this.uniqueID = 0;
-      this.courseStudents = [];
-      this.homeworks = [];
-      this.examResults = [];
-      this.coursePresentations = presentations;
+    if (presentations.length === 0) {
+      throw new Error('No presentations in course!');
     }
 
-    function validateTitle(title) {
-      if (!title) {
-        throw new Error('Title must have length of at least one symbol!');
+    if (!arePresentationTitlesValid(presentations)) {
+      throw new Error('Presentation titles are not valid!');
+    }
+
+    this.courseTitle = title;
+    this.uniqueID = 0;
+    this.courseStudents = [];
+    this.studentHomeworks = [];
+    this.examResults = [];
+    this.coursePresentations = presentations;
+
+    return this;
+  }
+
+  function validateTitle(title) {
+    if (!title) {
+      throw new Error('Title must have length of at least one symbol!');
+    }
+
+    if (title !== title.trim()) {
+      throw new Error('Title cannot contain spaces at start or end!');
+    }
+
+    let replacedMultipleSpacesTitle = title.replace(/\s\s+/g, ' ');
+
+    if (title !== replacedMultipleSpacesTitle) {
+      throw new Error('Title cannot contain multiple consecutive spaces!');
+    }
+  }
+
+  function arePresentationTitlesValid(presentations) {
+
+    presentations.forEach(function (title) {
+      if (!validateTitle(title)) {
+        return false;
+      }
+    });
+    return true;
+  }
+
+  function addStudent(name) {
+    let student = {},
+      studentNames = name.split(' ');
+
+    validateStudentNames(studentNames);
+
+    student.firstname = studentNames[0];
+    student.lastname = studentNames[1];
+    student.id = ++this.uniqueID;
+
+    this.courseStudents.push(student);
+    return this.uniqueID;
+  }
+
+  function validateStudentNames(studentNames) {
+    if (studentNames.length !== 2) {
+      throw new Error('Invalid name format!');
+    }
+
+    let areFirstLettersUppercase = studentNames[0][0].toUpperCase() === studentNames[0][0] &&
+      studentNames[1][0].toUpperCase() === studentNames[1][0];
+
+    if (!areFirstLettersUppercase) {
+      throw new Error('First letters of student names are not UpperCase!');
+    }
+
+    let areOtherLettersLowerCase = areRemainingLettersLowerCase(studentNames[0]) &&
+      areRemainingLettersLowerCase(studentNames[1]);
+
+    if (!areOtherLettersLowerCase) {
+      throw new Error('All letters except the first should be lower cased!');
+    }
+
+  }
+
+  function areRemainingLettersLowerCase(name) {
+    let len = name.length;
+
+    for (var i = 1; i < len; i += 1) {
+      if (name[i].toLowerCase() !== name[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function getAllStudents() {
+    let students = this.courseStudents.splice(0);
+
+    return students;
+  }
+
+  function submitHomework(studentID, homeworkID) {
+    let isStudentIDValid = studentID > 0 && studentID <= this.courseStudents.length && studentID % 1 === 0; // <- Is a whole number
+    let isHomeworkIDValid = homeworkID > 0 && homeworkID <= this.coursePresentations.length;
+
+    if (!isStudentIDValid || !isHomeworkIDValid) {
+      throw new Error('Wrong ID provided! Try again!');
+    }
+
+    if (!this.studentHomeworks[studentID]) {
+      this.studentHomeworks[studentID] = 0;
+    }
+
+    this.studentHomeworks[studentID] += 1;
+  }
+
+  function pushExamResults(results) {
+
+    for (let student of results) {
+      let isStudentIDValid = student.StudentID > 0 && student.StudentID <= this.courseStudents.length;
+      let isScoreValid = student.score && typeof student.score === 'number';
+
+      if (!isStudentIDValid) {
+        throw new Error('Invalid student ID in exam results');
       }
 
-      if (title !== title.trim()) {
-        throw new Error('Title cannot contain spaces at start or end!');
-      }
-
-      let replacedMultipleSpacesTitle = title.replace(/\s\s+/g, ' ');
-
-      if (title !== replacedMultipleSpacesTitle) {
-        throw new Error('Title cannot contain multiple consecutive spaces!');
+      if (!isScoreValid) {
+        throw new Error('Student exam score is not valid!');
       }
     }
 
-    function arePresentationTitlesValid(presentations) {
-
-      presentations.forEach(function (title) {
-        if (!validateTitle(title)) {
-          return false;
-        }
-      });
-      return true;
+    if (hasDuplicateStudentID(results)) {
+      throw new Error('Someone is trying to cheat!');
     }
 
-    function addStudent(name) {
-      let student = {},
-        studentNames = name.split(' ');
+    this.examResults = results;
+  }
 
-      validateStudentNames(studentNames);
+  function hasDuplicateStudentID(results) {
+    results = results.sort((a, b) => a.StudentID - b.StudentID);
 
-      student.firstname = studentNames[0];
-      student.lastname = studentNames[1];
-      student.id = ++this.uniqueID;
-
-      this.courseStudents.push(student);
-      return this.uniqueID;
-    }
-
-    function validateStudentNames(studentNames) {
-      if (studentNames.length !== 2) {
-        throw new Error('Invalid name format!');
-      }
-
-      let areFirstLettersUppercase = studentNames[0][0].toUpperCase() === studentNames[0][0] &&
-        studentNames[1][0].toUpperCase() === studentNames[1][0];
-
-      if (!areFirstLettersUppercase) {
-        throw new Error('First letters of student names are not UpperCase!');
-      }
-
-      let areOtherLettersLowerCase = areRemainingLettersLowerCase(studentNames[0]) &&
-        areRemainingLettersLowerCase(studentNames[1]);
-
-      if (!areOtherLettersLowerCase) {
-        throw new Error('All letters except the first should be lower cased!');
-      }
-
-    }
-
-    function areRemainingLettersLowerCase(name) {
-      let len = name.length;
-
-      for (var i = 1; i < len; i += 1) {
-        if (name[i].toLowerCase() !== name[i]) {
-          return false;
-        }
-      }
-      return true;
-    }
-
-    function getAllStudents() {
-      let students = this.courseStudents.splice(0);
-
-      return students;
-    }
-
-    function submitHomework(studentID, homeworkID) {
-      let isStudentIDValid = studentID > 0 && studentID <= this.courseStudents.length && studentID % 1 === 0;
-      let isHomeworkIDValid = homeworkID > 0 && homeworkID <= this.coursePresentations.length;
-
-      if (!isStudentIDValid || !isHomeworkIDValid) {
-        throw new Error('Wrong ID provided! Try again!');
+    for (var i = 0; i < results.length - 1; i += 1) {
+      if (results[i].StudentID === results[i + 1].StudentID) {
+        return true;
       }
     }
 
-    function pushExamResults(results) {
+    return false;
+  }
 
-      for (let student of results) {
-        let isStudentIDValid = student.StudentID > 0 && student.StudentID <= this.courseStudents.length;
-        let isScoreValid = student.score && typeof student.score === 'number';
+  function getTopStudents() {
+    let sortedStudentResults = [];
 
-        if (!isStudentIDValid) {
-          throw new Error('Invalid student ID in exam results');
-        }
+    let calculatedScoreResults = calculateFinalScores(this.examResults, this.studentHomeworks, this.coursePresentations.length);
 
-        if (!isScoreValid) {
-          throw new Error('Student exam score is not valid!');
-        }
-      }
+    calculatedScoreResults = calculatedScoreResults.sort((a, b) => a.finalScore - b.finalScore);
+    return calculatedScoreResults;
+  }
 
-      if (hasDuplicateStudentID(results)) {
-        throw new Error('Someone is trying to cheat!');
-      }
+  function calculateFinalScores(results, homeworks, presentationsLength) {
+    for (let student of results) {
+      let homeworkResult = (homeworks[student.StudentID] / presentationsLength) || 0;
+      let finalScore = (0.75 * student.score) + (0.25 * homeworkResult);
 
-      this.examResults = results;
+      student.finalScore = finalScore;
     }
 
-    function hasDuplicateStudentID(results) {
-      results = results.sort((a, b) => a.StudentID - b.StudentID);
+    return results;
+  }
 
-      for (var i = 0; i < results.length - 1; i += 1) {
-        if (results[i].StudentID === results[i + 1].StudentID) {
-          return true;
-        }
-      }
-
-      return false;
-    }
-
-    function getTopStudents() {
-
-    }
-
-    return {
-      init: init,
-      addStudent: addStudent,
-      getAllStudents: getAllStudents,
-      submitHomework: submitHomework,
-      pushExamResults: pushExamResults,
-      getTopStudents: getTopStudents
-    }
-  } ());
+  return {
+    init: init,
+    addStudent: addStudent,
+    getAllStudents: getAllStudents,
+    submitHomework: submitHomework,
+    pushExamResults: pushExamResults,
+    getTopStudents: getTopStudents
+  }
+} ());
   return Course;
 }
-
 module.exports = solve;
 
 // var course = Course.init('Hello', ['Maths']);
 
-// var id = Course.addStudent('John Doe');
-// Course.submitHomework(id + 5, 1);
+// var id = course.addStudent('John Doe');
+// var secondID = course.addStudent('Gosho Ko');
+
+// course.pushExamResults([{StudentID: 1, score: 4}, {StudentID: 2, score: 40}]);
+
+// console.log(course.getTopStudents());
