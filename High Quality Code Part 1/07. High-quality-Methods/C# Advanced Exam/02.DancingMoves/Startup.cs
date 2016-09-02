@@ -6,7 +6,7 @@
 
     public class Startup
     {
-        static void Main()
+        public static void Main()
         {
             var danceNumbers = ParseDanceNumberCommands();
             var directions = ParseDirectionCommands();

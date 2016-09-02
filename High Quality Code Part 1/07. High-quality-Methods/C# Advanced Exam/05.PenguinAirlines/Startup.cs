@@ -8,7 +8,7 @@
 
     public class Startup
     {
-        static void Main()
+        public static void Main()
         {
             // Solution to be written
         }

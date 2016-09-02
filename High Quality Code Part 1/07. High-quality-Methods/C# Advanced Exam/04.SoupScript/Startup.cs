@@ -14,7 +14,31 @@
 
         private static char[] spaceAround = { '+', '-', '<', '>', '=', '*' };
 
-        // whitespace formatting method
+        public static void Main()
+        {
+            Solve();
+        }
+
+        public static void Solve()
+        {
+            var rowNumber = int.Parse(Console.ReadLine());
+
+            var soup = string.Join(Environment.NewLine, Enumerable.Range(0, rowNumber).Select(x => Console.ReadLine()));
+
+            var whitespaceFormattedSoup = ReplaceWhitespaces(soup);
+            var formattedSoup = FormatComments(whitespaceFormattedSoup);
+
+            var splitByLines = formattedSoup.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var line in splitByLines)
+            {
+                if (!string.IsNullOrWhiteSpace(line))
+                {
+                    Console.WriteLine(line);
+                }
+            }
+        }
+
         public static string ReplaceWhitespaces(string soup)
         {
             var result = new StringBuilder();
@@ -132,32 +156,6 @@
             }
 
             return string.Join(Environment.NewLine, lines);
-        }
-
-        public static void Solve()
-        {
-            var n = int.Parse(Console.ReadLine());
-
-            var soup = string.Join(Environment.NewLine, Enumerable.Range(0, n).Select(x => Console.ReadLine()));
-
-            var whitespaceFormattedSoup = ReplaceWhitespaces(soup);
-            var formattedSoup = FormatComments(whitespaceFormattedSoup);
-
-            var splitByLines = formattedSoup.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (var line in splitByLines)
-            {
-                // ignore empty lines
-                if (!string.IsNullOrWhiteSpace(line))
-                {
-                    Console.WriteLine(line);
-                }
-            }
-        }
-
-        public static void Main()
-        {
-            Solve();
         }
     }
 }

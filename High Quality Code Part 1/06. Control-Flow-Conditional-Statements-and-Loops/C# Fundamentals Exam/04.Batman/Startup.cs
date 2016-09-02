@@ -4,14 +4,22 @@
 
     public class Startup
     {
-        public static string MakeString(char drawChar, int repeatCount)
+        /// <summary>
+        /// Creates a Batman sign with size and character or the sign
+        /// </summary>
+        public static void Main()
         {
-            return new string(drawChar, repeatCount);
-        }
+            int size = int.Parse(Console.ReadLine());
+            char drawChar = char.Parse(Console.ReadLine());
+            int wingHeight = size - ((size + 3) / 2);
 
-        public static string MakeEmptyString(int repeatCount)
-        {
-            return new string(' ', repeatCount);
+            DrawWings(size, drawChar, wingHeight);
+
+            DrawEars(size, drawChar, wingHeight);
+
+            DrawMiddlePart(size, wingHeight, drawChar);
+
+            DrawLowerPartTriangle(size, drawChar);
         }
 
         public static void DrawWings(int size, char drawChar, int wingHeight)
@@ -66,22 +74,14 @@
             }
         }
 
-        /// <summary>
-        /// Creates a Batman sign with size and character or the sign
-        /// </summary>
-        public static void Main()
+        public static string MakeString(char drawChar, int repeatCount)
         {
-            int size = int.Parse(Console.ReadLine());
-            char drawChar = char.Parse(Console.ReadLine());
-            int wingHeight = size - ((size + 3) / 2);
+            return new string(drawChar, repeatCount);
+        }
 
-            DrawWings(size, drawChar, wingHeight);
-
-            DrawEars(size, drawChar, wingHeight);
-
-            DrawMiddlePart(size, wingHeight, drawChar);
-
-            DrawLowerPartTriangle(size, drawChar);
+        public static string MakeEmptyString(int repeatCount)
+        {
+            return new string(' ', repeatCount);
         }
     }
 }
