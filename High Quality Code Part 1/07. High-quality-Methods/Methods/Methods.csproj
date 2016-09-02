@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Methods.cs" />
-    <Compile Include="Student.cs" />
+    <Compile Include="Utils\Calculations.cs" />
+    <Compile Include="Contracts\IStudent.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Utils\ConsoleWriter.cs" />
+    <Compile Include="Utils\StudentOperations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
