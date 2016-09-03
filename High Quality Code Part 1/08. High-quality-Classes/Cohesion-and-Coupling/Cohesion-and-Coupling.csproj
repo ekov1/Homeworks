@@ -41,8 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UtilsExamples.cs" />
-    <Compile Include="Utils.cs" />
+    <Compile Include="Contracts\I3DFigure.cs" />
+    <Compile Include="Contracts\IFigure.cs" />
+    <Compile Include="Models\Figure.cs" />
+    <Compile Include="Models\Figure3D.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utils\2DFigureCalculations.cs" />
+    <Compile Include="Utils\3DFigureCalculations.cs" />
+    <Compile Include="Utils\FileExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
