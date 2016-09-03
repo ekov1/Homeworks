@@ -62,7 +62,7 @@ var Course = (function () {
     this.courseTitle = title;
     this.uniqueID = 0;
     this.courseStudents = [];
-    this.studentHomeworks = [];
+    this.studentHomeworks = {};
     this.examResults = [];
     this.coursePresentations = presentations;
 
