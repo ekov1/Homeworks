@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace CohesionAndCoupling
+﻿namespace CohesionAndCoupling
 {
+    using System;
+
     static class Utils
     {
         public static double Width { get; set; }
