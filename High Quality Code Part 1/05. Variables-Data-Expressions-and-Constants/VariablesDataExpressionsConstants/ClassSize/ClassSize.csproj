@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISize.cs" />
-    <Compile Include="Rectangle.cs" />
+    <Compile Include="Contracts\ISize.cs" />
+    <Compile Include="Models\Rectangle.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

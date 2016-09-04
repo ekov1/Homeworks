@@ -1,6 +1,7 @@
-﻿namespace ClassSize
+﻿namespace ClassSize.Models
 {
     using System;
+    using Contracts;
 
     public class Rectangle : ISize
     {
