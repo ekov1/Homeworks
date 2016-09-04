@@ -1,17 +1,13 @@
 ﻿namespace ClassSize
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    public class Size
+    public class Rectangle : ISize
     {
         private double width;
         private double height;
 
-        public Size(double width, double height)
+        public Rectangle(double width, double height)
         {
             this.Width = width;
             this.Height = height;
@@ -57,7 +53,7 @@
         /// <param name="size">The initial size</param>
         /// <param name="rotationAngle">The rotation angle, which rotates the size</param>
         /// <returns>Returns the rotated size</returns>
-        public static Size GetRotatedSize(Size size, double rotationAngle)
+        public static Rectangle GetRotatedSize(ISize size, double rotationAngle)
         {
             double rotationAngleSinus = Math.Abs(Math.Sin(rotationAngle));
             double rotationAngleCosinus = Math.Abs(Math.Cos(rotationAngle));
@@ -65,7 +61,7 @@
             double widthAfterRotation = rotationAngleCosinus * size.Width + rotationAngleSinus * size.Height;
             double heightAfterRotation = rotationAngleSinus * size.Width + rotationAngleCosinus * size.Height;
 
-            var newSize = new Size(widthAfterRotation, heightAfterRotation);
+            var newSize = new Rectangle(widthAfterRotation, heightAfterRotation);
             return newSize;
         }
 
