@@ -5,7 +5,7 @@
 
     public abstract class Figure : IFigure
     {
-        public Figure()
+        protected Figure()
         {
         }
 

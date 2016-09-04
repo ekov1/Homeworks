@@ -1,68 +1,19 @@
 ﻿namespace Statistics
 {
     using System;
+    using System.Linq;
     using System.Text;
 
-    // I didn't change the original logic of the methods and didn't replace them with Math. functions on purpouse
     public class StatisticsViewer
     {
         private const char ConsoleSeparatorCharacter = '=';
         private const int ConsoleSeparatorRepearCount = 47;
 
-        public double GetMaxValue(double[] statistics)
-        {
-            double currentMax = statistics[0];
-
-            for (int i = 1; i < statistics.Length; i++)
-            {
-                if (statistics[i] > currentMax)
-                {
-                    currentMax = statistics[i];
-                }
-            }
-
-            return currentMax;
-        }
-
-        public double GetMinValue(double[] statistics)
-        {
-            double currentMin = statistics[0];
-
-            for (int i = 1; i < statistics.Length; i++)
-            {
-                if (statistics[i] < currentMin)
-                {
-                    currentMin = statistics[i];
-                }
-            }
-
-            return currentMin;
-        }
-
-        public double GetSum(double[] statisctics)
-        {
-            double sum = 0;
-
-            for (int i = 0; i < statisctics.Length; i++)
-            {
-                sum += statisctics[i];
-            }
-
-            return sum;
-        }
-
-        public double GetAverageValue(double[] statisctics)
-        {
-            double average = GetSum(statisctics) / statisctics.Length;
-
-            return average;
-        }
-
         public void PrintStatistics(double[] statisctics)
         {
-            string maxValue = GetMaxValue(statisctics).ToString("0.00");
-            string minValue = GetMinValue(statisctics).ToString("0.00");
-            string averageValue = GetAverageValue(statisctics).ToString("0.00");
+            string maxValue = statisctics.Max().ToString("0.00");
+            string minValue = statisctics.Min().ToString("0.00");
+            string averageValue = statisctics.Average().ToString("0.00");
             var builder = new StringBuilder();
 
             builder.AppendLine("The given statistics show the following results");

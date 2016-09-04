@@ -13,7 +13,7 @@
         private string teacherName;
         private IList<string> students;
 
-        public Course(string name, string teacherName)
+        protected Course(string name, string teacherName)
         {
             this.Name = name;
             this.TeacherName = teacherName;
