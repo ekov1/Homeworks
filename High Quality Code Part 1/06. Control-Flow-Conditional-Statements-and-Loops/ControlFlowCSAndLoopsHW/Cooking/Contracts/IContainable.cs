@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    interface IContainable
+    public interface IContainable
     {
         IList<IVegetable> Contents { get; }
     }

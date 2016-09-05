@@ -25,7 +25,7 @@
             this.speachLogger.Say(message);
         }
 
-        public Bowl GetBowl()
+        public IContainable GetBowl()
         {
             var bowl = new Bowl();
             this.speachLogger.Say("We have a bowl now!");
@@ -61,10 +61,9 @@
             this.speachLogger.Say("Alright, we're done with peeling the vegetable!");
         }
 
-        // There can be an option to input ingridients in the method contructor
-        public void Cook(IVegetable potato, IVegetable carrot, Bowl bowl)
+        public void Cook(IVegetable firstVegetable, IVegetable secondVegetable, Bowl bowl)
         {
-            var areIngridientsAvaliable = (potato != null) && (carrot != null) && (bowl != null);
+            var areIngridientsAvaliable = (firstVegetable != null) && (secondVegetable != null) && (bowl != null);
 
             if (!areIngridientsAvaliable)
             {
@@ -72,26 +71,32 @@
                 return;
             }
 
-            this.Peel(potato);
-            this.Peel(carrot);
-
-            this.Cut(potato);
-            this.Cut(carrot);
+            this.PrepareVegetables(firstVegetable, secondVegetable);
 
             // Task 2
-            var isPreparationComplete = this.CheckIfVegetableIsReadyToCook(potato) && this.CheckIfVegetableIsReadyToCook(carrot);
+            var isPreparationComplete = this.CheckIfVegetableIsReadyToCook(firstVegetable)
+                && this.CheckIfVegetableIsReadyToCook(secondVegetable);
 
             if (isPreparationComplete)
             {
-                bowl.Contents.Add(carrot);
-                bowl.Contents.Add(potato);
+                bowl.Contents.Add(secondVegetable);
+                bowl.Contents.Add(firstVegetable);
 
-                this.speachLogger.Say("Awesome we got ourselves a carrot a potato in a bowl!");
+                this.speachLogger.Say("Awesome we got ourselves vegetables in a bowl!");
             }
             else
             {
                 this.speachLogger.Say("Oops, I messed up the preparation of the products..");
             }
+        }
+
+        private void PrepareVegetables(IVegetable firstVegetable, IVegetable secondVegetable)
+        {
+            this.Peel(firstVegetable);
+            this.Peel(firstVegetable);
+
+            this.Cut(secondVegetable);
+            this.Cut(secondVegetable);
         }
 
         private bool CheckIfVegetableIsReadyToCook(IVegetable vegetable)
