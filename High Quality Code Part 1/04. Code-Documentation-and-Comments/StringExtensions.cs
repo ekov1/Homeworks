@@ -16,7 +16,7 @@
         /// <summary>
         /// Converts input to hexadecimal string
         /// </summary>
-        /// <param name="input">The input string</param>
+        /// <param name="input">The input string to perform the operation on.</param>
         /// <returns>Returns hexadecimal string</returns>
         public static string ToMd5Hash(this string input)
         {
@@ -34,13 +34,13 @@
                 builder.Append(data[i].ToString("x2"));
             }
 
-            return builder.ToString();
+            return builder.ToString(); 
         }
 
         /// <summary>
         /// Converts string to Boolean 
         /// </summary>
-        /// <param name="input">The input string</param>
+        /// <param name="input">The input string to perform the parse on.</param>
         /// <returns>Returns a Boolean value</returns>
         public static bool ToBoolean(this string input)
         {
@@ -51,7 +51,7 @@
         /// <summary>
         /// Converts string to short value
         /// </summary>
-        /// <param name="input">The input string</param>
+        /// <param name="input">String to evaluate.</param>
         /// <returns>Returns short value</returns>
         public static short ToShort(this string input)
         {
@@ -63,7 +63,7 @@
         /// <summary>
         /// Converts string to integer
         /// </summary>
-        /// <param name="input">The input string</param>
+        /// <param name="input">String to evaluate.</param>
         /// <returns>Returns integer value</returns>
         public static int ToInteger(this string input)
         {
@@ -75,7 +75,7 @@
         /// <summary>
         /// Converts string to long
         /// </summary>
-        /// <param name="input">The input string</param>
+        /// <param name="input">String to evaluate.</param>
         /// <returns>Returns long value</returns>
         public static long ToLong(this string input)
         {
@@ -87,7 +87,7 @@
         /// <summary>
         /// Converts string to DateTime
         /// </summary>
-        /// <param name="input">The input string</param>
+        /// <param name="input">String to evaluate.</param>
         /// <returns>Returns DateTime value</returns>
         public static DateTime ToDateTime(this string input)
         {
@@ -99,7 +99,7 @@
         /// <summary>
         /// Capitalizes first letter of input
         /// </summary>
-        /// <param name="input">The input string</param>
+        /// <param name="input">String to evaluate.</param>
         /// <returns>Capitalized first letter input string</returns>
         public static string CapitalizeFirstLetter(this string input)
         {
