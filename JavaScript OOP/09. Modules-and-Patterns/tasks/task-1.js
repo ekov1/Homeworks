@@ -46,7 +46,6 @@
 
 function solve() {
 var Course = (function () {
-  let self = this;
 
   function init(title, presentations) {
     validateTitle(title);

@@ -1,8 +1,7 @@
-
 class listNode {
     constructor(value) {
-        this._data = value;
-        this._next = null;
+        this.data = value;
+        this.next = null;
     }
 
     get next() {
@@ -38,7 +37,7 @@ class LinkedList {
     }
 
     get length() {
-        let length = this._length === 0 ? 0 :this._getLength();
+        let length = this._length === 0 ? 0 : this._getLength();
         return length;
     }
 
@@ -158,7 +157,7 @@ class LinkedList {
 
     removeAt(index) {
 
-        if(this._length === 0) {
+        if (this._length === 0) {
             return;
         }
 
