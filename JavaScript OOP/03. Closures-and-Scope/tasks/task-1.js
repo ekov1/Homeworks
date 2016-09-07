@@ -22,8 +22,8 @@
 */
 function solve() {
 	var library = (function () {
-		var books = [],
-			categories = [];
+		this.books = [];
+		this.categories = [];
 
 		function listBooks(obj) {
 			var sortedBooks,
