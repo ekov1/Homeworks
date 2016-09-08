@@ -37,14 +37,14 @@ class LinkedList {
     }
 
     get length() {
-        let length = this._length === 0 ? 0 : this._getLength();
-        return length;
+        this._length = this._getLength();
+        return this._length;
     }
 
     append(...values) {
         let currentItem;
 
-        for (const name of values) {
+        for (let name of values) {
 
             let itemToAppend = new listNode(name);
 
@@ -61,7 +61,6 @@ class LinkedList {
                 this._firstItem = itemToAppend;
             }
 
-            this._length += 1;
         }
         return this;
     }
@@ -89,29 +88,21 @@ class LinkedList {
     }
 
     insert(index, ...values) {
-        let isListEmpty = this._length > 0 && index !== 0;
+        let hasElementsInList = this.length > 0 && index !== 0;
 
-        if (isListEmpty) {
+        if (hasElementsInList) {
 
             let prevIndexElement = this._getElementAt(index - 1),
                 nextIndexElement = this._getElementAt(index),
-                currentElement = this._getElementAt(index - 1),
                 len = values.length;
 
             for (var i = 0; i < len; i += 1) {
                 let elementToAppend = new listNode(values[i]);
 
-                if (len === 1) {
-                    prevIndexElement.next = elementToAppend;
-                    elementToAppend.next = nextIndexElement;
-                    return this;
-                } else {
-                    currentElement.next = elementToAppend;
-                }
-
-                currentElement = currentElement.next;
+                prevIndexElement.next = elementToAppend;
+                prevIndexElement = prevIndexElement.next;
             }
-            currentElement.next = nextIndexElement;
+            prevIndexElement.next = nextIndexElement;
         } else {
             this.prepend(...values);
         }
@@ -145,7 +136,13 @@ class LinkedList {
 
     _getLength() {
         let counter = 1,
+            currentItem;
+
+        if (this._firstItem) {
             currentItem = this._firstItem;
+        } else {
+            return 0;
+        }
 
         while (currentItem.next) {
             currentItem = currentItem.next;
@@ -157,7 +154,7 @@ class LinkedList {
 
     removeAt(index) {
 
-        if (this._length === 0) {
+        if (this.length === 0) {
             return;
         }
 
