@@ -1,4 +1,4 @@
-var Course = require('../tasks/task-1')();
+var Course = require('../tasks/task-1-redo')();
 var expect = require('chai').expect;
 
 describe('Test for Modules and Patterns in JavaScript', function () {
