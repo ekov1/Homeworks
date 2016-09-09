@@ -199,7 +199,6 @@ class LinkedList {
             currentElement = currentElement.next;
         }
     }
-
 }
 
 module.exports = LinkedList;

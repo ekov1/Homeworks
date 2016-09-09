@@ -2,7 +2,7 @@
 
 const chai = require('chai'),
     expect = chai.expect,
-    LinkedList = require('../task/task-1');
+    LinkedList = require('../task/task-1-redo');
 
 describe('Linked list: ', () => {
     it('should have append and toString correctly', () => {
