@@ -7,15 +7,13 @@
 
     function drawImage(position) {
         let lat = position.coords.latitude,
-            long = position.coords.longitude;
+            long = position.coords.longitude,
+            container = document.getElementById('container');
 
         let imageSrc = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
             lat + ',' + long + '&zoom=18&size=500x500&sensor=false';
 
-        container = new google.maps.Map(document.getElementById('container'), {
-                    center: { lat: lat, lng: long },
-                    zoom: 18
-                });
+        container.src = imageSrc;
     }
 
     getLocation
