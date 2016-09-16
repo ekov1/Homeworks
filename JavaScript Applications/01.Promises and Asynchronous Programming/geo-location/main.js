@@ -1,3 +1,6 @@
+// If the map doesn't show'
+// Start the page though a live-server ( type live-server in the console on the project )
+
 (() => {
     var getLocation = new Promise(function (resolve, reject) {
         navigator.geolocation.getCurrentPosition(position => {
