@@ -1,84 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Exceptions_Homework.Utils;
 
-class ExceptionsHomework
+public class ExceptionsHomework
 {
-    public static T[] Subsequence<T>(T[] arr, int startIndex, int count)
+    public static void Main()
     {
-        List<T> result = new List<T>();
-        for (int i = startIndex; i < startIndex + count; i++)
-        {
-            result.Add(arr[i]);
-        }
-        return result.ToArray();
+        StringOperationsExample();
+
+        MathOperationsExample();
+
+        ExamsExample();
     }
 
-    public static string ExtractEnding(string str, int count)
+    private static void StringOperationsExample()
     {
-        if (count > str.Length)
-        {
-            return "Invalid count!";
-        }
+        var subString = MathOperations.GetSubsequence("Hello!".ToCharArray(), 2, 3);
+        Console.WriteLine(subString);
 
-        StringBuilder result = new StringBuilder();
-        for (int i = str.Length - count; i < str.Length; i++)
-        {
-            result.Append(str[i]);
-        }
-        return result.ToString();
+        var numbersArray = new int[] { -1, 3, 2, 1 };
+
+        var subArray = MathOperations.GetSubsequence(numbersArray, 0, 2);
+        Console.WriteLine(string.Join(" ", subArray));
+
+        var subArrayWithInitialArrayLength = MathOperations.GetSubsequence(numbersArray, 0, numbersArray.Length);
+        Console.WriteLine(string.Join(" ", subArrayWithInitialArrayLength));
+
+        var emptyArray = MathOperations.GetSubsequence(numbersArray, 0, 0);
+        Console.WriteLine(string.Join(" ", emptyArray));
+
+        Console.WriteLine(GetExtractedStringEndings());
     }
 
-    public static void CheckPrime(int number)
+    private static string GetExtractedStringEndings()
     {
-        for (int divisor = 2; divisor <= Math.Sqrt(number); divisor++)
+        var result = new List<string>();
+        var extractStrings = new Dictionary<string, int>()
         {
-            if (number % divisor == 0)
+            { "I love C#", 2 },
+            { "Nakov", 4 },
+            { "beer", 4 },
+            { "Hi", 100 }
+        };
+
+        foreach (var str in extractStrings)
+        {
+            try
             {
-                throw new Exception("The number is not prime!");
+                result.Add(StringOperations.ExtractEnding(str.Key, str.Value));
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Cannot extract ending with length {0} from '{1}'!", str.Value, str.Key);
+            }
+        }
+
+        var returnString = string.Join(" ", result);
+
+        return returnString;
+    }
+
+    private static void MathOperationsExample()
+    {
+        // I don't think that for checking are numbers prime we should throw an exception
+        var numbers = new List<int>();
+
+        foreach (var number in numbers)
+        {
+            var isPrime = MathOperations.IsPrime(number);
+
+            if (isPrime)
+            {
+                Console.WriteLine("{0} is prime!", number);
+            }
+            else
+            {
+                Console.WriteLine("{0} is NOT prime!", number);
             }
         }
     }
 
-    static void Main()
+    private static void ExamsExample()
     {
-        var substr = Subsequence("Hello!".ToCharArray(), 2, 3);
-        Console.WriteLine(substr);
-
-        var subarr = Subsequence(new int[] { -1, 3, 2, 1 }, 0, 2);
-        Console.WriteLine(String.Join(" ", subarr));
-
-        var allarr = Subsequence(new int[] { -1, 3, 2, 1 }, 0, 4);
-        Console.WriteLine(String.Join(" ", allarr));
-
-        var emptyarr = Subsequence(new int[] { -1, 3, 2, 1 }, 0, 0);
-        Console.WriteLine(String.Join(" ", emptyarr));
-
-        Console.WriteLine(ExtractEnding("I love C#", 2));
-        Console.WriteLine(ExtractEnding("Nakov", 4));
-        Console.WriteLine(ExtractEnding("beer", 4));
-        Console.WriteLine(ExtractEnding("Hi", 100));
-
-        try
-        {
-            CheckPrime(23);
-            Console.WriteLine("23 is prime.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("23 is not prime");
-        }
-
-        try
-        {
-            CheckPrime(33);
-            Console.WriteLine("33 is prime.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("33 is not prime");
-        }
-
         List<Exam> peterExams = new List<Exam>()
         {
             new SimpleMathExam(2),
