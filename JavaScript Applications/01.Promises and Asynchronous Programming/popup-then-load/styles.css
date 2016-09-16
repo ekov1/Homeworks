@@ -1,0 +1,19 @@
+body{
+    background-color: #D9F7BB;
+}
+
+#popup{
+    margin: auto;
+    position: absolute;
+    width: 600px;
+    height:100px;
+    top: 0;
+    bottom: 0;
+    left :0;
+    right: 0;
+    text-align: center;
+    font-size: 40px;
+    border: 5px solid black;
+    padding: 20px;
+    background-color: lightcyan
+}
