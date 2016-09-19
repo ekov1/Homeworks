@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// NOTE: Those algorithms are from internet
+    /// </summary>
     public class SortingAlgorithms
     {
         public static void InsertionSort<T>(T[] arrToSort)
