@@ -6,47 +6,143 @@
     {
         public static void Main()
         {
-            //Console.WriteLine("Enter a positive number ");
-            //string input = Console.ReadLine();
-            //int n = 0;
+            int cellsNumber = 3;
+            StartMatrixWalk(cellsNumber);
+        }
 
-            //while ( !int.TryParse( input, out n ) || n < 0 || n > 100 )
-            //{
-            //    Console.WriteLine("You haven't entered a correct positive number");
-            //    input = Console.ReadLine();
-            //}
-
-            int n = 3;
-            int[,] matrica = new int[n, n];
-            int step = n,
-                k = 1,
-                i = 0,
-                j = 0,
-                dx = 1,
-                dy = 1;
+        private static void StartMatrixWalk(int cellsNumber)
+        {
+            int[,] matrix = new int[cellsNumber, cellsNumber];
+            int step = cellsNumber,
+                stepsCount = 1,
+                rowCoordinate = 0,
+                colCoordinate = 0,
+                deltaX = 1,
+                deltaY = 1;
 
             while (true)
             {
-                matrica[i, j] = k;
+                matrix[rowCoordinate, colCoordinate] = stepsCount;
 
-                if (!proverka(matrica, i, j))
+                bool hasReachedDeadEnd = !HasAvaliableCells(matrix, rowCoordinate, colCoordinate);
+                bool hasNoEmptyCells = hasReachedDeadEnd && FindEmptyCell(matrix) == null;
+
+                if (hasNoEmptyCells)
                 {
-                    PrintMatrixSteps(matrica);
+                    PrintMatrixSteps(matrix);
                     break;
                 }
-
-                if (i + dx >= n || i + dx < 0 || j + dy >= n || j + dy < 0 || matrica[i + dx, j + dy] != 0)
+                else if (hasReachedDeadEnd)
                 {
-                    while (i + dx >= n || i + dx < 0 || j + dy >= n || j + dy < 0 || matrica[i + dx, j + dy] != 0)
-                    {
-                        change(ref dx, ref dy);
-                    }
+                    var cellCoordinates = FindEmptyCell(matrix);
+                    matrix[cellCoordinates[1], cellCoordinates[2]] = stepsCount;
+                }
+                else
+                {
+                    MoveToEmptyCell(matrix, ref rowCoordinate, ref colCoordinate, deltaX, deltaY, cellsNumber, ref stepsCount);
+                }
+            }
+        }
+
+        private static void MoveToEmptyCell(
+            int[,] matrix,
+            ref int rowCoordinate,
+            ref int colCoordinate,
+            int deltaX,
+            int deltaY,
+            int cellsNumber,
+            ref int stepsCount)
+        {
+            while (rowCoordinate + deltaX >= cellsNumber || rowCoordinate + deltaX < 0
+                   || colCoordinate + deltaY >= cellsNumber || colCoordinate + deltaY < 0 ||
+                   matrix[rowCoordinate + deltaX, colCoordinate + deltaY] != 0)
+            {
+                ChangeDirection(ref deltaX, ref deltaY);
+            }
+
+            rowCoordinate += deltaX;
+            colCoordinate += deltaY;
+
+            stepsCount++;
+        }
+
+        private static void ChangeDirection(ref int deltaX, ref int deltaY)
+        {
+            int[] rowDirections = { 1, 1, 1, 0, -1, -1, -1, 0 };
+            int[] colDirections = { 1, 0, -1, -1, -1, 0, 1, 1 };
+            int directionIndex = 0;
+            int directionsCount = rowDirections.Length;
+
+            for (int i = 0; i < directionsCount; i++)
+            {
+                if (rowDirections[i] == deltaX && colDirections[i] == deltaY)
+                {
+                    directionIndex = i;
+                    break;
+                }
+            }
+
+            if (directionIndex == directionsCount - 1)
+            {
+                deltaX = rowDirections[0];
+                deltaY = colDirections[0];
+                return;
+            }
+
+            deltaX = rowDirections[directionIndex + 1];
+            deltaY = colDirections[directionIndex + 1];
+        }
+
+        private static bool HasAvaliableCells(int[,] arr, int x, int y)
+        {
+            int[] directionsX = { 1, 1, 1, 0, -1, -1, -1, 0 };
+            int[] directionsY = { 1, 0, -1, -1, -1, 0, 1, 1 };
+            int directionsCount = directionsX.Length;
+            int matrixRange = arr.GetLength(0);
+
+            for (int i = 0; i < directionsCount; i++)
+            {
+                bool isXOutOfRange = x + directionsX[i] >= matrixRange || x + directionsX[i] < 0;
+                bool isYOutOfRange = y + directionsY[i] >= matrixRange || y + directionsY[i] < 0;
+
+                if (isXOutOfRange)
+                {
+                    directionsX[i] = 0;
                 }
 
-                i += dx;
-                j += dy;
-                k++;
+                if (isYOutOfRange)
+                {
+                    directionsY[i] = 0;
+                }
+
+                bool hasEmptyCellsAround = arr[x + directionsX[i], y + directionsY[i]] == 0;
+                if (hasEmptyCellsAround)
+                {
+                    return true;
+                }
             }
+
+            return false;
+        }
+
+        private static int[] FindEmptyCell(int[,] matrix)
+        {
+            int cellsNumber = matrix.GetLength(0);
+            int[] cellCoordinates;
+
+            for (int row = 0; row < cellsNumber; row++)
+            {
+                for (int col = 0; col < cellsNumber; col++)
+                {
+                    if (matrix[row, col] == 0)
+                    {
+                        cellCoordinates = new int[] { matrix[row, col], row, col };
+                        return cellCoordinates;
+                    }
+                }
+            }
+
+            return null;
         }
 
         private static void PrintMatrixSteps(int[,] matrix)
@@ -61,79 +157,6 @@
                 }
 
                 Console.WriteLine();
-            }
-        }
-
-        private static void change(ref int dx, ref int dy)
-        {
-            int[] dirX = { 1, 1, 1, 0, -1, -1, -1, 0 };
-            int[] dirY = { 1, 0, -1, -1, -1, 0, 1, 1 };
-            int cd = 0;
-
-            for (int count = 0; count < 8; count++)
-            {
-                if (dirX[count] == dx && dirY[count] == dy)
-                {
-                    cd = count;
-                    break;
-                }
-            }
-
-            if (cd == 7)
-            {
-                dx = dirX[0];
-                dy = dirY[0];
-                return;
-            }
-
-            dx = dirX[cd + 1];
-            dy = dirY[cd + 1];
-        }
-
-        private static bool proverka(int[,] arr, int x, int y)
-        {
-            int[] dirX = { 1, 1, 1, 0, -1, -1, -1, 0 };
-            int[] dirY = { 1, 0, -1, -1, -1, 0, 1, 1 };
-
-            for (int i = 0; i < 8; i++)
-            {
-                if (x + dirX[i] >= arr.GetLength(0) || x + dirX[i] < 0)
-                {
-                    dirX[i] = 0;
-                }
-
-                if (y + dirY[i] >= arr.GetLength(0) || y + dirY[i] < 0)
-                {
-                    dirY[i] = 0;
-                }
-            }
-
-            for (int i = 0; i < 8; i++)
-                if (arr[x + dirX[i], y + dirY[i]] == 0)
-                {
-                    return true;
-                }
-
-            return false;
-        }
-
-        private static void find_cell(int[,] matrix, out int x, out int y)
-        {
-            int rowsNumber = matrix.GetLength(0);
-            x = 0;
-            y = 0;
-
-            for (int i = 0; i < rowsNumber; i++)
-            {
-                for (int j = 0; j < rowsNumber; j++)
-                {
-                    if (matrix[i, j] == 0)
-                    {
-                        x = i;
-                        y = j;
-                        return;
-                    }
-                }
             }
         }
     }
