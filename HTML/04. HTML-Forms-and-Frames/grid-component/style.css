@@ -1,7 +1,13 @@
 .container{
+    font-family: 'Calibri';
+    color: #2d2d2d;
     border: 1px solid #D5DBE7;
     border-radius: 15px;
     border-collapse: collapse;
+}
+
+td{
+    padding: 4px;
 }
 
 input{
@@ -9,7 +15,52 @@ input{
     width: 80%;
 }
 
-button{
+.icon-div{
+    vertical-align: middle;
+    border: 1px solid #C3C7CC;
+    border-radius: 3px;
+    display: inline-block;
+    background: url('./icon.png');
+    width:20px;
+    height:20px;
+}
+
+.skip-right{
+    vertical-align: middle;
+    border: 1px solid #C3C7CC;
+    border-radius: 3px;
+    display: inline-block;
+    background: url('./skipRight.png');
+    width:20px;
+    height:20px;
+}
+
+.skip-left{
+    vertical-align: middle;
+    border: 1px solid #C3C7CC;
+    border-radius: 3px;
+    display: inline-block;
+    background: url('./skipLeft.png');
+    width:20px;
+    height:20px;
+}
+
+.right-pointer{
+    vertical-align: middle;
+    border: 1px solid #C3C7CC;
+    border-radius: 3px;
+    display: inline-block;
+    background: url('./rightPointer.png');
+    width:20px;
+    height:20px;
+}
+
+.left-pointer{
+    vertical-align: middle;
+    border: 1px solid #C3C7CC;
+    border-radius: 3px;
+    display: inline-block;
+    background: url('./leftPointer.png');
     width:20px;
     height:20px;
 }
@@ -25,7 +76,7 @@ background: -moz-linear-gradient(top,  #f3f3f5 0%, #dce0e4 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top,  #f3f3f5 0%,#dce0e4 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom,  #f3f3f5 0%,#dce0e4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f5', endColorstr='#dce0e4',GradientType=0 ); /* IE6-9 */
-
+width: 100px;
 }
 
 .third-row{
@@ -40,6 +91,12 @@ background: -webkit-linear-gradient(top,  #f3f3f5 0%,#babfc4 100%); /* Chrome10-
 background: linear-gradient(to bottom,  #f3f3f5 0%,#babfc4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f5', endColorstr='#babfc4',GradientType=0 ); /* IE6-9 */
 
+}
+
+.chosen{
+    border: 1px solid red;
+    border-radius: 3px;
+    padding: 2px;
 }
 
 .pages{
