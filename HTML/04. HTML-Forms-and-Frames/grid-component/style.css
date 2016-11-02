@@ -15,54 +15,34 @@ input{
     width: 80%;
 }
 
-.icon-div{
+.image-icon{
+    display:inline-block;
     vertical-align: middle;
     border: 1px solid #C3C7CC;
     border-radius: 3px;
     display: inline-block;
-    background: url('./icon.png');
     width:20px;
     height:20px;
+}
+
+.icon-div{
+    background: url('./icon.png');
 }
 
 .skip-right{
-    vertical-align: middle;
-    border: 1px solid #C3C7CC;
-    border-radius: 3px;
-    display: inline-block;
     background: url('./skipRight.png');
-    width:20px;
-    height:20px;
 }
 
 .skip-left{
-    vertical-align: middle;
-    border: 1px solid #C3C7CC;
-    border-radius: 3px;
-    display: inline-block;
     background: url('./skipLeft.png');
-    width:20px;
-    height:20px;
 }
 
 .right-pointer{
-    vertical-align: middle;
-    border: 1px solid #C3C7CC;
-    border-radius: 3px;
-    display: inline-block;
     background: url('./rightPointer.png');
-    width:20px;
-    height:20px;
 }
 
 .left-pointer{
-    vertical-align: middle;
-    border: 1px solid #C3C7CC;
-    border-radius: 3px;
-    display: inline-block;
     background: url('./leftPointer.png');
-    width:20px;
-    height:20px;
 }
 
 .first-row{
@@ -93,7 +73,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f5', end
 
 }
 
-.chosen{
+.selected{
     border: 1px solid red;
     border-radius: 3px;
     padding: 2px;

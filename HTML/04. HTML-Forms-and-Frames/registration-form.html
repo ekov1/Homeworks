@@ -1,136 +1,139 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
-    <title>Random demo</title>
-    <style>
-        .RightAlignment
-        {
-            text-align: right;
-        }
-        table {
-            border-collapse:collapse;           
-        }
-        .bottom{
-            background-color:lightgrey;
-        }
-        
-    </style>
+	<title>Random demo</title>
+	<style>
+		.right-alignment {
+			text-align: right;
+		}
+		
+		table {
+			border-collapse: collapse;
+		}
+		
+		.bottom {
+			background-color: lightgrey;
+		}
+	</style>
 </head>
+
 <body>
-
-    <!--I wrote the information from the example with placeholders.I hope you dont mind.-->
-
-    <form method="post">
-        <table border="1" cellpadding="4">
-            <tr>
-                <td class="RightAlignment" width="40%"><b>Last name</b></td>
-                <td width="60%">
-                    <input type="text" name="LastName" size="32" placeholder="Petkov" />
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>First name</b></td>
-                <td>
-                    <input type="text" name="FirstName" size="32" placeholder="Pesho" />
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>Adress</b></td>
-                <td>
-                    <textarea rows="3" cols="33" placeholder="Adress"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>City</b></td>
-                <td>
-                    <table border="0">
-                        <tr>
-                            <td>
-                                <input type="text" name="CityName" placeholder="Ex: Sofia" />
-                            </td>
-                            <td><b>State</b></td>
-                            <td>
-                                <input type="text" name="StateName" size="4" placeholder="State" />
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>Postal code</b></td>
-                <td>
-                    <input type="text" name="postalCode" placeholder="0000" size="4" pattern="0-9" maxlength="4" />
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>Country</b></td>
-                <td>
-                    <select>
+    
+	<!--I wrote the information from the example with placeholders.I hope you dont mind.-->
+	<form method="post">
+		<table border="1" cellpadding="4">
+			<tfoot>
+				<tr>
+					<td class="bottom" colspan="2" align="center">
+						<input type="reset" name="ResetBtn" value="Clear this form" />
+						<input type="submit" name="SubmitBtn" value="Submit" />
+					</td>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr>
+					<td class="right-alignment" width="40%"><b>Last name</b></td>
+					<td width="60%">
+						<input type="text" name="LastName" size="32" placeholder="Petkov" />
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>First name</b></td>
+					<td>
+						<input type="text" name="FirstName" size="32" placeholder="Pesho" />
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>Adress</b></td>
+					<td>
+						<textarea rows="3" cols="33" placeholder="Adress"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>City</b></td>
+					<td>
+						<table border="0">
+							<tr>
+								<td>
+									<input type="text" name="CityName" placeholder="Ex: Sofia" />
+								</td>
+								<td><b>State</b></td>
+								<td>
+									<input type="text" name="StateName" size="4" placeholder="State" />
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>Postal code</b></td>
+					<td>
+						<input type="text" name="postalCode" placeholder="0000" size="4" pattern="0-9" maxlength="4" />
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>Country</b></td>
+					<td>
+						<select>
                         <option value="Value 2">Bulgaria</option>
                         <option value="Value 3">Outside Bulgaria</option>
                         <option value="Value 4">Other planet</option>
                     </select>
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>Phone (country code,<br /> area code, number)</b></td>
-                <td>
-                    (+
-                    <input type="text" name="num1" size="3" pattern="0-9" placeholder="359" />
-                    )
-                    <input type="text" name="num1" size="3" pattern="0-9" placeholder="888" />
-                    -
-                    <input type="text" name="num1" size="9" pattern="0-9" placeholder="123456" />
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>Email</b></td>
-                <td>
-                    <input type="email" name="name" placeholder="sample@email.com" pattern="[a-zA-Z0-9_]{3,}@[a-zA-Z0-9_]{3,}.[a-zA-Z0-9_]{2,4}" />
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>Birth date</b></td>
-                <td>
-                    Month
-                    <input type="text" name="month" style="width: 20px" pattern="0-9" placeholder="03" />
-                    Day
-                    <input type="text" name="day" style="width: 20px" pattern="0-9" placeholder="30" />
-                    Year(four digit)
-                    <input type="text" name="year" style="width: 40px" pattern="0-9" placeholder="1456" />
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>Gender</b></td>
-                <td>
-                    <select>
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>Phone (country code,<br /> area code, number)</b></td>
+					<td>
+						(+
+						<input type="text" name="num1" size="3" pattern="0-9" placeholder="359" /> )
+						<input type="text" name="num1" size="3" pattern="0-9" placeholder="888" /> -
+						<input type="text" name="num1" size="9" pattern="0-9" placeholder="123456" />
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>Email</b></td>
+					<td>
+						<input type="email" name="name" placeholder="sample@email.com" pattern="[a-zA-Z0-9_]{3,}@[a-zA-Z0-9_]{3,}.[a-zA-Z0-9_]{2,4}"
+						/>
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>Birth date</b></td>
+					<td>
+						Month
+						<input type="text" name="month" style="width: 20px" pattern="0-9" placeholder="03" /> Day
+						<input type="text" name="day" style="width: 20px" pattern="0-9" placeholder="30" /> Year(4 digit)
+						<input type="text" name="year" style="width: 40px" pattern="0-9" placeholder="1456" />
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>Gender</b></td>
+					<td>
+						<select>
                         <option value="value 1">Male</option>
                         <option value="value 2">Female</option>
                     </select>
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>Starting date</b></td>
-                <td>
-                    <input type="radio" name="period" id="1" checked />
-                    <label for="1">Spring 2006</label>
-                    <input type="radio" name="period" id="2" />
-                    <label for="2">Summer 2006</label>
-                </td>
-            </tr>
-            <tr>
-                <td class="RightAlignment"><b>Comments/Questions</b></td>
-                <td>
-                    <textarea name="comments" rows="4" cols="35" placeholder="Write a comment"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td class="bottom" colspan="2" align="center">
-                    <input type="reset" name="ResetBtn" value="Clear this form" />
-                    <input type="submit" name="SubmitBtn" value="Submit" />
-                </td>
-            </tr>
-        </table>
-    </form>
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>Starting date</b></td>
+					<td>
+						<input type="radio" name="period" id="1" checked />
+						<label for="1">Spring 2006</label>
+						<input type="radio" name="period" id="2" />
+						<label for="2">Summer 2006</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="right-alignment"><b>Comments/Questions</b></td>
+					<td>
+						<textarea name="comments" rows="4" cols="35" placeholder="Write a comment"></textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
 </body>
+
 </html>
