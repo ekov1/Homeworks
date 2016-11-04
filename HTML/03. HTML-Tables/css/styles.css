@@ -1,0 +1,33 @@
+*{
+    padding:0;
+    margin:0;
+ }
+
+table{
+    border: 2px solid #90C9D7;
+}
+
+td{
+    width: 40px;
+    height: 40px;
+    background-color: #F4FAFB;
+}
+
+button{
+    width:100%;
+    height:100%;
+    border: none;
+    background-color: #F4FAFB;
+    font-weight: bold;
+    color:#90C9D7;
+}
+
+.calculator-result{
+    width: 100%;
+    height:100%;
+    border:none;
+    background-color: #F4FAFB;
+    font-weight: bold;
+    color:#90C9D7;
+    text-align: right;
+}

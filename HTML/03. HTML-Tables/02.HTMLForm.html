@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML Form</title>
+    <style>
+        .submit-btn {
+            width: 60px;
+            height: 35px;
+        }
+        
+        div {
+            margin: 2px;
+        }
+        
+        button {
+            width: 66px;
+            height: 45px;
+            background: url(images/submit_btn.png) no-repeat;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <div>
+            <span>Member name:</span>
+            <input type="text" name="member-name" required/>
+            <b>*req</b>
+        </div>
+        <div>
+            <span>Email:</span>
+            <input type="email" name="email" required/>
+            <b>*req</b>
+        </div>
+        <div>
+            <span>School:</span>
+            <input type="text" name="school" required/>
+            <b>*req</b>
+        </div>
+        <button type="submit"></button>
+    </form>
+
+</body>
+
+</html>
