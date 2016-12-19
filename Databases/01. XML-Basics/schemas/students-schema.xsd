@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8">
+<xs:schema xmlns:xs="https://www.w3.org/2001/XMLSchema"
+targetNamespace="https://something.com">
+    <xs:element name="students">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="student"
+                 maxOccurs="unbounded">
+                    <xs:attribute name="name" type="xs:string"/>
+                    <xs:attribute name="sex" type="xs:string"/>
+                    <xs:attribute name="birthDate" type="xs:date"/>
+                    <xs:attribute name="phone" type="xs:integer"/>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="course" type="xs:string"/>
+                    <xs:attribute name="specialty" type="xs:string"/>
+                    <xs:attribute name="facultyNumber" type="xs:string"/>
+                    <xs:element name="exams">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="exam" maxOccurs="unbouded">
+                                    <xs:attribute name="name" type="xs:string"/>
+                                    <xs:attribute name="tutor" type="xs:string"/>
+                                    <xs:attribute name="score" type="xs:integer"/>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

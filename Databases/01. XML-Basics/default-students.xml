@@ -1,0 +1,19 @@
+<?xml verion="1.0" encoding="UTF-8"?>
+<students xmlns="urn:students">
+    <student>
+        <name>George</name>
+        <sex>Male</sex>
+        <birthDate>05.05.1990</birthDate>
+        <phone>0888456789</phone>
+        <email>george@abv.bg</email>
+        <course>Maths</course>
+        <specialty>Algebra</specialty>
+        <facultyNumber>1004</facultyNumber>
+        <exams xmlns="urn:exams">
+            <exam>
+                <name>Test1</name>
+                <tutor>Dalai Lama</tutor>
+                <score>90</score>
+            </exam>
+    </student>
+</students>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="./students-stylesheet.xsl"?>
+<students:students xmlns:students="https://www.w3.org/students">
+    <students:student>
+        <students:name>George</students:name>
+        <students:sex>Male</students:sex>
+        <students:birthDate>05.05.1990</students:birthDate>
+        <students:phone>0888456789</students:phone>
+        <students:email>george@abv.bg</students:email>
+        <students:course>Maths</students:course>
+        <students:specialty>Algebra</students:specialty>
+        <students:facultyNumber>1004</students:facultyNumber>
+        <students:exams xmlns:exams="https://www.w3.org/exams">
+            <exams:exam>
+                <exams:name>Test1</exams:name>
+                <exams:tutor>Dalai Lama</exams:tutor>
+                <exams:score>90</exams:score>
+            </exams:exam>
+        </students:exams>
+    </students:student>
+    <students:student>
+        <students:name>Cathrine</students:name>
+        <students:sex>Female</students:sex>
+        <students:birthDate>12.05.1950</students:birthDate>
+        <students:phone>0885444333</students:phone>
+        <students:email>katty@gmail.com</students:email>
+        <students:course>Medicine</students:course>
+        <students:specialty>Whatever</students:specialty>
+        <students:facultyNumber>4054</students:facultyNumber>
+        <students:exams xmlns:exams="https://www.w3.org/exams">
+            <exams:exam>
+                <exams:name>Test1</exams:name>
+                <exams:tutor>Monk Jonk</exams:tutor>
+                <exams:score>78</exams:score>
+            </exams:exam>
+        </students:exams>
+    </students:student>
+</students:students>
