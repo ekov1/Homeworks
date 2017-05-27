@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<Channel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Videos>
+    <Video>
+      <VideoId>Gbe4ino0e2o</VideoId>
+      <Title>LINQ Lambda Delegates Events Dynamic</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=Gbe4ino0e2o</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>VXZfTfmwLLM</VideoId>
+      <Title>Задача Hittites</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=VXZfTfmwLLM</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>S0250Nz1GnY</VideoId>
+      <Title>Задача Words</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=S0250Nz1GnY</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>ou2JS7CV7Tg</VideoId>
+      <Title>Задача Penguin Airlines</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=ou2JS7CV7Tg</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>OthGmZIl7jo</VideoId>
+      <Title>Angular 2: Observables and Http</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=OthGmZIl7jo</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>eC43wSeD_wE</VideoId>
+      <Title>Задача Office Space</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=eC43wSeD_wE</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>is78YyDkbrI</VideoId>
+      <Title>Задача Vehicles</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=is78YyDkbrI</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>ITGfUfj8f9Y</VideoId>
+      <Title>Defining Classes Part 2</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=ITGfUfj8f9Y</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>f24RkBYan3s</VideoId>
+      <Title>Задача Doge++</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=f24RkBYan3s</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>PJZ-cakjDxU</VideoId>
+      <Title>Задача Пароли</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=PJZ-cakjDxU</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>J1gioc3JICI</VideoId>
+      <Title>Задача Box full of balls</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=J1gioc3JICI</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>lg0D88DXow8</VideoId>
+      <Title>Задача Exchange rates</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=lg0D88DXow8</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>XWmNJyPlcPE</VideoId>
+      <Title>Задача Диаметър</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=XWmNJyPlcPE</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>-lP2YE9_hQw</VideoId>
+      <Title>Основи на JavaScript - Типове данни и променливи</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=-lP2YE9_hQw</Link>
+      </Info>
+    </Video>
+    <Video>
+      <VideoId>Q4ujYcEvcRg</VideoId>
+      <Title>Оператор и изрази в JavaScript</Title>
+      <Info>
+        <Link>http://www.youtube.com/watch?v=Q4ujYcEvcRg</Link>
+      </Info>
+    </Video>
+  </Videos>
+</Channel>
