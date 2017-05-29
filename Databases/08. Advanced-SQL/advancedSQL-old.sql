@@ -226,7 +226,7 @@ CREATE TRIGGER trg_WorkHours_Insert ON WorkHours
     GO
 
 CREATE TRIGGER trg_WorkHours_Delete ON WorkHours
-    FOR INSERT 
+    FOR DELETE 
     AS
     INSERT INTO WorkHoursLogs([EmployeeId], [Date], [Task], [Hours], [Comments], [Command])
         SELECT [EmployeeId], [Date], [Task], [Hours], [Comments], 'DELETE'
@@ -234,7 +234,7 @@ CREATE TRIGGER trg_WorkHours_Delete ON WorkHours
     GO
 
 CREATE TRIGGER trg_WorkHours_Update ON WorkHours
-    FOR INSERT 
+    FOR UPDATE 
     AS
     INSERT INTO WorkHoursLogs([EmployeeId], [Date], [Task], [Hours], [Comments], [Command])
         SELECT [EmployeeId], [Date], [Task], [Hours], [Comments], 'UPDATE'
