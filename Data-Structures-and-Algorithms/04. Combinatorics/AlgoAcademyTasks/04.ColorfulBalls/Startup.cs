@@ -1,29 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 
-namespace _04.ColorfulBalls
+namespace SequenceOfBalls
 {
     public class Startup
     {
+        private const int MaxElementsToOccur = 30;
+        private static BigInteger[] memo = new BigInteger[MaxElementsToOccur + 1];
+
         public static void Main()
         {
-            var stopwatch = new Stopwatch();
+            var sequence = Console.ReadLine();
+            Console.WriteLine(FindCombinations(sequence));
+        }
 
-            var set = (Console.ReadLine()).ToArray();
+        private static BigInteger FindCombinations(string sequence)
+        {
+            BigInteger allNums = Fact(sequence.Length);
+            var repeatingBalls = GetUniqueItemCount(sequence.ToArray());
+            BigInteger divisionNumber = 1;
 
-            stopwatch.Start();
+            foreach (var key in repeatingBalls)
+            {
+                divisionNumber *= Fact(key);
+            }
 
-            var groups = GetUniqueItemCount(set);
-
-            var permutationsCount = GetCombinations(set, new List<char>(), groups, groups.Sum());
-
-            Console.WriteLine(permutationsCount);
-
-            Console.WriteLine(stopwatch.Elapsed);
+            return allNums / divisionNumber;
         }
 
         private static List<int> GetUniqueItemCount(char[] set)
@@ -39,58 +43,19 @@ namespace _04.ColorfulBalls
             return groups;
         }
 
-        private static long GetCombinations(char[] set, List<char> permutation, List<int> groups, int k)
+        private static BigInteger Fact(int number)
         {
-            if (k == permutation.Count)
+            if (number == 0)
             {
                 return 1;
             }
 
-            long total = 0;
-
-            for (int i = 1; i <= groups.Count; i++)
+            if (memo[number] == 0)
             {
-                if (groups[i - 1] == 0)
-                {
-                    continue;
-                }
-
-                permutation.Add(set[i - 1]);
-                groups[i - 1]--;
-
-                total += GetCombinations(set, permutation, groups, k);
-
-                groups[i - 1]++;
-                permutation.RemoveAt(permutation.Count - 1);
+                memo[number] = number * Fact(number - 1);
             }
 
-            return total;
-        }
-
-        private static long GetPermutations(int[] permutation, int[] set, bool[] indexInUse, int index)
-        {
-            if (index == permutation.Length)
-            {
-                return 1;
-            }
-
-            long total = 0;
-
-            // Need to optimize it to work with bigger sets of numbers
-            for (int i = 0; i < set.Length; i++)
-            {
-                if (!indexInUse[i])
-                {
-                    indexInUse[i] = true;
-                    permutation[index] = set[i];
-
-                    total += GetPermutations(permutation, set, indexInUse, index + 1);
-
-                    indexInUse[i] = false;
-                }
-            }
-
-            return total;
+            return memo[number];
         }
     }
 }

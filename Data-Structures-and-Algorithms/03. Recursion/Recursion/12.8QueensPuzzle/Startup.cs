@@ -27,8 +27,8 @@ namespace _12._8QueensPuzzle
             // The board is being filled up from the bottom and everytime we are searching only
             // the lower side, lower-left and lower-right diagonal
 
-            var deltaX = new int[] { 1, 0, -1 };
-            var deltaY = new int[] { 1, 1, 1 };
+            var deltaX = new int[] { 1, 1, 1 };
+            var deltaY = new int[] { 1, 0, -1 };
 
             // Puts only 1 queen each row
             int i = queensLeft - 1;
@@ -50,8 +50,8 @@ namespace _12._8QueensPuzzle
                             break;
                         }
 
-                        x += deltaY[j];
-                        y += deltaX[j];
+                        x += deltaX[j];
+                        y += deltaY[j];
                     }
                 }
 
