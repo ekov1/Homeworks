@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryHeap\BinaryHeap.cs" />
+    <Compile Include="BinaryHeap\MinHeap.cs" />
     <Compile Include="BinaryHeap\HeapSorter.cs" />
     <Compile Include="BinarySearchTree\BinarySearchTree.cs" />
     <Compile Include="BinarySearchTree\TreeNode.cs" />

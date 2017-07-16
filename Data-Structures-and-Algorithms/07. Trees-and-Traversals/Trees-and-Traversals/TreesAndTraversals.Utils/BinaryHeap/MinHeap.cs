@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace TreesAndTraversals.Utils.BinaryHeap
 {
-    public class BinaryHeap<T>
+    public class MinHeap<T>
     {
         private Func<T, T, bool> compareFunc;
         private List<T> buffer;
 
-        public BinaryHeap(Func<T, T, bool> cmpFunc)
+        public MinHeap(Func<T, T, bool> cmpFunc)
         {
             this.compareFunc = cmpFunc;
             this.buffer = new List<T>() { default(T) };

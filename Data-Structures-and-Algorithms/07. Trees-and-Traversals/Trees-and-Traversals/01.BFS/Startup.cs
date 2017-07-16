@@ -19,7 +19,7 @@ namespace _01.BFS
 
         private static void BinaryHeapOperations()
         {
-            var heap = new BinaryHeap<int>((a, b) => a > b);
+            var heap = new MinHeap<int>((a, b) => a > b);
             heap.Insert(3);
             heap.Insert(20);
             heap.Insert(1);
