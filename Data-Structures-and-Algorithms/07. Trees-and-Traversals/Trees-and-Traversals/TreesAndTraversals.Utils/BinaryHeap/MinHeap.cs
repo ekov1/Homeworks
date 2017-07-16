@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace TreesAndTraversals.Utils.BinaryHeap
 {
-    public class MinHeap<T>
+    public class MinHeap<T> where T : IComparable<T>
     {
         private Func<T, T, bool> compareFunc;
         private List<T> buffer;
+
+        public MinHeap()
+            :this((a, b) => a.CompareTo(b) > 0)
+        {
+        }
 
         public MinHeap(Func<T, T, bool> cmpFunc)
         {
@@ -17,11 +22,9 @@ namespace TreesAndTraversals.Utils.BinaryHeap
             this.buffer = new List<T>() { default(T) };
         }
 
-        public T Min => this.buffer[1];
-
         public int Count => this.buffer.Count - 1;
 
-        public void Insert(T value)
+        public void Enqueue(T value)
         {
             this.buffer.Add(value);
             var index = this.Count;
@@ -35,8 +38,9 @@ namespace TreesAndTraversals.Utils.BinaryHeap
             buffer[index] = value;
         }
 
-        public void RemoveMin()
+        public T Dequeue()
         {
+            var min = this.Peek();
             var endElement = this.buffer[this.Count];
             this.buffer.RemoveAt(this.Count);
 
@@ -44,6 +48,13 @@ namespace TreesAndTraversals.Utils.BinaryHeap
             {
                 this.NormalizeLowerHeap(1, endElement);
             }
+
+            return min;
+        }
+
+        public T Peek()
+        {
+            return this.buffer[1];
         }
 
         private void NormalizeLowerHeap(int currentIndex, T value)
