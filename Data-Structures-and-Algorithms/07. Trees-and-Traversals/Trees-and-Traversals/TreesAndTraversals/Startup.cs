@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using TreesAndTraversals.Utils.BinaryIndexedTrees;
 using TreesAndTraversals.Utils.Dijkstra;
 
 namespace TreesAndTraversals
 {
     public class Startup
     {
+        // Works only with comutative operation ( ex: *, + )
         public static void Main()
         {
-            var graph = CreateGraph();
+            var binaryIndexedTree = new BinaryIndexedTree<int>(30, (a, b) => { return a * b; });
 
-            var result = DijkstraAlgorithm.Dijkstra(graph, 0);
+            for (int i = 0; i < 10; i++)
+            {
+                binaryIndexedTree[i] = i;
+            }
 
-            Console.WriteLine("Shortest way to last node: " + result[result.Length - 1]);
+            Console.WriteLine(binaryIndexedTree.GetInterval(0, 5));
+            Console.WriteLine(binaryIndexedTree.GetInterval(6, 10));
+            Console.WriteLine(binaryIndexedTree.GetInterval(3, 7));
         }
 
         private static List<Node>[] CreateGraph()

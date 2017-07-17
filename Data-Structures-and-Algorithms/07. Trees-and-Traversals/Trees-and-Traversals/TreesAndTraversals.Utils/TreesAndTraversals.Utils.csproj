@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BinaryHeap\MinHeap.cs" />
     <Compile Include="BinaryHeap\HeapSorter.cs" />
+    <Compile Include="BinaryIndexedTrees\BinaryIndexedTree.cs" />
     <Compile Include="BinarySearchTree\BinarySearchTree.cs" />
     <Compile Include="BinarySearchTree\TreeNode.cs" />
     <Compile Include="Dijkstra\DijkstraAlgorithm.cs" />
