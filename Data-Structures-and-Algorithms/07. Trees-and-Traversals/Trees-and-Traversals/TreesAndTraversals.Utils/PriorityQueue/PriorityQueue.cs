@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TreesAndTraversals.Utils.BinaryHeap
+namespace TreesAndTraversals.Utils.PriorityQueue
 {
-    public class MinHeap<T> where T : IComparable<T>
+    public class PriorityQueue<T>
     {
         private Func<T, T, bool> compareFunc;
         private List<T> buffer;
 
-        public MinHeap()
-            : this((a, b) => a.CompareTo(b) < 0)
-        {
-        }
-
-        private MinHeap(Func<T, T, bool> cmpFunc)
+        public PriorityQueue(Func<T, T, bool> cmpFunc)
         {
             this.compareFunc = cmpFunc;
             this.buffer = new List<T>() { default(T) };
