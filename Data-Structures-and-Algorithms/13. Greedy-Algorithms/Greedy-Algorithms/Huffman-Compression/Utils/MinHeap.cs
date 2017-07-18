@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreesAndTraversals.Utils.BinaryHeap
 {
@@ -12,7 +9,7 @@ namespace TreesAndTraversals.Utils.BinaryHeap
         private List<T> buffer;
 
         public MinHeap()
-            :this((a, b) => a.CompareTo(b) < 0)
+            : this((a, b) => a.CompareTo(b) < 0)
         {
         }
 
@@ -56,7 +53,7 @@ namespace TreesAndTraversals.Utils.BinaryHeap
 
         private void NormalizeLowerHeap(int currentIndex, T value)
         {
-            while (currentIndex * 2 + 1 < this.Count)
+            while (currentIndex * 2 + 1 < this.buffer.Count)
             {
                 var smallerChildIndex = compareFunc(this.buffer[currentIndex * 2], this.buffer[currentIndex * 2 + 1]) ?
                 currentIndex * 2 :
@@ -67,9 +64,13 @@ namespace TreesAndTraversals.Utils.BinaryHeap
                     this.buffer[currentIndex] = this.buffer[smallerChildIndex];
                     currentIndex = smallerChildIndex;
                 }
+                else
+                {
+                    break;
+                }
             }
 
-            if (currentIndex * 2 < this.Count)
+            if (currentIndex * 2 < this.buffer.Count)
             {
                 var childIndex = currentIndex * 2;
 
