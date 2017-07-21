@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guitar", "Guitar\Guitar.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheGameOfLife", "TheGameOfLife\TheGameOfLife.csproj", "{6D848AB4-A5A1-4208-89F0-017135389F4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMarioWorkshop", "SuperMarioWorkshop\SuperMarioWorkshop.csproj", "{6D1E94A5-730C-478C-A876-BA903C329993}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMarioTest", "SuperMarioTest\SuperMarioTest.csproj", "{4E532E16-3859-4BAB-BCDF-B069C4CA802F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{6D848AB4-A5A1-4208-89F0-017135389F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D848AB4-A5A1-4208-89F0-017135389F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D848AB4-A5A1-4208-89F0-017135389F4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D1E94A5-730C-478C-A876-BA903C329993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D1E94A5-730C-478C-A876-BA903C329993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D1E94A5-730C-478C-A876-BA903C329993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D1E94A5-730C-478C-A876-BA903C329993}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E532E16-3859-4BAB-BCDF-B069C4CA802F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E532E16-3859-4BAB-BCDF-B069C4CA802F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E532E16-3859-4BAB-BCDF-B069C4CA802F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E532E16-3859-4BAB-BCDF-B069C4CA802F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
