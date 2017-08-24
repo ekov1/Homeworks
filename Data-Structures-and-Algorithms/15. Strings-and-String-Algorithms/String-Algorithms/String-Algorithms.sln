@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rabin-Karp", "Rabin-Karp\Ra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMP", "KMP\KMP.csproj", "{DCC37985-30CB-4273-A232-64C18960B660}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aho-Corasik", "Aho-Corasik\Aho-Corasik.csproj", "{5FB3BFE4-ECB5-4354-A353-95C4FB4CF834}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DCC37985-30CB-4273-A232-64C18960B660}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCC37985-30CB-4273-A232-64C18960B660}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCC37985-30CB-4273-A232-64C18960B660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FB3BFE4-ECB5-4354-A353-95C4FB4CF834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FB3BFE4-ECB5-4354-A353-95C4FB4CF834}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FB3BFE4-ECB5-4354-A353-95C4FB4CF834}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FB3BFE4-ECB5-4354-A353-95C4FB4CF834}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
